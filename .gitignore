@@ -1,0 +1,37 @@
+# 超大文件夹（必须忽略，否则Git卡死）
+checkpoints/
+RL_train_cc3d/
+RL_train/
+predictions/
+logs/
+infer/
+pyradiomics_dice/
+Segmentation_infer/
+cc3d/
+back_up/
+__pycache__/
+.vscode/
+.ipynb_checkpoints/
+
+# 模型权重文件
+*.pth
+*.pt
+*.bin
+*.ckpt
+*.h5
+*.pkl
+*.ubj
+*.joblib
+
+# 输出结果
+*.csv
+*.pdf
+*.png
+*.svg
+*.txt
+*.json
+*.log
+
+# Python缓存
+*.pyc
+*.pyo
