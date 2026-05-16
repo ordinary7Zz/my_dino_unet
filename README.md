@@ -38,6 +38,13 @@ python utils/filter_json_by_exported_paths.py \
   --output_json my_json/train_labels_sample_exported_only.json
 ```
 
+```bash
+python utils/filter_json_by_exported_paths.py \
+  --patient_summary_csv screening_inference_outputs/test_dataset/Malignant_ultrasound_images_cropped_screening/tables/patient_summary.csv \
+  --input_json my_json/test_labels.json \
+  --output_json my_json/test_labels_sample_exported_only.json
+```
+
 ### 路径匹配说明
 `patient_summary.csv` 中的 `exported_relative_paths` 使用 `|` 分隔多个图像路径，例如：
 
