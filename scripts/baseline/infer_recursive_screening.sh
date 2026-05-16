@@ -9,7 +9,7 @@ DEVICE="cuda:${CUDA_VISIBLE_DEVICES}"
 CHECKPOINT_PATH="/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/baseline/train_dataset_4/20260113_170943/dino_unet_train_dataset_4_epoch_50.pth"
 
 # Test image root (recursive)
-TEST_IMAGE_PATH="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/"
+TEST_IMAGE_PATH="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016"
 
 # Output root directory
 OUTPUT_ROOT="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/screening_inference_outputs"
