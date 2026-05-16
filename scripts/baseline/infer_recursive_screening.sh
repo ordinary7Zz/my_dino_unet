@@ -12,7 +12,7 @@ CHECKPOINT_PATH="/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/b
 TEST_IMAGE_PATH="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016"
 
 # Output root directory
-OUTPUT_ROOT="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/screening_inference_outputs"
+OUTPUT_ROOT="/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/screening_inference_outputs"
 
 # Inference parameters
 IMG_SIZE=224
