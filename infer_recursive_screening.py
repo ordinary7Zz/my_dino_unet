@@ -36,18 +36,48 @@ def clean_path(path):
     return path
 
 
-def find_images_recursive(input_dir):
+def load_patient_ids_from_json(json_path):
+    path = Path(json_path)
+    with open(path, "r", encoding="utf-8") as fp:
+        payload = json.load(fp)
+
+    if not isinstance(payload, list):
+        raise ValueError("--patient_filter_json must point to a JSON list")
+
+    patient_ids = set()
+    for item in payload:
+        if not isinstance(item, dict):
+            continue
+        filename = item.get("filename")
+        if not filename:
+            continue
+        normalized = str(filename).replace("\\", "/")
+        patient_id = Path(normalized).parent.name
+        if patient_id:
+            patient_ids.add(patient_id)
+
+    if not patient_ids:
+        raise ValueError("No patient IDs could be extracted from --patient_filter_json")
+
+    return patient_ids
+
+
+def find_images_recursive(input_dir, allowed_patient_ids=None):
     root = Path(input_dir)
     image_paths = [
         p for p in root.rglob("*") if p.is_file() and p.suffix.lower() in IMAGE_EXTENSIONS
     ]
+    if allowed_patient_ids is not None:
+        image_paths = [
+            p for p in image_paths if p.relative_to(root).parts and p.relative_to(root).parts[0] in allowed_patient_ids
+        ]
     return sorted(image_paths)
 
 
 class RecursiveInferenceDataset(Dataset):
-    def __init__(self, input_dir, img_size):
+    def __init__(self, input_dir, img_size, allowed_patient_ids=None):
         self.input_root = Path(input_dir)
-        self.image_paths = find_images_recursive(self.input_root)
+        self.image_paths = find_images_recursive(self.input_root, allowed_patient_ids=allowed_patient_ids)
         self.transform = transforms.Compose(
             [
                 transforms.Resize((img_size, img_size)),
@@ -587,6 +617,12 @@ def main():
     parser.add_argument("--trust_num_components_max", type=int, default=5)
     parser.add_argument("--trust_high_conf_fraction_0p9_min", type=float, default=0.0)
     parser.add_argument(
+        "--patient_filter_json",
+        type=str,
+        default="",
+        help="Optional JSON file; if provided, only patients appearing in its filename fields will be processed",
+    )
+    parser.add_argument(
         "--export_rejected_json",
         type=str,
         default="false",
@@ -597,6 +633,7 @@ def main():
     args.input_dir = clean_path(args.input_dir)
     args.output_dir = clean_path(args.output_dir)
     args.checkpoint = clean_path(args.checkpoint)
+    args.patient_filter_json = clean_path(args.patient_filter_json)
     args.dino_pretrained = str2bool(args.dino_pretrained)
     args.use_dilation = str2bool(args.use_dilation)
     args.save_orig_size = str2bool(args.save_orig_size)
@@ -612,8 +649,14 @@ def main():
         raise NotADirectoryError(f"--input_dir must be an existing directory: {args.input_dir}")
     if not os.path.isfile(args.checkpoint):
         raise FileNotFoundError(f"Checkpoint file not found: {args.checkpoint}")
+    if args.patient_filter_json and not os.path.isfile(args.patient_filter_json):
+        raise FileNotFoundError(f"Patient filter JSON not found: {args.patient_filter_json}")
     if args.min_region_area < 1:
         raise ValueError("--min_region_area must be >= 1")
+
+    allowed_patient_ids = None
+    if args.patient_filter_json:
+        allowed_patient_ids = load_patient_ids_from_json(args.patient_filter_json)
 
     os.makedirs(args.output_dir, exist_ok=True)
     device = torch.device(args.device if args.device else ("cuda" if torch.cuda.is_available() else "cpu"))
@@ -622,8 +665,11 @@ def main():
     print(f"Checkpoint: {args.checkpoint}")
     print(f"Input dir: {args.input_dir}")
     print(f"Output dir: {args.output_dir}")
+    if args.patient_filter_json:
+        print(f"Patient filter JSON: {args.patient_filter_json}")
+        print(f"Allowed patients: {len(allowed_patient_ids)}")
 
-    dataset = RecursiveInferenceDataset(args.input_dir, args.img_size)
+    dataset = RecursiveInferenceDataset(args.input_dir, args.img_size, allowed_patient_ids=allowed_patient_ids)
     if len(dataset) == 0:
         print("No image files found under input_dir.")
         return

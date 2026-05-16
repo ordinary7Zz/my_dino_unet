@@ -50,3 +50,5 @@ screening_inference_outputs/**
 !screening_inference_outputs/*/tables/**/*.csv
 !screening_inference_outputs/*/tables/**/*.json
 !screening_inference_outputs/*/tables/**/*.txt
+
+!my_json/*

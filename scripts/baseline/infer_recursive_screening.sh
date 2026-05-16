@@ -9,7 +9,7 @@ DEVICE="cuda:${CUDA_VISIBLE_DEVICES}"
 CHECKPOINT_PATH="/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/baseline/train_dataset_4/20260113_170943/dino_unet_train_dataset_4_epoch_50.pth"
 
 # Test image root (recursive)
-TEST_IMAGE_PATH="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016"
+TEST_IMAGE_PATH="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped"
 
 # Output root directory
 OUTPUT_ROOT="/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/screening_inference_outputs"
@@ -35,6 +35,7 @@ PRIMARY_JSON_NAME="likely_primary_lesion_images.json"
 PRIMARY_TOPK=0
 PRIMARY_SORT_SCORE="screen_score"
 EXPORT_REJECTED_JSON="False"
+PATIENT_FILTER_JSON="my_json/train_labels.json"
 TRUST_THRESHOLDS_FILE="threshold_analysis_outputs/Malignant_ultrasound/thresholds_for_infer_recursive_screening.txt"
 TRUST_FG_PROB_MEAN_MIN="0.60"
 TRUST_PROB_MAX_MIN="0.80"
@@ -65,6 +66,11 @@ if [ ! -f "$PYTHON_SCRIPT" ]; then
     exit 1
 fi
 
+if [ -n "$PATIENT_FILTER_JSON" ] && [ ! -f "$PATIENT_FILTER_JSON" ]; then
+    echo "Error: Patient filter JSON does not exist: $PATIENT_FILTER_JSON"
+    exit 1
+fi
+
 if [ ! -z "$CUDA_VISIBLE_DEVICES" ]; then
     export CUDA_VISIBLE_DEVICES="$CUDA_VISIBLE_DEVICES"
 fi
@@ -73,6 +79,13 @@ if [ -n "$TRUST_THRESHOLDS_FILE" ]; then
     case "$TRUST_THRESHOLDS_FILE" in
         /*) ;;
         *) TRUST_THRESHOLDS_FILE="$REPO_ROOT/$TRUST_THRESHOLDS_FILE" ;;
+    esac
+fi
+
+if [ -n "$PATIENT_FILTER_JSON" ]; then
+    case "$PATIENT_FILTER_JSON" in
+        /*) ;;
+        *) PATIENT_FILTER_JSON="$REPO_ROOT/$PATIENT_FILTER_JSON" ;;
     esac
 fi
 
@@ -111,6 +124,7 @@ CMD=(
     --primary_topk "$PRIMARY_TOPK"
     --primary_sort_score "$PRIMARY_SORT_SCORE"
     --export_rejected_json "$EXPORT_REJECTED_JSON"
+    --patient_filter_json "$PATIENT_FILTER_JSON"
 )
 
 if [ -n "$TRUST_THRESHOLDS_FILE" ]; then
