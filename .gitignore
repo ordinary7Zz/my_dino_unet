@@ -43,12 +43,27 @@ __pycache__/
 !threshold_analysis_outputs/**/*.json
 !threshold_analysis_outputs/**/*.txt
 
-screening_inference_outputs/**
-!screening_inference_outputs/
-!screening_inference_outputs/*/
-!screening_inference_outputs/*/tables/
-!screening_inference_outputs/*/tables/**/*.csv
-!screening_inference_outputs/*/tables/**/*.json
-!screening_inference_outputs/*/tables/**/*.txt
+!screening_inference_outputs/**
+screening_inference_outputs/*.png
+screening_inference_outputs/*.jpg
+screening_inference_outputs/*.jpeg
+screening_inference_outputs/*.bmp
+screening_inference_outputs/*.tif
+screening_inference_outputs/*.tiff
+screening_inference_outputs/*.webp
+screening_inference_outputs/*/*.png
+screening_inference_outputs/*/*.jpg
+screening_inference_outputs/*/*.jpeg
+screening_inference_outputs/*/*.bmp
+screening_inference_outputs/*/*.tif
+screening_inference_outputs/*/*.tiff
+screening_inference_outputs/*/*.webp
+screening_inference_outputs/**/*.png
+screening_inference_outputs/**/*.jpg
+screening_inference_outputs/**/*.jpeg
+screening_inference_outputs/**/*.bmp
+screening_inference_outputs/**/*.tif
+screening_inference_outputs/**/*.tiff
+screening_inference_outputs/**/*.webp
 
 !my_json/*
