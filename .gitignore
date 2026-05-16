@@ -42,3 +42,11 @@ __pycache__/
 !threshold_analysis_outputs/**/*.csv
 !threshold_analysis_outputs/**/*.json
 !threshold_analysis_outputs/**/*.txt
+
+screening_inference_outputs/**
+!screening_inference_outputs/
+!screening_inference_outputs/*/
+!screening_inference_outputs/*/tables/
+!screening_inference_outputs/*/tables/**/*.csv
+!screening_inference_outputs/*/tables/**/*.json
+!screening_inference_outputs/*/tables/**/*.txt
