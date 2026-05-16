@@ -65,5 +65,6 @@ screening_inference_outputs/**/*.bmp
 screening_inference_outputs/**/*.tif
 screening_inference_outputs/**/*.tiff
 screening_inference_outputs/**/*.webp
+screening_inference_outputs/**/*.npy
 
 !my_json/*
