@@ -272,10 +272,6 @@ def is_trustworthy_mask(row, args):
             f"pred_positive_fraction>={args.trust_positive_fraction_min}",
         ),
         (
-            row["pred_positive_fraction"] <= args.trust_positive_fraction_max,
-            f"pred_positive_fraction<={args.trust_positive_fraction_max}",
-        ),
-        (
             row["largest_component_ratio"] >= args.trust_largest_component_ratio_min,
             f"largest_component_ratio>={args.trust_largest_component_ratio_min}",
         ),
