@@ -35,3 +35,10 @@ __pycache__/
 # Python缓存
 *.pyc
 *.pyo
+
+
+!threshold_analysis_outputs/
+!threshold_analysis_outputs/**/
+!threshold_analysis_outputs/**/*.csv
+!threshold_analysis_outputs/**/*.json
+!threshold_analysis_outputs/**/*.txt

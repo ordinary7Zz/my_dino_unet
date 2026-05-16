@@ -1,0 +1,8 @@
+--trust_fg_prob_mean_min "0.9604" \
+--trust_prob_max_min "0.9999" \
+--trust_largest_component_area_min "4236" \
+--trust_positive_fraction_min "0.0129" \
+--trust_positive_fraction_max "0.2022" \
+--trust_largest_component_ratio_min "1.0" \
+--trust_num_components_max "1" \
+--trust_high_conf_fraction_0p9_min "0.0116"
