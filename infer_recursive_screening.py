@@ -36,7 +36,16 @@ def clean_path(path):
     return path
 
 
-def load_patient_ids_from_json(json_path):
+def patient_id_from_relative_path(relative_path):
+    parts = Path(relative_path).parts
+    if len(parts) >= 2:
+        return f"{parts[0]}/{parts[1]}"
+    if parts:
+        return parts[0]
+    return relative_path
+
+
+def load_patient_filter_from_json(json_path):
     path = Path(json_path)
     with open(path, "r", encoding="utf-8") as fp:
         payload = json.load(fp)
@@ -44,6 +53,7 @@ def load_patient_ids_from_json(json_path):
     if not isinstance(payload, list):
         raise ValueError("--patient_filter_json must point to a JSON list")
 
+    image_relative_paths = set()
     patient_ids = set()
     for item in payload:
         if not isinstance(item, dict):
@@ -51,33 +61,41 @@ def load_patient_ids_from_json(json_path):
         filename = item.get("filename")
         if not filename:
             continue
-        normalized = str(filename).replace("\\", "/")
-        patient_id = Path(normalized).parent.name
+        normalized = str(filename).replace("\\", "/").strip("/")
+        path_parts = Path(normalized).parts
+        if not path_parts:
+            continue
+        rel_path = "/".join(path_parts)
+        image_relative_paths.add(rel_path)
+        patient_id = patient_id_from_relative_path(rel_path)
         if patient_id:
             patient_ids.add(patient_id)
 
-    if not patient_ids:
-        raise ValueError("No patient IDs could be extracted from --patient_filter_json")
+    if not image_relative_paths:
+        raise ValueError("No image paths could be extracted from --patient_filter_json")
 
-    return patient_ids
+    return {
+        "image_relative_paths": image_relative_paths,
+        "patient_ids": patient_ids,
+    }
 
 
-def find_images_recursive(input_dir, allowed_patient_ids=None):
+def find_images_recursive(input_dir, allowed_relative_paths=None):
     root = Path(input_dir)
     image_paths = [
         p for p in root.rglob("*") if p.is_file() and p.suffix.lower() in IMAGE_EXTENSIONS
     ]
-    if allowed_patient_ids is not None:
+    if allowed_relative_paths is not None:
         image_paths = [
-            p for p in image_paths if p.relative_to(root).parts and p.relative_to(root).parts[0] in allowed_patient_ids
+            p for p in image_paths if p.relative_to(root).as_posix() in allowed_relative_paths
         ]
     return sorted(image_paths)
 
 
 class RecursiveInferenceDataset(Dataset):
-    def __init__(self, input_dir, img_size, allowed_patient_ids=None):
+    def __init__(self, input_dir, img_size, allowed_relative_paths=None):
         self.input_root = Path(input_dir)
-        self.image_paths = find_images_recursive(self.input_root, allowed_patient_ids=allowed_patient_ids)
+        self.image_paths = find_images_recursive(self.input_root, allowed_relative_paths=allowed_relative_paths)
         self.transform = transforms.Compose(
             [
                 transforms.Resize((img_size, img_size)),
@@ -323,7 +341,11 @@ def is_trustworthy_mask(row, args):
 
 def patient_id_from_relative_path(relative_path):
     parts = Path(relative_path).parts
-    return parts[0] if parts else relative_path
+    if len(parts) >= 2:
+        return f"{parts[0]}/{parts[1]}"
+    if parts:
+        return parts[0]
+    return relative_path
 
 
 
@@ -654,9 +676,9 @@ def main():
     if args.min_region_area < 1:
         raise ValueError("--min_region_area must be >= 1")
 
-    allowed_patient_ids = None
+    patient_filter = None
     if args.patient_filter_json:
-        allowed_patient_ids = load_patient_ids_from_json(args.patient_filter_json)
+        patient_filter = load_patient_filter_from_json(args.patient_filter_json)
 
     os.makedirs(args.output_dir, exist_ok=True)
     device = torch.device(args.device if args.device else ("cuda" if torch.cuda.is_available() else "cpu"))
@@ -667,9 +689,14 @@ def main():
     print(f"Output dir: {args.output_dir}")
     if args.patient_filter_json:
         print(f"Patient filter JSON: {args.patient_filter_json}")
-        print(f"Allowed patients: {len(allowed_patient_ids)}")
+        print(f"Allowed patients: {len(patient_filter['patient_ids'])}")
+        print(f"Allowed images: {len(patient_filter['image_relative_paths'])}")
 
-    dataset = RecursiveInferenceDataset(args.input_dir, args.img_size, allowed_patient_ids=allowed_patient_ids)
+    dataset = RecursiveInferenceDataset(
+        args.input_dir,
+        args.img_size,
+        allowed_relative_paths=(patient_filter["image_relative_paths"] if patient_filter else None),
+    )
     if len(dataset) == 0:
         print("No image files found under input_dir.")
         return
