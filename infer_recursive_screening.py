@@ -295,8 +295,23 @@ def is_trustworthy_mask(row, args):
     return len(failed) == 0, passed, failed
 
 
+def patient_id_from_relative_path(relative_path):
+    parts = Path(relative_path).parts
+    return parts[0] if parts else relative_path
+
+
+
+def primary_max_per_patient(value):
+    if value <= 0:
+        return 3
+    if value > 3:
+        raise ValueError("--primary_topk must be within 0-3 for patient-level primary lesion export")
+    return int(value)
+
+
+
 def build_primary_lesion_record(row, rank):
-    return {
+    record = {
         "rank": rank,
         "source_path": row["source_path"],
         "relative_path": row["relative_path"],
@@ -335,6 +350,9 @@ def build_primary_lesion_record(row, rank):
             "ymax": int(row["largest_component_bbox_ymax"]),
         },
     }
+    if "rank_within_patient" in row:
+        record["rank_within_patient"] = int(row["rank_within_patient"])
+    return record
 
 
 def build_rejected_record(row):
@@ -361,6 +379,7 @@ def build_rejected_record(row):
 def export_primary_lesion_json(rows, args, tables_dir):
     trusted_rows = []
     rejected_rows = []
+    rows_by_patient = {}
 
     for row in rows:
         trustworthy, passed, failed = is_trustworthy_mask(row, args)
@@ -368,14 +387,33 @@ def export_primary_lesion_json(rows, args, tables_dir):
         annotated_row["trustworthy_mask"] = trustworthy
         annotated_row["trust_reasons_passed"] = passed
         annotated_row["trust_reasons_failed"] = failed
+        annotated_row["patient_id"] = patient_id_from_relative_path(annotated_row["relative_path"])
+        rows_by_patient.setdefault(annotated_row["patient_id"], []).append(annotated_row)
         if trustworthy:
             trusted_rows.append(annotated_row)
         else:
             rejected_rows.append(annotated_row)
 
-    trusted_rows = sorted(trusted_rows, key=lambda item: item[args.primary_sort_score], reverse=True)
-    if args.primary_topk > 0:
-        trusted_rows = trusted_rows[: args.primary_topk]
+    selected_rows = []
+    exported_patient_ids = set()
+    patient_limit = primary_max_per_patient(args.primary_topk)
+
+    for patient_id, patient_rows in rows_by_patient.items():
+        patient_trusted_rows = [row for row in patient_rows if row["trustworthy_mask"]]
+        if not patient_trusted_rows:
+            continue
+
+        patient_trusted_rows = sorted(patient_trusted_rows, key=lambda item: item[args.primary_sort_score], reverse=True)
+        patient_selected_rows = patient_trusted_rows[:patient_limit]
+        exported_patient_ids.add(patient_id)
+
+        for patient_rank, row in enumerate(patient_selected_rows, start=1):
+            selected_row = dict(row)
+            selected_row["rank_within_patient"] = patient_rank
+            selected_rows.append(selected_row)
+
+    selected_rows = sorted(selected_rows, key=lambda item: item[args.primary_sort_score], reverse=True)
+    patients_with_trusted = {row["patient_id"] for row in trusted_rows}
 
     payload = {
         "version": "1.0",
@@ -397,13 +435,17 @@ def export_primary_lesion_json(rows, args, tables_dir):
             "trust_num_components_max": int(args.trust_num_components_max),
             "trust_high_conf_fraction_0p9_min": float(args.trust_high_conf_fraction_0p9_min),
             "primary_topk": int(args.primary_topk),
+            "primary_max_per_patient": int(patient_limit),
         },
         "summary": {
             "num_images_total": int(len(rows)),
-            "num_trusted": int(len([row for row in rows if is_trustworthy_mask(row, args)[0]])),
-            "num_exported": int(len(trusted_rows)),
+            "num_trusted": int(len(trusted_rows)),
+            "num_exported": int(len(selected_rows)),
+            "num_patients_total": int(len(rows_by_patient)),
+            "num_patients_with_trusted_images": int(len(patients_with_trusted)),
+            "num_patients_exported": int(len(exported_patient_ids)),
         },
-        "images": [build_primary_lesion_record(row, rank) for rank, row in enumerate(trusted_rows, start=1)],
+        "images": [build_primary_lesion_record(row, rank) for rank, row in enumerate(selected_rows, start=1)],
     }
 
     primary_json_path = tables_dir / args.primary_json_name
@@ -495,7 +537,7 @@ def main():
         "--primary_topk",
         type=int,
         default=0,
-        help="Export only top-k trusted images; set <=0 to export all trusted images",
+        help="Max trusted images to export per patient (0 uses the default cap of 3)",
     )
     parser.add_argument(
         "--primary_sort_score",
