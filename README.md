@@ -33,7 +33,7 @@ pip install -r requirements.txt
 
 ```bash
 python utils/filter_json_by_exported_paths.py \
-  --patient_summary_csv screening_inference_outputs/2016_screening/tables/patient_summary.csv \
+  --patient_summary_csv screening_inference_outputs/train_dataset/Malignant_ultrasound_images_cropped_screening/tables/patient_summary.csv \
   --input_json my_json/train_labels.json \
   --output_json my_json/train_labels_sample_exported_only.json
 ```
