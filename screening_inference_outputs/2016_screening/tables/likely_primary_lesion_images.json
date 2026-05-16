@@ -2,7 +2,7 @@
   "version": "1.0",
   "generated_from": {
     "input_dir": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016",
-    "output_dir": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/screening_inference_outputs/2016_screening",
+    "output_dir": "/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/screening_inference_outputs/2016_screening",
     "checkpoint": "/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/baseline/train_dataset_4/20260113_170943/dino_unet_train_dataset_4_epoch_50.pth",
     "ranking_score": "screen_score",
     "threshold": 0.5,
@@ -30,7 +30,6 @@
   },
   "images": [
     {
-      "rank": 1,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/杨晓兰/杨晓兰_01_0012_0013.jpg",
       "relative_path": "杨晓兰/杨晓兰_01_0012_0013.jpg",
       "selection_label": "likely_primary_lesion",
@@ -80,7 +79,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 2,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/姚海山/姚海山_01_0016_0016.jpg",
       "relative_path": "姚海山/姚海山_01_0016_0016.jpg",
       "selection_label": "likely_primary_lesion",
@@ -130,7 +128,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 3,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/郑龟/郑龟_01_0008_0008.jpg",
       "relative_path": "郑龟/郑龟_01_0008_0008.jpg",
       "selection_label": "likely_primary_lesion",
@@ -180,7 +177,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 4,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/范会涛/范会涛_01_0011_0011.jpg",
       "relative_path": "范会涛/范会涛_01_0011_0011.jpg",
       "selection_label": "likely_primary_lesion",
@@ -230,7 +226,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 5,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/何春芬/何春芬_01_0007_0007.jpg",
       "relative_path": "何春芬/何春芬_01_0007_0007.jpg",
       "selection_label": "likely_primary_lesion",
@@ -280,7 +275,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 6,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/许茶/许茶_01_0017_0017.jpg",
       "relative_path": "许茶/许茶_01_0017_0017.jpg",
       "selection_label": "likely_primary_lesion",
@@ -330,7 +324,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 7,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/杨秀卿/杨秀卿_01_0010_0010.jpg",
       "relative_path": "杨秀卿/杨秀卿_01_0010_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -380,7 +373,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 8,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/黄盛烨/黄盛烨_01_0001_0001.jpg",
       "relative_path": "黄盛烨/黄盛烨_01_0001_0001.jpg",
       "selection_label": "likely_primary_lesion",
@@ -430,7 +422,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 9,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/叶莺/叶莺_01_0001_0001.jpg",
       "relative_path": "叶莺/叶莺_01_0001_0001.jpg",
       "selection_label": "likely_primary_lesion",
@@ -480,7 +471,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 10,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/廖永强/廖永强_01_0014_0014.jpg",
       "relative_path": "廖永强/廖永强_01_0014_0014.jpg",
       "selection_label": "likely_primary_lesion",
@@ -530,7 +520,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 11,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/齐晓明/齐晓明_01_0001_0001.jpg",
       "relative_path": "齐晓明/齐晓明_01_0001_0001.jpg",
       "selection_label": "likely_primary_lesion",
@@ -580,7 +569,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 12,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈佩斯/陈佩斯_01_0003_0003.jpg",
       "relative_path": "陈佩斯/陈佩斯_01_0003_0003.jpg",
       "selection_label": "likely_primary_lesion",
@@ -630,7 +618,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 13,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/蔡秋权/蔡秋权_01_0008_0008.jpg",
       "relative_path": "蔡秋权/蔡秋权_01_0008_0008.jpg",
       "selection_label": "likely_primary_lesion",
@@ -680,7 +667,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 14,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/余雪莲/余雪莲_01_0010_0010.jpg",
       "relative_path": "余雪莲/余雪莲_01_0010_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -730,7 +716,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 15,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈佩斯/陈佩斯_01_0015_0015.jpg",
       "relative_path": "陈佩斯/陈佩斯_01_0015_0015.jpg",
       "selection_label": "likely_primary_lesion",
@@ -780,7 +765,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 16,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/宋伟雪/宋伟雪_01_0012_0012.jpg",
       "relative_path": "宋伟雪/宋伟雪_01_0012_0012.jpg",
       "selection_label": "likely_primary_lesion",
@@ -830,7 +814,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 17,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/廖永强/廖永强_01_0016_0016.jpg",
       "relative_path": "廖永强/廖永强_01_0016_0016.jpg",
       "selection_label": "likely_primary_lesion",
@@ -880,7 +863,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 18,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/杨晓兰/杨晓兰_01_0013_0014.jpg",
       "relative_path": "杨晓兰/杨晓兰_01_0013_0014.jpg",
       "selection_label": "likely_primary_lesion",
@@ -930,7 +912,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 19,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/邝三/邝三_01_0007_0007.jpg",
       "relative_path": "邝三/邝三_01_0007_0007.jpg",
       "selection_label": "likely_primary_lesion",
@@ -980,7 +961,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 20,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/翟海斌/翟海斌_01_0017_0017.jpg",
       "relative_path": "翟海斌/翟海斌_01_0017_0017.jpg",
       "selection_label": "likely_primary_lesion",
@@ -1030,7 +1010,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 21,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈容/陈容_01_0007_0007.jpg",
       "relative_path": "陈容/陈容_01_0007_0007.jpg",
       "selection_label": "likely_primary_lesion",
@@ -1080,7 +1059,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 22,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/廖永强/廖永强_01_0006_0006.jpg",
       "relative_path": "廖永强/廖永强_01_0006_0006.jpg",
       "selection_label": "likely_primary_lesion",
@@ -1130,7 +1108,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 23,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/姚海山/姚海山_01_0018_0018.jpg",
       "relative_path": "姚海山/姚海山_01_0018_0018.jpg",
       "selection_label": "likely_primary_lesion",
@@ -1180,7 +1157,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 24,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/洪滨滨/洪滨滨_01_0010_0010.jpg",
       "relative_path": "洪滨滨/洪滨滨_01_0010_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -1230,7 +1206,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 25,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/彭巨/彭巨_01_0015_0015.jpg",
       "relative_path": "彭巨/彭巨_01_0015_0015.jpg",
       "selection_label": "likely_primary_lesion",
@@ -1280,7 +1255,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 26,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/姚海山/姚海山_01_0006_0006.jpg",
       "relative_path": "姚海山/姚海山_01_0006_0006.jpg",
       "selection_label": "likely_primary_lesion",
@@ -1330,7 +1304,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 27,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/王顺妹/王顺妹_01_0010_0010.jpg",
       "relative_path": "王顺妹/王顺妹_01_0010_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -1380,7 +1353,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 28,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/张永南/张永南_01_0004_0004.jpg",
       "relative_path": "张永南/张永南_01_0004_0004.jpg",
       "selection_label": "likely_primary_lesion",
@@ -1430,7 +1402,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 29,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/黄子贺/黄子贺_01_0015_0015.jpg",
       "relative_path": "黄子贺/黄子贺_01_0015_0015.jpg",
       "selection_label": "likely_primary_lesion",
@@ -1480,7 +1451,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 30,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/郑传锦/郑传锦_01_0005_0005.jpg",
       "relative_path": "郑传锦/郑传锦_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -1530,7 +1500,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 31,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/王顺妹/王顺妹_01_0018_0018.jpg",
       "relative_path": "王顺妹/王顺妹_01_0018_0018.jpg",
       "selection_label": "likely_primary_lesion",
@@ -1580,7 +1549,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 32,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/吴海兰/吴海兰_01_0019_0019.jpg",
       "relative_path": "吴海兰/吴海兰_01_0019_0019.jpg",
       "selection_label": "likely_primary_lesion",
@@ -1630,7 +1598,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 33,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/何天思/何天思_01_0001_0001.jpg",
       "relative_path": "何天思/何天思_01_0001_0001.jpg",
       "selection_label": "likely_primary_lesion",
@@ -1680,7 +1647,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 34,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/宋伟雪/宋伟雪_01_0007_0007.jpg",
       "relative_path": "宋伟雪/宋伟雪_01_0007_0007.jpg",
       "selection_label": "likely_primary_lesion",
@@ -1730,7 +1696,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 35,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/梁锐霞/梁锐霞_01_0004_0004.jpg",
       "relative_path": "梁锐霞/梁锐霞_01_0004_0004.jpg",
       "selection_label": "likely_primary_lesion",
@@ -1780,7 +1745,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 36,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/范少达/范少达_01_0017_0017.jpg",
       "relative_path": "范少达/范少达_01_0017_0017.jpg",
       "selection_label": "likely_primary_lesion",
@@ -1830,7 +1794,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 37,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/宋伟雪/宋伟雪_01_0015_0015.jpg",
       "relative_path": "宋伟雪/宋伟雪_01_0015_0015.jpg",
       "selection_label": "likely_primary_lesion",
@@ -1880,7 +1843,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 38,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/辜国华/辜国华_01_0001_0001.jpg",
       "relative_path": "辜国华/辜国华_01_0001_0001.jpg",
       "selection_label": "likely_primary_lesion",
@@ -1930,7 +1892,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 39,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/杨晓兰/杨晓兰_01_0009_0010.jpg",
       "relative_path": "杨晓兰/杨晓兰_01_0009_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -1980,7 +1941,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 40,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/洪滨滨/洪滨滨_01_0009_0009.jpg",
       "relative_path": "洪滨滨/洪滨滨_01_0009_0009.jpg",
       "selection_label": "likely_primary_lesion",
@@ -2030,7 +1990,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 41,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈倩妮/陈倩妮_01_0004_0004.jpg",
       "relative_path": "陈倩妮/陈倩妮_01_0004_0004.jpg",
       "selection_label": "likely_primary_lesion",
@@ -2080,7 +2039,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 42,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李贺芳/李贺芳_01_0002_0002.jpg",
       "relative_path": "李贺芳/李贺芳_01_0002_0002.jpg",
       "selection_label": "likely_primary_lesion",
@@ -2130,7 +2088,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 43,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/吴海兰/吴海兰_01_0009_0009.jpg",
       "relative_path": "吴海兰/吴海兰_01_0009_0009.jpg",
       "selection_label": "likely_primary_lesion",
@@ -2180,7 +2137,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 44,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/吴瑛/吴瑛_01_0009_0009.jpg",
       "relative_path": "吴瑛/吴瑛_01_0009_0009.jpg",
       "selection_label": "likely_primary_lesion",
@@ -2230,7 +2186,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 45,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/叶莺/叶莺_01_0002_0002.jpg",
       "relative_path": "叶莺/叶莺_01_0002_0002.jpg",
       "selection_label": "likely_primary_lesion",
@@ -2280,7 +2235,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 46,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/杨秀卿/杨秀卿_01_0015_0015.jpg",
       "relative_path": "杨秀卿/杨秀卿_01_0015_0015.jpg",
       "selection_label": "likely_primary_lesion",
@@ -2330,7 +2284,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 47,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/洪滨滨/洪滨滨_01_0008_0008.jpg",
       "relative_path": "洪滨滨/洪滨滨_01_0008_0008.jpg",
       "selection_label": "likely_primary_lesion",
@@ -2380,7 +2333,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 48,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/郑龟/郑龟_01_0017_0017.jpg",
       "relative_path": "郑龟/郑龟_01_0017_0017.jpg",
       "selection_label": "likely_primary_lesion",
@@ -2430,7 +2382,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 49,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/吴瑛/吴瑛_01_0002_0002.jpg",
       "relative_path": "吴瑛/吴瑛_01_0002_0002.jpg",
       "selection_label": "likely_primary_lesion",
@@ -2480,7 +2431,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 50,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/孙妙荣/孙妙荣_01_0003_0003.jpg",
       "relative_path": "孙妙荣/孙妙荣_01_0003_0003.jpg",
       "selection_label": "likely_primary_lesion",
@@ -2530,7 +2480,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 51,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/王顺妹/王顺妹_01_0007_0007.jpg",
       "relative_path": "王顺妹/王顺妹_01_0007_0007.jpg",
       "selection_label": "likely_primary_lesion",
@@ -2580,7 +2529,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 52,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/叶永强/叶永强_01_0009_0009.jpg",
       "relative_path": "叶永强/叶永强_01_0009_0009.jpg",
       "selection_label": "likely_primary_lesion",
@@ -2630,7 +2578,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 53,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/叶永强/叶永强_01_0001_0001.jpg",
       "relative_path": "叶永强/叶永强_01_0001_0001.jpg",
       "selection_label": "likely_primary_lesion",
@@ -2680,7 +2627,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 54,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/练森勤/练森勤_01_0005_0005.jpg",
       "relative_path": "练森勤/练森勤_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -2730,7 +2676,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 55,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/郑龟/郑龟_01_0011_0011.jpg",
       "relative_path": "郑龟/郑龟_01_0011_0011.jpg",
       "selection_label": "likely_primary_lesion",
@@ -2780,7 +2725,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 56,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/吴海兰/吴海兰_01_0017_0017.jpg",
       "relative_path": "吴海兰/吴海兰_01_0017_0017.jpg",
       "selection_label": "likely_primary_lesion",
@@ -2830,7 +2774,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 57,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈容/陈容_01_0005_0005.jpg",
       "relative_path": "陈容/陈容_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -2880,7 +2823,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 58,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/余雪莲/余雪莲_01_0011_0011.jpg",
       "relative_path": "余雪莲/余雪莲_01_0011_0011.jpg",
       "selection_label": "likely_primary_lesion",
@@ -2930,7 +2872,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 59,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/黄盛烨/黄盛烨_01_0006_0006.jpg",
       "relative_path": "黄盛烨/黄盛烨_01_0006_0006.jpg",
       "selection_label": "likely_primary_lesion",
@@ -2980,7 +2921,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 60,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈容/陈容_01_0012_0012.jpg",
       "relative_path": "陈容/陈容_01_0012_0012.jpg",
       "selection_label": "likely_primary_lesion",
@@ -3030,7 +2970,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 61,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/敬文英/敬文英_01_0001_0001.jpg",
       "relative_path": "敬文英/敬文英_01_0001_0001.jpg",
       "selection_label": "likely_primary_lesion",
@@ -3080,7 +3019,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 62,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/邱权生/邱权生_01_0018_0018.jpg",
       "relative_path": "邱权生/邱权生_01_0018_0018.jpg",
       "selection_label": "likely_primary_lesion",
@@ -3130,7 +3068,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 63,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/黄春梅/黄春梅_01_0005_0005.jpg",
       "relative_path": "黄春梅/黄春梅_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -3180,7 +3117,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 64,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李园芳/李园芳_01_0002_0002.jpg",
       "relative_path": "李园芳/李园芳_01_0002_0002.jpg",
       "selection_label": "likely_primary_lesion",
@@ -3230,7 +3166,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 65,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/梁志成/梁志成_01_0017_0017.jpg",
       "relative_path": "梁志成/梁志成_01_0017_0017.jpg",
       "selection_label": "likely_primary_lesion",
@@ -3280,7 +3215,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 66,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/张永南/张永南_01_0003_0003.jpg",
       "relative_path": "张永南/张永南_01_0003_0003.jpg",
       "selection_label": "likely_primary_lesion",
@@ -3330,7 +3264,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 67,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李娴/李娴_01_0006_0006.jpg",
       "relative_path": "李娴/李娴_01_0006_0006.jpg",
       "selection_label": "likely_primary_lesion",
@@ -3380,7 +3313,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 68,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/林丽环/林丽环_01_0002_0002.jpg",
       "relative_path": "林丽环/林丽环_01_0002_0002.jpg",
       "selection_label": "likely_primary_lesion",
@@ -3430,7 +3362,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 69,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/曾文苑/曾文苑_01_0008_0008.jpg",
       "relative_path": "曾文苑/曾文苑_01_0008_0008.jpg",
       "selection_label": "likely_primary_lesion",
@@ -3480,7 +3411,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 70,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李娴/李娴_01_0003_0003.jpg",
       "relative_path": "李娴/李娴_01_0003_0003.jpg",
       "selection_label": "likely_primary_lesion",
@@ -3530,7 +3460,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 71,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李杨/李杨_01_0001_0001.jpg",
       "relative_path": "李杨/李杨_01_0001_0001.jpg",
       "selection_label": "likely_primary_lesion",
@@ -3580,7 +3509,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 72,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/刘琼华/刘琼华_01_0005_0005.jpg",
       "relative_path": "刘琼华/刘琼华_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -3630,7 +3558,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 73,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/郑伟东/郑伟东_01_0001_0001.jpg",
       "relative_path": "郑伟东/郑伟东_01_0001_0001.jpg",
       "selection_label": "likely_primary_lesion",
@@ -3680,7 +3607,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 74,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/龙润明/龙润明_01_0005_0005.jpg",
       "relative_path": "龙润明/龙润明_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -3730,7 +3656,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 75,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/黄春梅/黄春梅_01_0010_0010.jpg",
       "relative_path": "黄春梅/黄春梅_01_0010_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -3780,7 +3705,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 76,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/敬文英/敬文英_01_0010_0010.jpg",
       "relative_path": "敬文英/敬文英_01_0010_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -3830,7 +3754,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 77,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/练森勤/练森勤_01_0006_0006.jpg",
       "relative_path": "练森勤/练森勤_01_0006_0006.jpg",
       "selection_label": "likely_primary_lesion",
@@ -3880,7 +3803,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 78,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/黄春梅/黄春梅_01_0009_0009.jpg",
       "relative_path": "黄春梅/黄春梅_01_0009_0009.jpg",
       "selection_label": "likely_primary_lesion",
@@ -3930,7 +3852,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 79,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/孙妙荣/孙妙荣_01_0002_0002.jpg",
       "relative_path": "孙妙荣/孙妙荣_01_0002_0002.jpg",
       "selection_label": "likely_primary_lesion",
@@ -3980,7 +3901,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 80,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/胡敏茵/胡敏茵_01_0008_0008.jpg",
       "relative_path": "胡敏茵/胡敏茵_01_0008_0008.jpg",
       "selection_label": "likely_primary_lesion",
@@ -4030,7 +3950,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 81,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/曾文苑/曾文苑_01_0010_0010.jpg",
       "relative_path": "曾文苑/曾文苑_01_0010_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -4080,7 +3999,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 82,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/列渠福/列渠福_01_0010_0010.jpg",
       "relative_path": "列渠福/列渠福_01_0010_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -4130,7 +4048,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 83,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/郭敬宇/郭敬宇_01_0033_0033.jpg",
       "relative_path": "郭敬宇/郭敬宇_01_0033_0033.jpg",
       "selection_label": "likely_primary_lesion",
@@ -4180,7 +4097,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 84,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/列渠福/列渠福_01_0017_0017.jpg",
       "relative_path": "列渠福/列渠福_01_0017_0017.jpg",
       "selection_label": "likely_primary_lesion",
@@ -4230,7 +4146,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 85,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/张永南/张永南_01_0002_0002.jpg",
       "relative_path": "张永南/张永南_01_0002_0002.jpg",
       "selection_label": "likely_primary_lesion",
@@ -4280,7 +4195,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 86,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李慧/李慧_01_0017_0017.jpg",
       "relative_path": "李慧/李慧_01_0017_0017.jpg",
       "selection_label": "likely_primary_lesion",
@@ -4330,7 +4244,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 87,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/郭啟添/郭啟添_01_0014_0014.jpg",
       "relative_path": "郭啟添/郭啟添_01_0014_0014.jpg",
       "selection_label": "likely_primary_lesion",
@@ -4380,7 +4293,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 88,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/梁志成/梁志成_01_0020_0020.jpg",
       "relative_path": "梁志成/梁志成_01_0020_0020.jpg",
       "selection_label": "likely_primary_lesion",
@@ -4430,7 +4342,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 89,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/苏虹丹/苏虹丹_01_0007_0008.jpg",
       "relative_path": "苏虹丹/苏虹丹_01_0007_0008.jpg",
       "selection_label": "likely_primary_lesion",
@@ -4480,7 +4391,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 90,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈佩斯/陈佩斯_01_0006_0006.jpg",
       "relative_path": "陈佩斯/陈佩斯_01_0006_0006.jpg",
       "selection_label": "likely_primary_lesion",
@@ -4530,7 +4440,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 91,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/苏虹丹/苏虹丹_01_0013_0013.jpg",
       "relative_path": "苏虹丹/苏虹丹_01_0013_0013.jpg",
       "selection_label": "likely_primary_lesion",
@@ -4580,7 +4489,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 92,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/黄伟平/黄伟平_01_0006_0006.jpg",
       "relative_path": "黄伟平/黄伟平_01_0006_0006.jpg",
       "selection_label": "likely_primary_lesion",
@@ -4630,7 +4538,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 93,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/邱权生/邱权生_01_0010_0010.jpg",
       "relative_path": "邱权生/邱权生_01_0010_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -4680,7 +4587,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 94,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李任长/李任长_01_0008_0008.jpg",
       "relative_path": "李任长/李任长_01_0008_0008.jpg",
       "selection_label": "likely_primary_lesion",
@@ -4730,7 +4636,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 95,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/孙妙荣/孙妙荣_01_0001_0001.jpg",
       "relative_path": "孙妙荣/孙妙荣_01_0001_0001.jpg",
       "selection_label": "likely_primary_lesion",
@@ -4780,7 +4685,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 96,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/郑伟东/郑伟东_01_0017_0017.jpg",
       "relative_path": "郑伟东/郑伟东_01_0017_0017.jpg",
       "selection_label": "likely_primary_lesion",
@@ -4830,7 +4734,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 97,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈招萍/陈招萍_01_0031_0031.jpg",
       "relative_path": "陈招萍/陈招萍_01_0031_0031.jpg",
       "selection_label": "likely_primary_lesion",
@@ -4880,7 +4783,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 98,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李任长/李任长_01_0006_0006.jpg",
       "relative_path": "李任长/李任长_01_0006_0006.jpg",
       "selection_label": "likely_primary_lesion",
@@ -4930,7 +4832,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 99,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/林丽环/林丽环_01_0001_0001.jpg",
       "relative_path": "林丽环/林丽环_01_0001_0001.jpg",
       "selection_label": "likely_primary_lesion",
@@ -4980,7 +4881,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 100,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李慧/李慧_01_0013_0013.jpg",
       "relative_path": "李慧/李慧_01_0013_0013.jpg",
       "selection_label": "likely_primary_lesion",
@@ -5030,7 +4930,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 101,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/列渠福/列渠福_01_0009_0009.jpg",
       "relative_path": "列渠福/列渠福_01_0009_0009.jpg",
       "selection_label": "likely_primary_lesion",
@@ -5080,7 +4979,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 102,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/黄新兰/黄新兰_01_0005_0005.jpg",
       "relative_path": "黄新兰/黄新兰_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -5130,7 +5028,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 103,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/曾文苑/曾文苑_01_0009_0009.jpg",
       "relative_path": "曾文苑/曾文苑_01_0009_0009.jpg",
       "selection_label": "likely_primary_lesion",
@@ -5180,7 +5077,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 104,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/郭敬宇/郭敬宇_01_0015_0015.jpg",
       "relative_path": "郭敬宇/郭敬宇_01_0015_0015.jpg",
       "selection_label": "likely_primary_lesion",
@@ -5230,7 +5126,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 105,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/梁志成/梁志成_01_0015_0015.jpg",
       "relative_path": "梁志成/梁志成_01_0015_0015.jpg",
       "selection_label": "likely_primary_lesion",
@@ -5280,7 +5175,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 106,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/麦爱仙/麦爱仙_01_0009_0009.jpg",
       "relative_path": "麦爱仙/麦爱仙_01_0009_0009.jpg",
       "selection_label": "likely_primary_lesion",
@@ -5330,7 +5224,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 107,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李卫平/李卫平_01_0003_0003.jpg",
       "relative_path": "李卫平/李卫平_01_0003_0003.jpg",
       "selection_label": "likely_primary_lesion",
@@ -5380,7 +5273,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 108,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈爱君/陈爱君_01_0012_0012.jpg",
       "relative_path": "陈爱君/陈爱君_01_0012_0012.jpg",
       "selection_label": "likely_primary_lesion",
@@ -5430,7 +5322,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 109,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李贺芳/李贺芳_01_0013_0013.jpg",
       "relative_path": "李贺芳/李贺芳_01_0013_0013.jpg",
       "selection_label": "likely_primary_lesion",
@@ -5480,7 +5371,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 110,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/齐晓明/齐晓明_01_0013_0013.jpg",
       "relative_path": "齐晓明/齐晓明_01_0013_0013.jpg",
       "selection_label": "likely_primary_lesion",
@@ -5530,7 +5420,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 111,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李孟留/李孟留_01_0011_0011.jpg",
       "relative_path": "李孟留/李孟留_01_0011_0011.jpg",
       "selection_label": "likely_primary_lesion",
@@ -5580,7 +5469,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 112,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李慧/李慧_01_0012_0012.jpg",
       "relative_path": "李慧/李慧_01_0012_0012.jpg",
       "selection_label": "likely_primary_lesion",
@@ -5630,7 +5518,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 113,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/黄子贺/黄子贺_01_0014_0014.jpg",
       "relative_path": "黄子贺/黄子贺_01_0014_0014.jpg",
       "selection_label": "likely_primary_lesion",
@@ -5680,7 +5567,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 114,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/苏虹丹/苏虹丹_01_0005_0006.jpg",
       "relative_path": "苏虹丹/苏虹丹_01_0005_0006.jpg",
       "selection_label": "likely_primary_lesion",
@@ -5730,7 +5616,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 115,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/郭敬宇/郭敬宇_01_0017_0017.jpg",
       "relative_path": "郭敬宇/郭敬宇_01_0017_0017.jpg",
       "selection_label": "likely_primary_lesion",
@@ -5780,7 +5665,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 116,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/余晓辉/余晓辉_01_0011_0011.jpg",
       "relative_path": "余晓辉/余晓辉_01_0011_0011.jpg",
       "selection_label": "likely_primary_lesion",
@@ -5830,7 +5714,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 117,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李园芳/李园芳_01_0005_0005.jpg",
       "relative_path": "李园芳/李园芳_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -5880,7 +5763,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 118,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/郑伟东/郑伟东_01_0015_0015.jpg",
       "relative_path": "郑伟东/郑伟东_01_0015_0015.jpg",
       "selection_label": "likely_primary_lesion",
@@ -5930,7 +5812,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 119,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/许茶/许茶_01_0003_0003.jpg",
       "relative_path": "许茶/许茶_01_0003_0003.jpg",
       "selection_label": "likely_primary_lesion",
@@ -5980,7 +5861,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 120,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/黄子贺/黄子贺_01_0004_0004.jpg",
       "relative_path": "黄子贺/黄子贺_01_0004_0004.jpg",
       "selection_label": "likely_primary_lesion",
@@ -6030,7 +5910,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 121,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/吕雁如/吕雁如_01_0006_0006.jpg",
       "relative_path": "吕雁如/吕雁如_01_0006_0006.jpg",
       "selection_label": "likely_primary_lesion",
@@ -6080,7 +5959,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 122,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/范会涛/范会涛_01_0017_0017.jpg",
       "relative_path": "范会涛/范会涛_01_0017_0017.jpg",
       "selection_label": "likely_primary_lesion",
@@ -6130,7 +6008,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 123,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李园芳/李园芳_01_0003_0003.jpg",
       "relative_path": "李园芳/李园芳_01_0003_0003.jpg",
       "selection_label": "likely_primary_lesion",
@@ -6180,7 +6057,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 124,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/邱权生/邱权生_01_0008_0008.jpg",
       "relative_path": "邱权生/邱权生_01_0008_0008.jpg",
       "selection_label": "likely_primary_lesion",
@@ -6230,7 +6106,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 125,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/范少达/范少达_01_0012_0012.jpg",
       "relative_path": "范少达/范少达_01_0012_0012.jpg",
       "selection_label": "likely_primary_lesion",
@@ -6280,7 +6155,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 126,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/麦爱仙/麦爱仙_01_0016_0016.jpg",
       "relative_path": "麦爱仙/麦爱仙_01_0016_0016.jpg",
       "selection_label": "likely_primary_lesion",
@@ -6330,7 +6204,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 127,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/杨秀卿/杨秀卿_01_0009_0009.jpg",
       "relative_path": "杨秀卿/杨秀卿_01_0009_0009.jpg",
       "selection_label": "likely_primary_lesion",
@@ -6380,7 +6253,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 128,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/邵剑辉/邵剑辉_01_0010_0010.jpg",
       "relative_path": "邵剑辉/邵剑辉_01_0010_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -6430,7 +6302,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 129,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/范会涛/范会涛_01_0018_0018.jpg",
       "relative_path": "范会涛/范会涛_01_0018_0018.jpg",
       "selection_label": "likely_primary_lesion",
@@ -6480,7 +6351,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 130,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/罗淑娴/罗淑娴_01_0002_0002.jpg",
       "relative_path": "罗淑娴/罗淑娴_01_0002_0002.jpg",
       "selection_label": "likely_primary_lesion",
@@ -6530,7 +6400,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 131,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李玲/李玲_01_0002_0002.jpg",
       "relative_path": "李玲/李玲_01_0002_0002.jpg",
       "selection_label": "likely_primary_lesion",
@@ -6580,7 +6449,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 132,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/邝三/邝三_01_0005_0005.jpg",
       "relative_path": "邝三/邝三_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -6630,7 +6498,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 133,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/许茶/许茶_01_0002_0002.jpg",
       "relative_path": "许茶/许茶_01_0002_0002.jpg",
       "selection_label": "likely_primary_lesion",
@@ -6680,7 +6547,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 134,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈招萍/陈招萍_01_0030_0030.jpg",
       "relative_path": "陈招萍/陈招萍_01_0030_0030.jpg",
       "selection_label": "likely_primary_lesion",
@@ -6730,7 +6596,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 135,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈羽生/陈羽生_01_0004_0004.jpg",
       "relative_path": "陈羽生/陈羽生_01_0004_0004.jpg",
       "selection_label": "likely_primary_lesion",
@@ -6780,7 +6645,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 136,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/张仲爱/张仲爱_01_0012_0012.jpg",
       "relative_path": "张仲爱/张仲爱_01_0012_0012.jpg",
       "selection_label": "likely_primary_lesion",
@@ -6830,7 +6694,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 137,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/范少达/范少达_01_0005_0005.jpg",
       "relative_path": "范少达/范少达_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -6880,7 +6743,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 138,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/洪佩婵/洪佩婵_01_0021_0021.jpg",
       "relative_path": "洪佩婵/洪佩婵_01_0021_0021.jpg",
       "selection_label": "likely_primary_lesion",
@@ -6930,7 +6792,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 139,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/林凤娟/林凤娟_01_0015_0015.jpg",
       "relative_path": "林凤娟/林凤娟_01_0015_0015.jpg",
       "selection_label": "likely_primary_lesion",
@@ -6980,7 +6841,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 140,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/齐晓明/齐晓明_01_0012_0012.jpg",
       "relative_path": "齐晓明/齐晓明_01_0012_0012.jpg",
       "selection_label": "likely_primary_lesion",
@@ -7030,7 +6890,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 141,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/张仲爱/张仲爱_01_0005_0005.jpg",
       "relative_path": "张仲爱/张仲爱_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -7080,7 +6939,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 142,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈羽生/陈羽生_01_0010_0010.jpg",
       "relative_path": "陈羽生/陈羽生_01_0010_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -7130,7 +6988,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 143,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/叶莺/叶莺_01_0005_0005.jpg",
       "relative_path": "叶莺/叶莺_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -7180,7 +7037,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 144,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/何瑶/何瑶_01_0011_0011.jpg",
       "relative_path": "何瑶/何瑶_01_0011_0011.jpg",
       "selection_label": "likely_primary_lesion",
@@ -7230,7 +7086,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 145,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/余晓辉/余晓辉_01_0025_0025.jpg",
       "relative_path": "余晓辉/余晓辉_01_0025_0025.jpg",
       "selection_label": "likely_primary_lesion",
@@ -7280,7 +7135,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 146,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/欧慧芳/欧慧芳_01_0002_0002.jpg",
       "relative_path": "欧慧芳/欧慧芳_01_0002_0002.jpg",
       "selection_label": "likely_primary_lesion",
@@ -7330,7 +7184,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 147,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李钰汝/李钰汝_01_0011_0011.jpg",
       "relative_path": "李钰汝/李钰汝_01_0011_0011.jpg",
       "selection_label": "likely_primary_lesion",
@@ -7380,7 +7233,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 148,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/何春芬/何春芬_01_0004_0004.jpg",
       "relative_path": "何春芬/何春芬_01_0004_0004.jpg",
       "selection_label": "likely_primary_lesion",
@@ -7430,7 +7282,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 149,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/黄英/黄英_01_0006_0006.jpg",
       "relative_path": "黄英/黄英_01_0006_0006.jpg",
       "selection_label": "likely_primary_lesion",
@@ -7480,7 +7331,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 150,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/欧慧芳/欧慧芳_01_0001_0001.jpg",
       "relative_path": "欧慧芳/欧慧芳_01_0001_0001.jpg",
       "selection_label": "likely_primary_lesion",
@@ -7530,7 +7380,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 151,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈爱君/陈爱君_01_0017_0017.jpg",
       "relative_path": "陈爱君/陈爱君_01_0017_0017.jpg",
       "selection_label": "likely_primary_lesion",
@@ -7580,7 +7429,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 152,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/张仲爱/张仲爱_01_0010_0010.jpg",
       "relative_path": "张仲爱/张仲爱_01_0010_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -7630,7 +7478,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 153,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/邝三/邝三_01_0016_0016.jpg",
       "relative_path": "邝三/邝三_01_0016_0016.jpg",
       "selection_label": "likely_primary_lesion",
@@ -7680,7 +7527,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 154,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈招萍/陈招萍_01_0026_0026.jpg",
       "relative_path": "陈招萍/陈招萍_01_0026_0026.jpg",
       "selection_label": "likely_primary_lesion",
@@ -7730,7 +7576,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 155,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/叶永强/叶永强_01_0021_0021.jpg",
       "relative_path": "叶永强/叶永强_01_0021_0021.jpg",
       "selection_label": "likely_primary_lesion",
@@ -7780,7 +7625,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 156,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/欧慧芳/欧慧芳_01_0006_0006.jpg",
       "relative_path": "欧慧芳/欧慧芳_01_0006_0006.jpg",
       "selection_label": "likely_primary_lesion",
@@ -7830,7 +7674,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 157,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李玲/李玲_01_0010_0010.jpg",
       "relative_path": "李玲/李玲_01_0010_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -7880,7 +7723,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 158,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/邱凤/邱凤_01_0013_0013.jpg",
       "relative_path": "邱凤/邱凤_01_0013_0013.jpg",
       "selection_label": "likely_primary_lesion",
@@ -7930,7 +7772,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 159,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/温社妹/温社妹_01_0001_0001.jpg",
       "relative_path": "温社妹/温社妹_01_0001_0001.jpg",
       "selection_label": "likely_primary_lesion",
@@ -7980,7 +7821,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 160,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/龙润明/龙润明_01_0006_0006.jpg",
       "relative_path": "龙润明/龙润明_01_0006_0006.jpg",
       "selection_label": "likely_primary_lesion",
@@ -8030,7 +7870,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 161,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李玲/李玲_01_0008_0008.jpg",
       "relative_path": "李玲/李玲_01_0008_0008.jpg",
       "selection_label": "likely_primary_lesion",
@@ -8080,7 +7919,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 162,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/敬文英/敬文英_01_0013_0013.jpg",
       "relative_path": "敬文英/敬文英_01_0013_0013.jpg",
       "selection_label": "likely_primary_lesion",
@@ -8130,7 +7968,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 163,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/郑传锦/郑传锦_01_0003_0003.jpg",
       "relative_path": "郑传锦/郑传锦_01_0003_0003.jpg",
       "selection_label": "likely_primary_lesion",
@@ -8180,7 +8017,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 164,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/余晓辉/余晓辉_01_0007_0007.jpg",
       "relative_path": "余晓辉/余晓辉_01_0007_0007.jpg",
       "selection_label": "likely_primary_lesion",
@@ -8230,7 +8066,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 165,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李银/李银_01_0004_0004.jpg",
       "relative_path": "李银/李银_01_0004_0004.jpg",
       "selection_label": "likely_primary_lesion",
@@ -8280,7 +8115,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 166,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/黄英/黄英_01_0009_0009.jpg",
       "relative_path": "黄英/黄英_01_0009_0009.jpg",
       "selection_label": "likely_primary_lesion",
@@ -8330,7 +8164,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 167,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/侯进旺/侯进旺_01_0017_0017.jpg",
       "relative_path": "侯进旺/侯进旺_01_0017_0017.jpg",
       "selection_label": "likely_primary_lesion",
@@ -8380,7 +8213,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 168,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/苏善群/苏善群_01_0005_0005.jpg",
       "relative_path": "苏善群/苏善群_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -8430,7 +8262,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 169,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈倩妮/陈倩妮_01_0010_0010.jpg",
       "relative_path": "陈倩妮/陈倩妮_01_0010_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -8480,7 +8311,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 170,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/黄英/黄英_01_0002_0002.jpg",
       "relative_path": "黄英/黄英_01_0002_0002.jpg",
       "selection_label": "likely_primary_lesion",
@@ -8530,7 +8360,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 171,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李银/李银_01_0010_0010.jpg",
       "relative_path": "李银/李银_01_0010_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -8580,7 +8409,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 172,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈羽生/陈羽生_01_0011_0011.jpg",
       "relative_path": "陈羽生/陈羽生_01_0011_0011.jpg",
       "selection_label": "likely_primary_lesion",
@@ -8630,7 +8458,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 173,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/刘惠银/刘惠银_01_0009_0009.jpg",
       "relative_path": "刘惠银/刘惠银_01_0009_0009.jpg",
       "selection_label": "likely_primary_lesion",
@@ -8680,7 +8507,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 174,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/邱凤/邱凤_01_0012_0012.jpg",
       "relative_path": "邱凤/邱凤_01_0012_0012.jpg",
       "selection_label": "likely_primary_lesion",
@@ -8730,7 +8556,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 175,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/张池标/张池标_01_0001_0001.jpg",
       "relative_path": "张池标/张池标_01_0001_0001.jpg",
       "selection_label": "likely_primary_lesion",
@@ -8780,7 +8605,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 176,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李银/李银_01_0008_0008.jpg",
       "relative_path": "李银/李银_01_0008_0008.jpg",
       "selection_label": "likely_primary_lesion",
@@ -8830,7 +8654,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 177,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/赵伟东/赵伟东_01_0004_0004.jpg",
       "relative_path": "赵伟东/赵伟东_01_0004_0004.jpg",
       "selection_label": "likely_primary_lesion",
@@ -8880,7 +8703,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 178,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/邱凤/邱凤_01_0001_0001.jpg",
       "relative_path": "邱凤/邱凤_01_0001_0001.jpg",
       "selection_label": "likely_primary_lesion",
@@ -8930,7 +8752,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 179,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/赵伟东/赵伟东_01_0002_0002.jpg",
       "relative_path": "赵伟东/赵伟东_01_0002_0002.jpg",
       "selection_label": "likely_primary_lesion",
@@ -8980,7 +8801,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 180,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李钰汝/李钰汝_01_0007_0007.jpg",
       "relative_path": "李钰汝/李钰汝_01_0007_0007.jpg",
       "selection_label": "likely_primary_lesion",
@@ -9030,7 +8850,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 181,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/黄伟平/黄伟平_01_0012_0012.jpg",
       "relative_path": "黄伟平/黄伟平_01_0012_0012.jpg",
       "selection_label": "likely_primary_lesion",
@@ -9080,7 +8899,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 182,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李孟留/李孟留_01_0008_0008.jpg",
       "relative_path": "李孟留/李孟留_01_0008_0008.jpg",
       "selection_label": "likely_primary_lesion",
@@ -9130,7 +8948,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 183,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/黄盛烨/黄盛烨_01_0003_0003.jpg",
       "relative_path": "黄盛烨/黄盛烨_01_0003_0003.jpg",
       "selection_label": "likely_primary_lesion",
@@ -9180,7 +8997,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 184,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/刘琼华/刘琼华_01_0002_0002.jpg",
       "relative_path": "刘琼华/刘琼华_01_0002_0002.jpg",
       "selection_label": "likely_primary_lesion",
@@ -9230,7 +9046,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 185,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李孟留/李孟留_01_0012_0012.jpg",
       "relative_path": "李孟留/李孟留_01_0012_0012.jpg",
       "selection_label": "likely_primary_lesion",
@@ -9280,7 +9095,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 186,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/洪佩婵/洪佩婵_01_0009_0009.jpg",
       "relative_path": "洪佩婵/洪佩婵_01_0009_0009.jpg",
       "selection_label": "likely_primary_lesion",
@@ -9330,7 +9144,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 187,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李卫平/李卫平_01_0002_0002.jpg",
       "relative_path": "李卫平/李卫平_01_0002_0002.jpg",
       "selection_label": "likely_primary_lesion",
@@ -9380,7 +9193,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 188,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李美菊/李美菊_01_0008_0008.jpg",
       "relative_path": "李美菊/李美菊_01_0008_0008.jpg",
       "selection_label": "likely_primary_lesion",
@@ -9430,7 +9242,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 189,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/吕雁如/吕雁如_01_0005_0005.jpg",
       "relative_path": "吕雁如/吕雁如_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -9480,7 +9291,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 190,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/何瑶/何瑶_01_0008_0008.jpg",
       "relative_path": "何瑶/何瑶_01_0008_0008.jpg",
       "selection_label": "likely_primary_lesion",
@@ -9530,7 +9340,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 191,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/何瑶/何瑶_01_0001_0001.jpg",
       "relative_path": "何瑶/何瑶_01_0001_0001.jpg",
       "selection_label": "likely_primary_lesion",
@@ -9580,7 +9389,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 192,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/赵伟东/赵伟东_01_0011_0011.jpg",
       "relative_path": "赵伟东/赵伟东_01_0011_0011.jpg",
       "selection_label": "likely_primary_lesion",
@@ -9630,7 +9438,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 193,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李静文/李静文_01_0007_0007.jpg",
       "relative_path": "李静文/李静文_01_0007_0007.jpg",
       "selection_label": "likely_primary_lesion",
@@ -9680,7 +9487,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 194,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/邵剑辉/邵剑辉_01_0006_0006.jpg",
       "relative_path": "邵剑辉/邵剑辉_01_0006_0006.jpg",
       "selection_label": "likely_primary_lesion",
@@ -9730,7 +9536,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 195,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/彭巨/彭巨_01_0010_0010.jpg",
       "relative_path": "彭巨/彭巨_01_0010_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -9780,7 +9585,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 196,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李静文/李静文_01_0004_0004.jpg",
       "relative_path": "李静文/李静文_01_0004_0004.jpg",
       "selection_label": "likely_primary_lesion",
@@ -9830,7 +9634,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 197,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/张玲/张玲_01_0007_0007.jpg",
       "relative_path": "张玲/张玲_01_0007_0007.jpg",
       "selection_label": "likely_primary_lesion",
@@ -9880,7 +9683,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 198,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/洪佩婵/洪佩婵_01_0006_0006.jpg",
       "relative_path": "洪佩婵/洪佩婵_01_0006_0006.jpg",
       "selection_label": "likely_primary_lesion",
@@ -9930,7 +9732,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 199,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/侯进旺/侯进旺_01_0012_0012.jpg",
       "relative_path": "侯进旺/侯进旺_01_0012_0012.jpg",
       "selection_label": "likely_primary_lesion",
@@ -9980,7 +9781,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 200,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/邵剑辉/邵剑辉_01_0003_0003.jpg",
       "relative_path": "邵剑辉/邵剑辉_01_0003_0003.jpg",
       "selection_label": "likely_primary_lesion",
@@ -10030,7 +9830,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 201,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李娴/李娴_01_0002_0002.jpg",
       "relative_path": "李娴/李娴_01_0002_0002.jpg",
       "selection_label": "likely_primary_lesion",
@@ -10080,7 +9879,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 202,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李杨/李杨_01_0016_0016.jpg",
       "relative_path": "李杨/李杨_01_0016_0016.jpg",
       "selection_label": "likely_primary_lesion",
@@ -10130,7 +9928,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 203,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/邹小梅/邹小梅_01_0010_0010.jpg",
       "relative_path": "邹小梅/邹小梅_01_0010_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -10180,7 +9977,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 204,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/杨远芬/杨远芬_01_0004_0004.jpg",
       "relative_path": "杨远芬/杨远芬_01_0004_0004.jpg",
       "selection_label": "likely_primary_lesion",
@@ -10230,7 +10026,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 205,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/彭巨/彭巨_01_0001_0001.jpg",
       "relative_path": "彭巨/彭巨_01_0001_0001.jpg",
       "selection_label": "likely_primary_lesion",
@@ -10280,7 +10075,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 206,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/张玲/张玲_01_0002_0002.jpg",
       "relative_path": "张玲/张玲_01_0002_0002.jpg",
       "selection_label": "likely_primary_lesion",
@@ -10330,7 +10124,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 207,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/郭啟添/郭啟添_01_0010_0010.jpg",
       "relative_path": "郭啟添/郭啟添_01_0010_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -10380,7 +10173,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 208,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/刘惠银/刘惠银_01_0002_0002.jpg",
       "relative_path": "刘惠银/刘惠银_01_0002_0002.jpg",
       "selection_label": "likely_primary_lesion",
@@ -10430,7 +10222,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 209,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈亚奖/陈亚奖_01_0010_0010.jpg",
       "relative_path": "陈亚奖/陈亚奖_01_0010_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -10480,7 +10271,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 210,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/蔡秋权/蔡秋权_01_0017_0017.jpg",
       "relative_path": "蔡秋权/蔡秋权_01_0017_0017.jpg",
       "selection_label": "likely_primary_lesion",
@@ -10530,7 +10320,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 211,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李杨/李杨_01_0009_0009.jpg",
       "relative_path": "李杨/李杨_01_0009_0009.jpg",
       "selection_label": "likely_primary_lesion",
@@ -10580,7 +10369,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 212,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/吴雄梅/吴雄梅_01_0008_0008.jpg",
       "relative_path": "吴雄梅/吴雄梅_01_0008_0008.jpg",
       "selection_label": "likely_primary_lesion",
@@ -10630,7 +10418,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 213,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/翟海斌/翟海斌_01_0027_0027.jpg",
       "relative_path": "翟海斌/翟海斌_01_0027_0027.jpg",
       "selection_label": "likely_primary_lesion",
@@ -10680,7 +10467,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 214,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/黄新兰/黄新兰_01_0003_0003.jpg",
       "relative_path": "黄新兰/黄新兰_01_0003_0003.jpg",
       "selection_label": "likely_primary_lesion",
@@ -10730,7 +10516,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 215,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/吕雁如/吕雁如_01_0010_0010.jpg",
       "relative_path": "吕雁如/吕雁如_01_0010_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -10780,7 +10565,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 216,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈倩妮/陈倩妮_01_0003_0003.jpg",
       "relative_path": "陈倩妮/陈倩妮_01_0003_0003.jpg",
       "selection_label": "likely_primary_lesion",
@@ -10830,7 +10614,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 217,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李美菊/李美菊_01_0012_0012.jpg",
       "relative_path": "李美菊/李美菊_01_0012_0012.jpg",
       "selection_label": "likely_primary_lesion",
@@ -10880,7 +10663,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 218,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/郭啟添/郭啟添_01_0013_0013.jpg",
       "relative_path": "郭啟添/郭啟添_01_0013_0013.jpg",
       "selection_label": "likely_primary_lesion",
@@ -10930,7 +10712,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 219,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李贺芳/李贺芳_01_0009_0009.jpg",
       "relative_path": "李贺芳/李贺芳_01_0009_0009.jpg",
       "selection_label": "likely_primary_lesion",
@@ -10980,7 +10761,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 220,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/杨远芬/杨远芬_01_0008_0008.jpg",
       "relative_path": "杨远芬/杨远芬_01_0008_0008.jpg",
       "selection_label": "likely_primary_lesion",
@@ -11030,7 +10810,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 221,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/林丽环/林丽环_01_0004_0004.jpg",
       "relative_path": "林丽环/林丽环_01_0004_0004.jpg",
       "selection_label": "likely_primary_lesion",
@@ -11080,7 +10859,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 222,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/曾秀菊/曾秀菊_01_0001_0001.jpg",
       "relative_path": "曾秀菊/曾秀菊_01_0001_0001.jpg",
       "selection_label": "likely_primary_lesion",
@@ -11130,7 +10908,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 223,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/余喜君/余喜君_01_0035_0035.jpg",
       "relative_path": "余喜君/余喜君_01_0035_0035.jpg",
       "selection_label": "likely_primary_lesion",
@@ -11180,7 +10957,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 224,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李招弟/李招弟_01_0002_0002.jpg",
       "relative_path": "李招弟/李招弟_01_0002_0002.jpg",
       "selection_label": "likely_primary_lesion",
@@ -11230,7 +11006,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 225,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/黄伟平/黄伟平_01_0009_0009.jpg",
       "relative_path": "黄伟平/黄伟平_01_0009_0009.jpg",
       "selection_label": "likely_primary_lesion",
@@ -11280,7 +11055,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 226,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李卫平/李卫平_01_0001_0001.jpg",
       "relative_path": "李卫平/李卫平_01_0001_0001.jpg",
       "selection_label": "likely_primary_lesion",
@@ -11330,7 +11104,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 227,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/翁美钦/翁美钦_01_0010_0010.jpg",
       "relative_path": "翁美钦/翁美钦_01_0010_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -11380,7 +11153,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 228,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李静文/李静文_01_0018_0018.jpg",
       "relative_path": "李静文/李静文_01_0018_0018.jpg",
       "selection_label": "likely_primary_lesion",
@@ -11430,7 +11202,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 229,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/胡敏茵/胡敏茵_01_0011_0011.jpg",
       "relative_path": "胡敏茵/胡敏茵_01_0011_0011.jpg",
       "selection_label": "likely_primary_lesion",
@@ -11480,7 +11251,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 230,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/黄新兰/黄新兰_01_0004_0004.jpg",
       "relative_path": "黄新兰/黄新兰_01_0004_0004.jpg",
       "selection_label": "likely_primary_lesion",
@@ -11530,7 +11300,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 231,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/刘琼华/刘琼华_01_0010_0010.jpg",
       "relative_path": "刘琼华/刘琼华_01_0010_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -11580,7 +11349,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 232,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/吴雄梅/吴雄梅_01_0005_0005.jpg",
       "relative_path": "吴雄梅/吴雄梅_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -11630,7 +11398,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 233,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/余喜君/余喜君_01_0033_0033.jpg",
       "relative_path": "余喜君/余喜君_01_0033_0033.jpg",
       "selection_label": "likely_primary_lesion",
@@ -11680,7 +11447,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 234,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李美菊/李美菊_01_0011_0011.jpg",
       "relative_path": "李美菊/李美菊_01_0011_0011.jpg",
       "selection_label": "likely_primary_lesion",
@@ -11730,7 +11496,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 235,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈利娣/陈利娣_01_0001_0001.jpg",
       "relative_path": "陈利娣/陈利娣_01_0001_0001.jpg",
       "selection_label": "likely_primary_lesion",
@@ -11780,7 +11545,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 236,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/温赛美/温赛美_01_0007_0007.jpg",
       "relative_path": "温赛美/温赛美_01_0007_0007.jpg",
       "selection_label": "likely_primary_lesion",
@@ -11830,7 +11594,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 237,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/余喜君/余喜君_01_0029_0029.jpg",
       "relative_path": "余喜君/余喜君_01_0029_0029.jpg",
       "selection_label": "likely_primary_lesion",
@@ -11880,7 +11643,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 238,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/吴雄梅/吴雄梅_01_0010_0010.jpg",
       "relative_path": "吴雄梅/吴雄梅_01_0010_0010.jpg",
       "selection_label": "likely_primary_lesion",
@@ -11930,7 +11692,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 239,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/侯进旺/侯进旺_01_0011_0011.jpg",
       "relative_path": "侯进旺/侯进旺_01_0011_0011.jpg",
       "selection_label": "likely_primary_lesion",
@@ -11980,7 +11741,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 240,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李招弟/李招弟_01_0003_0003.jpg",
       "relative_path": "李招弟/李招弟_01_0003_0003.jpg",
       "selection_label": "likely_primary_lesion",
@@ -12030,7 +11790,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 241,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/杨远芬/杨远芬_01_0002_0002.jpg",
       "relative_path": "杨远芬/杨远芬_01_0002_0002.jpg",
       "selection_label": "likely_primary_lesion",
@@ -12080,7 +11839,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 242,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈俊勇/陈俊勇_01_0004_0004.jpg",
       "relative_path": "陈俊勇/陈俊勇_01_0004_0004.jpg",
       "selection_label": "likely_primary_lesion",
@@ -12130,7 +11888,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 243,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/翁美钦/翁美钦_01_0014_0014.jpg",
       "relative_path": "翁美钦/翁美钦_01_0014_0014.jpg",
       "selection_label": "likely_primary_lesion",
@@ -12180,7 +11937,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 244,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/罗淑娴/罗淑娴_01_0001_0001.jpg",
       "relative_path": "罗淑娴/罗淑娴_01_0001_0001.jpg",
       "selection_label": "likely_primary_lesion",
@@ -12230,7 +11986,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 245,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/张笑/张笑_01_0002_0002.jpg",
       "relative_path": "张笑/张笑_01_0002_0002.jpg",
       "selection_label": "likely_primary_lesion",
@@ -12280,7 +12035,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 246,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/苏善群/苏善群_01_0006_0006.jpg",
       "relative_path": "苏善群/苏善群_01_0006_0006.jpg",
       "selection_label": "likely_primary_lesion",
@@ -12330,7 +12084,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 247,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/翟海斌/翟海斌_01_0019_0019.jpg",
       "relative_path": "翟海斌/翟海斌_01_0019_0019.jpg",
       "selection_label": "likely_primary_lesion",
@@ -12380,7 +12133,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 248,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李招弟/李招弟_01_0004_0004.jpg",
       "relative_path": "李招弟/李招弟_01_0004_0004.jpg",
       "selection_label": "likely_primary_lesion",
@@ -12430,7 +12182,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 249,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/张笑/张笑_01_0003_0003.jpg",
       "relative_path": "张笑/张笑_01_0003_0003.jpg",
       "selection_label": "likely_primary_lesion",
@@ -12480,7 +12231,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 250,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/曾焕敬/曾焕敬_01_0005_0005.jpg",
       "relative_path": "曾焕敬/曾焕敬_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -12530,7 +12280,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 251,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/谢妮/谢妮_01_0026_0026.jpg",
       "relative_path": "谢妮/谢妮_01_0026_0026.jpg",
       "selection_label": "likely_primary_lesion",
@@ -12580,7 +12329,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 252,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/谢妮/谢妮_01_0022_0022.jpg",
       "relative_path": "谢妮/谢妮_01_0022_0022.jpg",
       "selection_label": "likely_primary_lesion",
@@ -12630,7 +12378,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 253,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/谢妮/谢妮_01_0012_0012.jpg",
       "relative_path": "谢妮/谢妮_01_0012_0012.jpg",
       "selection_label": "likely_primary_lesion",
@@ -12680,7 +12427,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 254,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/余雪莲/余雪莲_01_0009_0009.jpg",
       "relative_path": "余雪莲/余雪莲_01_0009_0009.jpg",
       "selection_label": "likely_primary_lesion",
@@ -12730,7 +12476,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 255,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/吴瑛/吴瑛_01_0003_0003.jpg",
       "relative_path": "吴瑛/吴瑛_01_0003_0003.jpg",
       "selection_label": "likely_primary_lesion",
@@ -12780,7 +12525,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 256,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/翁美钦/翁美钦_01_0013_0013.jpg",
       "relative_path": "翁美钦/翁美钦_01_0013_0013.jpg",
       "selection_label": "likely_primary_lesion",
@@ -12830,7 +12574,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 257,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈利娣/陈利娣_01_0005_0005.jpg",
       "relative_path": "陈利娣/陈利娣_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -12880,7 +12623,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 258,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/曾秀菊/曾秀菊_01_0011_0011.jpg",
       "relative_path": "曾秀菊/曾秀菊_01_0011_0011.jpg",
       "selection_label": "likely_primary_lesion",
@@ -12930,7 +12672,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 259,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/曾焕敬/曾焕敬_01_0009_0009.jpg",
       "relative_path": "曾焕敬/曾焕敬_01_0009_0009.jpg",
       "selection_label": "likely_primary_lesion",
@@ -12980,7 +12721,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 260,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈俊勇/陈俊勇_01_0005_0005.jpg",
       "relative_path": "陈俊勇/陈俊勇_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -13030,7 +12770,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 261,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/邹小梅/邹小梅_01_0008_0008.jpg",
       "relative_path": "邹小梅/邹小梅_01_0008_0008.jpg",
       "selection_label": "likely_primary_lesion",
@@ -13080,7 +12819,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 262,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/梁桂妹/梁桂妹_01_0031_0031.jpg",
       "relative_path": "梁桂妹/梁桂妹_01_0031_0031.jpg",
       "selection_label": "likely_primary_lesion",
@@ -13130,7 +12868,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 263,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/张梅春/张梅春_01_0008_0008.jpg",
       "relative_path": "张梅春/张梅春_01_0008_0008.jpg",
       "selection_label": "likely_primary_lesion",
@@ -13180,7 +12917,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 264,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/李任长/李任长_01_0009_0009.jpg",
       "relative_path": "李任长/李任长_01_0009_0009.jpg",
       "selection_label": "likely_primary_lesion",
@@ -13230,7 +12966,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 265,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/刘桂英/刘桂英_01_0002_0002.jpg",
       "relative_path": "刘桂英/刘桂英_01_0002_0002.jpg",
       "selection_label": "likely_primary_lesion",
@@ -13280,7 +13015,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 266,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/练森勤/练森勤_01_0003_0003.jpg",
       "relative_path": "练森勤/练森勤_01_0003_0003.jpg",
       "selection_label": "likely_primary_lesion",
@@ -13330,7 +13064,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 267,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/袁海峰/袁海峰_01_0015_0015.jpg",
       "relative_path": "袁海峰/袁海峰_01_0015_0015.jpg",
       "selection_label": "likely_primary_lesion",
@@ -13380,7 +13113,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 268,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/梁桂妹/梁桂妹_01_0033_0033.jpg",
       "relative_path": "梁桂妹/梁桂妹_01_0033_0033.jpg",
       "selection_label": "likely_primary_lesion",
@@ -13430,7 +13162,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 269,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/黎丽娟/黎丽娟_01_0004_0004.jpg",
       "relative_path": "黎丽娟/黎丽娟_01_0004_0004.jpg",
       "selection_label": "likely_primary_lesion",
@@ -13480,7 +13211,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 270,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈俊勇/陈俊勇_01_0007_0007.jpg",
       "relative_path": "陈俊勇/陈俊勇_01_0007_0007.jpg",
       "selection_label": "likely_primary_lesion",
@@ -13530,7 +13260,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 271,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/胡敏茵/胡敏茵_01_0019_0019.jpg",
       "relative_path": "胡敏茵/胡敏茵_01_0019_0019.jpg",
       "selection_label": "likely_primary_lesion",
@@ -13580,7 +13309,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 272,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/曾秀菊/曾秀菊_01_0012_0012.jpg",
       "relative_path": "曾秀菊/曾秀菊_01_0012_0012.jpg",
       "selection_label": "likely_primary_lesion",
@@ -13630,7 +13358,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 273,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/薛素君/薛素君_01_0001_0001.jpg",
       "relative_path": "薛素君/薛素君_01_0001_0001.jpg",
       "selection_label": "likely_primary_lesion",
@@ -13680,7 +13407,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 274,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/邹小梅/邹小梅_01_0009_0009.jpg",
       "relative_path": "邹小梅/邹小梅_01_0009_0009.jpg",
       "selection_label": "likely_primary_lesion",
@@ -13730,7 +13456,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 275,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/董建伟/董建伟_01_0012_0012.jpg",
       "relative_path": "董建伟/董建伟_01_0012_0012.jpg",
       "selection_label": "likely_primary_lesion",
@@ -13780,7 +13505,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 276,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈亚奖/陈亚奖_01_0006_0006.jpg",
       "relative_path": "陈亚奖/陈亚奖_01_0006_0006.jpg",
       "selection_label": "likely_primary_lesion",
@@ -13830,7 +13554,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 277,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/黎丽娟/黎丽娟_01_0005_0005.jpg",
       "relative_path": "黎丽娟/黎丽娟_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -13880,7 +13603,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 278,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/梁桂妹/梁桂妹_01_0008_0008.jpg",
       "relative_path": "梁桂妹/梁桂妹_01_0008_0008.jpg",
       "selection_label": "likely_primary_lesion",
@@ -13930,7 +13652,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 279,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/袁海峰/袁海峰_01_0005_0005.jpg",
       "relative_path": "袁海峰/袁海峰_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -13980,7 +13701,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 280,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/袁海峰/袁海峰_01_0008_0008.jpg",
       "relative_path": "袁海峰/袁海峰_01_0008_0008.jpg",
       "selection_label": "likely_primary_lesion",
@@ -14030,7 +13750,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 281,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/曾焕敬/曾焕敬_01_0008_0008.jpg",
       "relative_path": "曾焕敬/曾焕敬_01_0008_0008.jpg",
       "selection_label": "likely_primary_lesion",
@@ -14080,7 +13799,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 282,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/张梅春/张梅春_01_0014_0014.jpg",
       "relative_path": "张梅春/张梅春_01_0014_0014.jpg",
       "selection_label": "likely_primary_lesion",
@@ -14130,7 +13848,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 283,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈利娣/陈利娣_01_0008_0008.jpg",
       "relative_path": "陈利娣/陈利娣_01_0008_0008.jpg",
       "selection_label": "likely_primary_lesion",
@@ -14180,7 +13897,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 284,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/温社妹/温社妹_01_0005_0005.jpg",
       "relative_path": "温社妹/温社妹_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -14230,7 +13946,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 285,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/张梅春/张梅春_01_0007_0007.jpg",
       "relative_path": "张梅春/张梅春_01_0007_0007.jpg",
       "selection_label": "likely_primary_lesion",
@@ -14280,7 +13995,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 286,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/董建伟/董建伟_01_0013_0013.jpg",
       "relative_path": "董建伟/董建伟_01_0013_0013.jpg",
       "selection_label": "likely_primary_lesion",
@@ -14330,7 +14044,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 287,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/连彬/连彬_01_0020_0020.jpg",
       "relative_path": "连彬/连彬_01_0020_0020.jpg",
       "selection_label": "likely_primary_lesion",
@@ -14380,7 +14093,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 288,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/温赛美/温赛美_01_0004_0004.jpg",
       "relative_path": "温赛美/温赛美_01_0004_0004.jpg",
       "selection_label": "likely_primary_lesion",
@@ -14430,7 +14142,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 289,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/董建伟/董建伟_01_0011_0011.jpg",
       "relative_path": "董建伟/董建伟_01_0011_0011.jpg",
       "selection_label": "likely_primary_lesion",
@@ -14480,7 +14191,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 290,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/金霞/金霞_01_0006_0006.jpg",
       "relative_path": "金霞/金霞_01_0006_0006.jpg",
       "selection_label": "likely_primary_lesion",
@@ -14530,7 +14240,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 291,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/张笑/张笑_01_0005_0005.jpg",
       "relative_path": "张笑/张笑_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -14580,7 +14289,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 292,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/潘鲜萍/潘鲜萍_01_0006_0006.jpg",
       "relative_path": "潘鲜萍/潘鲜萍_01_0006_0006.jpg",
       "selection_label": "likely_primary_lesion",
@@ -14630,7 +14338,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 293,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/连彬/连彬_01_0009_0009.jpg",
       "relative_path": "连彬/连彬_01_0009_0009.jpg",
       "selection_label": "likely_primary_lesion",
@@ -14680,7 +14387,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 294,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/郑耀毅/郑耀毅_01_0001_0001.jpg",
       "relative_path": "郑耀毅/郑耀毅_01_0001_0001.jpg",
       "selection_label": "likely_primary_lesion",
@@ -14730,7 +14436,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 295,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/金霞/金霞_01_0004_0004.jpg",
       "relative_path": "金霞/金霞_01_0004_0004.jpg",
       "selection_label": "likely_primary_lesion",
@@ -14780,7 +14485,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 296,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/刘惠银/刘惠银_01_0003_0003.jpg",
       "relative_path": "刘惠银/刘惠银_01_0003_0003.jpg",
       "selection_label": "likely_primary_lesion",
@@ -14830,7 +14534,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 297,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/连彬/连彬_01_0005_0005.jpg",
       "relative_path": "连彬/连彬_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -14880,7 +14583,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 298,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/廖善辉/廖善辉_01_0007_0007.jpg",
       "relative_path": "廖善辉/廖善辉_01_0007_0007.jpg",
       "selection_label": "likely_primary_lesion",
@@ -14930,7 +14632,6 @@
       "rank_within_patient": 1
     },
     {
-      "rank": 299,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/张池标/张池标_01_0002_0002.jpg",
       "relative_path": "张池标/张池标_01_0002_0002.jpg",
       "selection_label": "likely_primary_lesion",
@@ -14980,7 +14681,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 300,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/刘桂英/刘桂英_01_0021_0021.jpg",
       "relative_path": "刘桂英/刘桂英_01_0021_0021.jpg",
       "selection_label": "likely_primary_lesion",
@@ -15030,7 +14730,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 301,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/陈爱君/陈爱君_01_0014_0014.jpg",
       "relative_path": "陈爱君/陈爱君_01_0014_0014.jpg",
       "selection_label": "likely_primary_lesion",
@@ -15080,7 +14779,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 302,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/刘桂英/刘桂英_01_0018_0018.jpg",
       "relative_path": "刘桂英/刘桂英_01_0018_0018.jpg",
       "selection_label": "likely_primary_lesion",
@@ -15130,7 +14828,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 303,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/何春芬/何春芬_01_0006_0006.jpg",
       "relative_path": "何春芬/何春芬_01_0006_0006.jpg",
       "selection_label": "likely_primary_lesion",
@@ -15180,7 +14877,6 @@
       "rank_within_patient": 3
     },
     {
-      "rank": 304,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/廖善辉/廖善辉_01_0005_0005.jpg",
       "relative_path": "廖善辉/廖善辉_01_0005_0005.jpg",
       "selection_label": "likely_primary_lesion",
@@ -15230,7 +14926,6 @@
       "rank_within_patient": 2
     },
     {
-      "rank": 305,
       "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2016/廖善辉/廖善辉_01_0009_0009.jpg",
       "relative_path": "廖善辉/廖善辉_01_0009_0009.jpg",
       "selection_label": "likely_primary_lesion",
