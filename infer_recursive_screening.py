@@ -740,12 +740,14 @@ def main():
         "prob_npy_path",
         "overlay_path",
     ]
+    summary_rows = [{field: row.get(field, "") for field in summary_fieldnames} for row in ranked_rows]
+
     screening_summary_csv = tables_dir / "screening_summary.csv"
-    save_csv(screening_summary_csv, ranked_rows, summary_fieldnames)
+    save_csv(screening_summary_csv, summary_rows, summary_fieldnames)
 
     if args.topk_summary > 0:
         topk_csv = tables_dir / "topk_summary.csv"
-        save_csv(topk_csv, ranked_rows[: args.topk_summary], summary_fieldnames)
+        save_csv(topk_csv, summary_rows[: args.topk_summary], summary_fieldnames)
 
     primary_json_path = None
     rejected_json_path = None
