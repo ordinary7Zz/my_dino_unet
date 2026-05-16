@@ -350,10 +350,10 @@ def patient_id_from_relative_path(relative_path):
 
 
 def primary_max_per_patient(value):
-    if value <= 0:
-        return 3
+    if value < 1:
+        raise ValueError("--primary_topk must be within 1-3 for patient-level primary lesion export")
     if value > 3:
-        raise ValueError("--primary_topk must be within 0-3 for patient-level primary lesion export")
+        raise ValueError("--primary_topk must be within 1-3 for patient-level primary lesion export")
     return int(value)
 
 
@@ -449,7 +449,10 @@ def export_primary_lesion_json(rows, args, tables_dir):
     for patient_id, patient_rows in rows_by_patient.items():
         patient_rows_sorted = sorted(patient_rows, key=lambda item: item[args.primary_sort_score], reverse=True)
         patient_trusted_rows = [row for row in patient_rows_sorted if row["trustworthy_mask"]]
-        patient_selected_rows = patient_trusted_rows[:patient_limit]
+        if patient_trusted_rows:
+            patient_selected_rows = patient_trusted_rows[:patient_limit]
+        else:
+            patient_selected_rows = patient_rows_sorted[:1]
         if patient_selected_rows:
             exported_patient_ids.add(patient_id)
 
@@ -620,8 +623,8 @@ def main():
     parser.add_argument(
         "--primary_topk",
         type=int,
-        default=0,
-        help="Max trusted images to export per patient (0 uses the default cap of 3)",
+        default=1,
+        help="Max trusted images to export per patient (must be within 1-3; if no trusted images exist, export the best-scoring image)",
     )
     parser.add_argument(
         "--primary_sort_score",
