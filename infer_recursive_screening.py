@@ -310,9 +310,8 @@ def primary_max_per_patient(value):
 
 
 
-def build_primary_lesion_record(row, rank):
+def build_primary_lesion_record(row):
     record = {
-        "rank": rank,
         "source_path": row["source_path"],
         "relative_path": row["relative_path"],
         "selection_label": "likely_primary_lesion",
@@ -397,15 +396,32 @@ def export_primary_lesion_json(rows, args, tables_dir):
     selected_rows = []
     exported_patient_ids = set()
     patient_limit = primary_max_per_patient(args.primary_topk)
+    patient_summary_rows = []
 
     for patient_id, patient_rows in rows_by_patient.items():
-        patient_trusted_rows = [row for row in patient_rows if row["trustworthy_mask"]]
-        if not patient_trusted_rows:
-            continue
-
-        patient_trusted_rows = sorted(patient_trusted_rows, key=lambda item: item[args.primary_sort_score], reverse=True)
+        patient_rows_sorted = sorted(patient_rows, key=lambda item: item[args.primary_sort_score], reverse=True)
+        patient_trusted_rows = [row for row in patient_rows_sorted if row["trustworthy_mask"]]
         patient_selected_rows = patient_trusted_rows[:patient_limit]
-        exported_patient_ids.add(patient_id)
+        if patient_selected_rows:
+            exported_patient_ids.add(patient_id)
+
+        best_row = patient_rows_sorted[0] if patient_rows_sorted else None
+        best_trusted_row = patient_trusted_rows[0] if patient_trusted_rows else None
+
+        patient_summary_rows.append(
+            {
+                "patient_id": patient_id,
+                "num_images": int(len(patient_rows)),
+                "num_trusted_images": int(len(patient_trusted_rows)),
+                "num_exported_images": int(len(patient_selected_rows)),
+                "has_trusted_images": bool(len(patient_trusted_rows) > 0),
+                "best_image_relative_path": best_row["relative_path"] if best_row else "",
+                "best_image_score": float(best_row[args.primary_sort_score]) if best_row else 0.0,
+                "best_trusted_relative_path": best_trusted_row["relative_path"] if best_trusted_row else "",
+                "best_trusted_score": float(best_trusted_row[args.primary_sort_score]) if best_trusted_row else 0.0,
+                "exported_relative_paths": "|".join(row["relative_path"] for row in patient_selected_rows),
+            }
+        )
 
         for patient_rank, row in enumerate(patient_selected_rows, start=1):
             selected_row = dict(row)
@@ -413,6 +429,11 @@ def export_primary_lesion_json(rows, args, tables_dir):
             selected_rows.append(selected_row)
 
     selected_rows = sorted(selected_rows, key=lambda item: item[args.primary_sort_score], reverse=True)
+    patient_summary_rows = sorted(
+        patient_summary_rows,
+        key=lambda item: (item["num_exported_images"], item["best_trusted_score"], item["best_image_score"]),
+        reverse=True,
+    )
     patients_with_trusted = {row["patient_id"] for row in trusted_rows}
 
     payload = {
@@ -445,11 +466,26 @@ def export_primary_lesion_json(rows, args, tables_dir):
             "num_patients_with_trusted_images": int(len(patients_with_trusted)),
             "num_patients_exported": int(len(exported_patient_ids)),
         },
-        "images": [build_primary_lesion_record(row, rank) for rank, row in enumerate(selected_rows, start=1)],
+        "images": [build_primary_lesion_record(row) for row in selected_rows],
     }
 
     primary_json_path = tables_dir / args.primary_json_name
     save_json(primary_json_path, payload)
+
+    patient_summary_csv = tables_dir / "patient_summary.csv"
+    patient_summary_fieldnames = [
+        "patient_id",
+        "num_images",
+        "num_trusted_images",
+        "num_exported_images",
+        "has_trusted_images",
+        "best_image_relative_path",
+        "best_image_score",
+        "best_trusted_relative_path",
+        "best_trusted_score",
+        "exported_relative_paths",
+    ]
+    save_csv(patient_summary_csv, patient_summary_rows, patient_summary_fieldnames)
 
     rejected_json_path = None
     if args.export_rejected_json:
