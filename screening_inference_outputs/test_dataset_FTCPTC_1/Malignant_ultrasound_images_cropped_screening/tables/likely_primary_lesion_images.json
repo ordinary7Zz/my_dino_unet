@@ -1,0 +1,1031 @@
+{
+  "version": "1.0",
+  "generated_from": {
+    "input_dir": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped",
+    "output_dir": "/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/screening_inference_outputs/test_dataset_FTCPTC_1/Malignant_ultrasound_images_cropped_screening",
+    "checkpoint": "/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/baseline/train_dataset_4/20260113_170943/dino_unet_train_dataset_4_epoch_50.pth",
+    "ranking_score": "screen_score",
+    "threshold": 0.5,
+    "min_region_area": 32
+  },
+  "selection_config": {
+    "trust_fg_prob_mean_min": 0.9604,
+    "trust_prob_max_min": 0.9999,
+    "trust_largest_component_area_min": 4236,
+    "trust_positive_fraction_min": 0.0129,
+    "trust_positive_fraction_max": 0.2022,
+    "trust_largest_component_ratio_min": 1.0,
+    "trust_num_components_max": 1,
+    "trust_high_conf_fraction_0p9_min": 0.0116,
+    "primary_topk": 1,
+    "primary_max_per_patient": 1
+  },
+  "summary": {
+    "num_images_total": 163,
+    "num_trusted": 98,
+    "num_exported": 21,
+    "num_patients_total": 21,
+    "num_patients_with_trusted_images": 17,
+    "num_patients_exported": 21
+  },
+  "images": [
+    {
+      "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2023/卢巧逢/卢巧逢_01_0018_0018.jpg",
+      "relative_path": "2023/卢巧逢/卢巧逢_01_0018_0018.jpg",
+      "selection_label": "likely_primary_lesion",
+      "trustworthy_mask": true,
+      "trust_reasons_passed": [
+        "pred_has_positive",
+        "fg_prob_mean>=0.9604",
+        "prob_max>=0.9999",
+        "largest_component_area>=4236",
+        "pred_positive_fraction>=0.0129",
+        "largest_component_ratio>=1.0",
+        "num_components<=1",
+        "high_conf_fraction_0p9>=0.0116"
+      ],
+      "scores": {
+        "screen_score": 0.21807826429836688,
+        "score_max_prob": 0.9999784231185913,
+        "score_area": 0.22147202158716867,
+        "score_fg_mean": 0.9846763610839844
+      },
+      "mask_stats": {
+        "pred_positive_fraction": 0.22147202158716867,
+        "pred_positive_pixels": 38083,
+        "num_components": 1,
+        "largest_component_area": 38083,
+        "largest_component_fraction": 0.22147202158716867,
+        "largest_component_ratio": 1.0,
+        "fg_prob_mean": 0.9846763610839844,
+        "fg_prob_max": 0.9999784231185913,
+        "fg_prob_p95": 0.9999700784683228,
+        "prob_max": 0.9999784231185913,
+        "high_conf_fraction_0p9": 0.2124754294753248
+      },
+      "artifacts": {
+        "binary_mask_path": "binary_masks/2023/卢巧逢/卢巧逢_01_0018_0018.png",
+        "prob_png_path": "prob_png/2023/卢巧逢/卢巧逢_01_0018_0018.png",
+        "prob_npy_path": "prob_npy/2023/卢巧逢/卢巧逢_01_0018_0018.npy",
+        "overlay_path": "overlays/2023/卢巧逢/卢巧逢_01_0018_0018.png"
+      },
+      "bbox": {
+        "xmin": 107,
+        "ymin": 73,
+        "xmax": 413,
+        "ymax": 233
+      },
+      "rank_within_patient": 1
+    },
+    {
+      "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2023/易土弟/易土弟_01_0006_0006.jpg",
+      "relative_path": "2023/易土弟/易土弟_01_0006_0006.jpg",
+      "selection_label": "likely_primary_lesion",
+      "trustworthy_mask": true,
+      "trust_reasons_passed": [
+        "pred_has_positive",
+        "fg_prob_mean>=0.9604",
+        "prob_max>=0.9999",
+        "largest_component_area>=4236",
+        "pred_positive_fraction>=0.0129",
+        "largest_component_ratio>=1.0",
+        "num_components<=1",
+        "high_conf_fraction_0p9>=0.0116"
+      ],
+      "scores": {
+        "screen_score": 0.1866895782766133,
+        "score_max_prob": 0.9999990463256836,
+        "score_area": 0.19052452630884004,
+        "score_fg_mean": 0.9798716306686401
+      },
+      "mask_stats": {
+        "pred_positive_fraction": 0.19052452630884004,
+        "pred_positive_pixels": 23087,
+        "num_components": 1,
+        "largest_component_area": 23087,
+        "largest_component_fraction": 0.19052452630884004,
+        "largest_component_ratio": 1.0,
+        "fg_prob_mean": 0.9798716306686401,
+        "fg_prob_max": 0.9999990463256836,
+        "fg_prob_p95": 0.9999967813491821,
+        "prob_max": 0.9999990463256836,
+        "high_conf_fraction_0p9": 0.1799696309500231
+      },
+      "artifacts": {
+        "binary_mask_path": "binary_masks/2023/易土弟/易土弟_01_0006_0006.png",
+        "prob_png_path": "prob_png/2023/易土弟/易土弟_01_0006_0006.png",
+        "prob_npy_path": "prob_npy/2023/易土弟/易土弟_01_0006_0006.npy",
+        "overlay_path": "overlays/2023/易土弟/易土弟_01_0006_0006.png"
+      },
+      "bbox": {
+        "xmin": 51,
+        "ymin": 59,
+        "xmax": 244,
+        "ymax": 205
+      },
+      "rank_within_patient": 1
+    },
+    {
+      "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2023/李琼/李琼_01_0013_0012.jpg",
+      "relative_path": "2023/李琼/李琼_01_0013_0012.jpg",
+      "selection_label": "likely_primary_lesion",
+      "trustworthy_mask": true,
+      "trust_reasons_passed": [
+        "pred_has_positive",
+        "fg_prob_mean>=0.9604",
+        "prob_max>=0.9999",
+        "largest_component_area>=4236",
+        "pred_positive_fraction>=0.0129",
+        "largest_component_ratio>=1.0",
+        "num_components<=1",
+        "high_conf_fraction_0p9>=0.0116"
+      ],
+      "scores": {
+        "screen_score": 0.13797592333770858,
+        "score_max_prob": 0.9999935626983643,
+        "score_area": 0.14326263681366094,
+        "score_fg_mean": 0.9630977511405945
+      },
+      "mask_stats": {
+        "pred_positive_fraction": 0.14326263681366094,
+        "pred_positive_pixels": 25236,
+        "num_components": 1,
+        "largest_component_area": 25236,
+        "largest_component_fraction": 0.14326263681366094,
+        "largest_component_ratio": 1.0,
+        "fg_prob_mean": 0.9630977511405945,
+        "fg_prob_max": 0.9999935626983643,
+        "fg_prob_p95": 0.9999892711639404,
+        "prob_max": 0.9999935626983643,
+        "high_conf_fraction_0p9": 0.12761138107997638
+      },
+      "artifacts": {
+        "binary_mask_path": "binary_masks/2023/李琼/李琼_01_0013_0012.png",
+        "prob_png_path": "prob_png/2023/李琼/李琼_01_0013_0012.png",
+        "prob_npy_path": "prob_npy/2023/李琼/李琼_01_0013_0012.npy",
+        "overlay_path": "overlays/2023/李琼/李琼_01_0013_0012.png"
+      },
+      "bbox": {
+        "xmin": 138,
+        "ymin": 68,
+        "xmax": 332,
+        "ymax": 235
+      },
+      "rank_within_patient": 1
+    },
+    {
+      "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2023/周巧章/周巧章_01_0008_0008.jpg",
+      "relative_path": "2023/周巧章/周巧章_01_0008_0008.jpg",
+      "selection_label": "likely_primary_lesion",
+      "trustworthy_mask": true,
+      "trust_reasons_passed": [
+        "pred_has_positive",
+        "fg_prob_mean>=0.9604",
+        "prob_max>=0.9999",
+        "largest_component_area>=4236",
+        "pred_positive_fraction>=0.0129",
+        "largest_component_ratio>=1.0",
+        "num_components<=1",
+        "high_conf_fraction_0p9>=0.0116"
+      ],
+      "scores": {
+        "screen_score": 0.1266157016211297,
+        "score_max_prob": 0.9999569058418274,
+        "score_area": 0.1303529775635656,
+        "score_fg_mean": 0.9713295698165894
+      },
+      "mask_stats": {
+        "pred_positive_fraction": 0.1303529775635656,
+        "pred_positive_pixels": 30345,
+        "num_components": 1,
+        "largest_component_area": 30345,
+        "largest_component_fraction": 0.1303529775635656,
+        "largest_component_ratio": 1.0,
+        "fg_prob_mean": 0.9713295698165894,
+        "fg_prob_max": 0.9999569058418274,
+        "fg_prob_p95": 0.9999092102050782,
+        "prob_max": 0.9999569058418274,
+        "high_conf_fraction_0p9": 0.12089814468772418
+      },
+      "artifacts": {
+        "binary_mask_path": "binary_masks/2023/周巧章/周巧章_01_0008_0008.png",
+        "prob_png_path": "prob_png/2023/周巧章/周巧章_01_0008_0008.png",
+        "prob_npy_path": "prob_npy/2023/周巧章/周巧章_01_0008_0008.npy",
+        "overlay_path": "overlays/2023/周巧章/周巧章_01_0008_0008.png"
+      },
+      "bbox": {
+        "xmin": 118,
+        "ymin": 57,
+        "xmax": 400,
+        "ymax": 199
+      },
+      "rank_within_patient": 1
+    },
+    {
+      "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2023/欧嘉宝/欧嘉宝_01_0011_0011.jpg",
+      "relative_path": "2023/欧嘉宝/欧嘉宝_01_0011_0011.jpg",
+      "selection_label": "likely_primary_lesion",
+      "trustworthy_mask": true,
+      "trust_reasons_passed": [
+        "pred_has_positive",
+        "fg_prob_mean>=0.9604",
+        "prob_max>=0.9999",
+        "largest_component_area>=4236",
+        "pred_positive_fraction>=0.0129",
+        "largest_component_ratio>=1.0",
+        "num_components<=1",
+        "high_conf_fraction_0p9>=0.0116"
+      ],
+      "scores": {
+        "screen_score": 0.1111521145678922,
+        "score_max_prob": 0.9999986886978149,
+        "score_area": 0.11284874539392876,
+        "score_fg_mean": 0.984965443611145
+      },
+      "mask_stats": {
+        "pred_positive_fraction": 0.11284874539392876,
+        "pred_positive_pixels": 25725,
+        "num_components": 1,
+        "largest_component_area": 25725,
+        "largest_component_fraction": 0.11284874539392876,
+        "largest_component_ratio": 1.0,
+        "fg_prob_mean": 0.984965443611145,
+        "fg_prob_max": 0.9999986886978149,
+        "fg_prob_p95": 0.9999982118606567,
+        "prob_max": 0.9999986886978149,
+        "high_conf_fraction_0p9": 0.10824267415336024
+      },
+      "artifacts": {
+        "binary_mask_path": "binary_masks/2023/欧嘉宝/欧嘉宝_01_0011_0011.png",
+        "prob_png_path": "prob_png/2023/欧嘉宝/欧嘉宝_01_0011_0011.png",
+        "prob_npy_path": "prob_npy/2023/欧嘉宝/欧嘉宝_01_0011_0011.npy",
+        "overlay_path": "overlays/2023/欧嘉宝/欧嘉宝_01_0011_0011.png"
+      },
+      "bbox": {
+        "xmin": 172,
+        "ymin": 61,
+        "xmax": 382,
+        "ymax": 214
+      },
+      "rank_within_patient": 1
+    },
+    {
+      "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2023/严朝婷/严朝婷_01_0009_0009.jpg",
+      "relative_path": "2023/严朝婷/严朝婷_01_0009_0009.jpg",
+      "selection_label": "likely_primary_lesion",
+      "trustworthy_mask": true,
+      "trust_reasons_passed": [
+        "pred_has_positive",
+        "fg_prob_mean>=0.9604",
+        "prob_max>=0.9999",
+        "largest_component_area>=4236",
+        "pred_positive_fraction>=0.0129",
+        "largest_component_ratio>=1.0",
+        "num_components<=1",
+        "high_conf_fraction_0p9>=0.0116"
+      ],
+      "scores": {
+        "screen_score": 0.10236043985492697,
+        "score_max_prob": 0.9999914169311523,
+        "score_area": 0.10532530558222822,
+        "score_fg_mean": 0.9718503952026367
+      },
+      "mask_stats": {
+        "pred_positive_fraction": 0.10532530558222822,
+        "pred_positive_pixels": 16234,
+        "num_components": 1,
+        "largest_component_area": 16234,
+        "largest_component_fraction": 0.10532530558222822,
+        "largest_component_ratio": 1.0,
+        "fg_prob_mean": 0.9718503952026367,
+        "fg_prob_max": 0.9999914169311523,
+        "fg_prob_p95": 0.999987781047821,
+        "prob_max": 0.9999914169311523,
+        "high_conf_fraction_0p9": 0.09734513274336283
+      },
+      "artifacts": {
+        "binary_mask_path": "binary_masks/2023/严朝婷/严朝婷_01_0009_0009.png",
+        "prob_png_path": "prob_png/2023/严朝婷/严朝婷_01_0009_0009.png",
+        "prob_npy_path": "prob_npy/2023/严朝婷/严朝婷_01_0009_0009.npy",
+        "overlay_path": "overlays/2023/严朝婷/严朝婷_01_0009_0009.png"
+      },
+      "bbox": {
+        "xmin": 101,
+        "ymin": 40,
+        "xmax": 308,
+        "ymax": 143
+      },
+      "rank_within_patient": 1
+    },
+    {
+      "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2023/黄文华/黄文华_01_0013_0013.jpg",
+      "relative_path": "2023/黄文华/黄文华_01_0013_0013.jpg",
+      "selection_label": "likely_primary_lesion",
+      "trustworthy_mask": true,
+      "trust_reasons_passed": [
+        "pred_has_positive",
+        "fg_prob_mean>=0.9604",
+        "prob_max>=0.9999",
+        "largest_component_area>=4236",
+        "pred_positive_fraction>=0.0129",
+        "largest_component_ratio>=1.0",
+        "num_components<=1",
+        "high_conf_fraction_0p9>=0.0116"
+      ],
+      "scores": {
+        "screen_score": 0.09935343904101576,
+        "score_max_prob": 0.9999997615814209,
+        "score_area": 0.10096759380739963,
+        "score_fg_mean": 0.9840131402015686
+      },
+      "mask_stats": {
+        "pred_positive_fraction": 0.10096759380739963,
+        "pred_positive_pixels": 30783,
+        "num_components": 1,
+        "largest_component_area": 30783,
+        "largest_component_fraction": 0.10096759380739963,
+        "largest_component_ratio": 1.0,
+        "fg_prob_mean": 0.9840131402015686,
+        "fg_prob_max": 0.9999997615814209,
+        "fg_prob_p95": 0.9999992847442627,
+        "prob_max": 0.9999997615814209,
+        "high_conf_fraction_0p9": 0.09655602204145894
+      },
+      "artifacts": {
+        "binary_mask_path": "binary_masks/2023/黄文华/黄文华_01_0013_0013.png",
+        "prob_png_path": "prob_png/2023/黄文华/黄文华_01_0013_0013.png",
+        "prob_npy_path": "prob_npy/2023/黄文华/黄文华_01_0013_0013.npy",
+        "overlay_path": "overlays/2023/黄文华/黄文华_01_0013_0013.png"
+      },
+      "bbox": {
+        "xmin": 141,
+        "ymin": 148,
+        "xmax": 380,
+        "ymax": 335
+      },
+      "rank_within_patient": 1
+    },
+    {
+      "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2023/董云珊/董云珊_01_0003_0003.jpg",
+      "relative_path": "2023/董云珊/董云珊_01_0003_0003.jpg",
+      "selection_label": "likely_primary_lesion",
+      "trustworthy_mask": true,
+      "trust_reasons_passed": [
+        "pred_has_positive",
+        "fg_prob_mean>=0.9604",
+        "prob_max>=0.9999",
+        "largest_component_area>=4236",
+        "pred_positive_fraction>=0.0129",
+        "largest_component_ratio>=1.0",
+        "num_components<=1",
+        "high_conf_fraction_0p9>=0.0116"
+      ],
+      "scores": {
+        "screen_score": 0.0966158712758012,
+        "score_max_prob": 0.9999998807907104,
+        "score_area": 0.09841590832490732,
+        "score_fg_mean": 0.981709897518158
+      },
+      "mask_stats": {
+        "pred_positive_fraction": 0.09841590832490732,
+        "pred_positive_pixels": 15768,
+        "num_components": 1,
+        "largest_component_area": 15768,
+        "largest_component_fraction": 0.09841590832490732,
+        "largest_component_ratio": 1.0,
+        "fg_prob_mean": 0.981709897518158,
+        "fg_prob_max": 0.9999998807907104,
+        "fg_prob_p95": 0.9999997615814209,
+        "prob_max": 0.9999998807907104,
+        "high_conf_fraction_0p9": 0.09344767753935264
+      },
+      "artifacts": {
+        "binary_mask_path": "binary_masks/2023/董云珊/董云珊_01_0003_0003.png",
+        "prob_png_path": "prob_png/2023/董云珊/董云珊_01_0003_0003.png",
+        "prob_npy_path": "prob_npy/2023/董云珊/董云珊_01_0003_0003.npy",
+        "overlay_path": "overlays/2023/董云珊/董云珊_01_0003_0003.png"
+      },
+      "bbox": {
+        "xmin": 152,
+        "ymin": 63,
+        "xmax": 347,
+        "ymax": 164
+      },
+      "rank_within_patient": 1
+    },
+    {
+      "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2023/陈笑君/陈笑君_01_0003_0003.jpg",
+      "relative_path": "2023/陈笑君/陈笑君_01_0003_0003.jpg",
+      "selection_label": "likely_primary_lesion",
+      "trustworthy_mask": true,
+      "trust_reasons_passed": [
+        "pred_has_positive",
+        "fg_prob_mean>=0.9604",
+        "prob_max>=0.9999",
+        "largest_component_area>=4236",
+        "pred_positive_fraction>=0.0129",
+        "largest_component_ratio>=1.0",
+        "num_components<=1",
+        "high_conf_fraction_0p9>=0.0116"
+      ],
+      "scores": {
+        "screen_score": 0.09569680467689384,
+        "score_max_prob": 0.9999972581863403,
+        "score_area": 0.09736034701650444,
+        "score_fg_mean": 0.9829135537147522
+      },
+      "mask_stats": {
+        "pred_positive_fraction": 0.09736034701650444,
+        "pred_positive_pixels": 22086,
+        "num_components": 1,
+        "largest_component_area": 22086,
+        "largest_component_fraction": 0.09736034701650444,
+        "largest_component_ratio": 1.0,
+        "fg_prob_mean": 0.9829135537147522,
+        "fg_prob_max": 0.9999972581863403,
+        "fg_prob_p95": 0.9999938011169434,
+        "prob_max": 0.9999972581863403,
+        "high_conf_fraction_0p9": 0.0927316969953449
+      },
+      "artifacts": {
+        "binary_mask_path": "binary_masks/2023/陈笑君/陈笑君_01_0003_0003.png",
+        "prob_png_path": "prob_png/2023/陈笑君/陈笑君_01_0003_0003.png",
+        "prob_npy_path": "prob_npy/2023/陈笑君/陈笑君_01_0003_0003.npy",
+        "overlay_path": "overlays/2023/陈笑君/陈笑君_01_0003_0003.png"
+      },
+      "bbox": {
+        "xmin": 80,
+        "ymin": 106,
+        "xmax": 312,
+        "ymax": 231
+      },
+      "rank_within_patient": 1
+    },
+    {
+      "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2023/黄建怡/黄建怡_01_0011_0011.jpg",
+      "relative_path": "2023/黄建怡/黄建怡_01_0011_0011.jpg",
+      "selection_label": "likely_primary_lesion",
+      "trustworthy_mask": true,
+      "trust_reasons_passed": [
+        "pred_has_positive",
+        "fg_prob_mean>=0.9604",
+        "prob_max>=0.9999",
+        "largest_component_area>=4236",
+        "pred_positive_fraction>=0.0129",
+        "largest_component_ratio>=1.0",
+        "num_components<=1",
+        "high_conf_fraction_0p9>=0.0116"
+      ],
+      "scores": {
+        "screen_score": 0.08082881391126455,
+        "score_max_prob": 0.9999974966049194,
+        "score_area": 0.08233376966847435,
+        "score_fg_mean": 0.9817212820053101
+      },
+      "mask_stats": {
+        "pred_positive_fraction": 0.08233376966847435,
+        "pred_positive_pixels": 15410,
+        "num_components": 1,
+        "largest_component_area": 15410,
+        "largest_component_fraction": 0.08233376966847435,
+        "largest_component_ratio": 1.0,
+        "fg_prob_mean": 0.9817212820053101,
+        "fg_prob_max": 0.9999974966049194,
+        "fg_prob_p95": 0.9999956488609314,
+        "prob_max": 0.9999974966049194,
+        "high_conf_fraction_0p9": 0.07841209627868459
+      },
+      "artifacts": {
+        "binary_mask_path": "binary_masks/2023/黄建怡/黄建怡_01_0011_0011.png",
+        "prob_png_path": "prob_png/2023/黄建怡/黄建怡_01_0011_0011.png",
+        "prob_npy_path": "prob_npy/2023/黄建怡/黄建怡_01_0011_0011.npy",
+        "overlay_path": "overlays/2023/黄建怡/黄建怡_01_0011_0011.png"
+      },
+      "bbox": {
+        "xmin": 228,
+        "ymin": 56,
+        "xmax": 354,
+        "ymax": 209
+      },
+      "rank_within_patient": 1
+    },
+    {
+      "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2023/徐诗婷/徐诗婷_01_0009_0009.jpg",
+      "relative_path": "2023/徐诗婷/徐诗婷_01_0009_0009.jpg",
+      "selection_label": "likely_primary_lesion",
+      "trustworthy_mask": true,
+      "trust_reasons_passed": [
+        "pred_has_positive",
+        "fg_prob_mean>=0.9604",
+        "prob_max>=0.9999",
+        "largest_component_area>=4236",
+        "pred_positive_fraction>=0.0129",
+        "largest_component_ratio>=1.0",
+        "num_components<=1",
+        "high_conf_fraction_0p9>=0.0116"
+      ],
+      "scores": {
+        "screen_score": 0.08018380101074855,
+        "score_max_prob": 0.999998927116394,
+        "score_area": 0.08222983550183488,
+        "score_fg_mean": 0.975118100643158
+      },
+      "mask_stats": {
+        "pred_positive_fraction": 0.08222983550183488,
+        "pred_positive_pixels": 12817,
+        "num_components": 1,
+        "largest_component_area": 12817,
+        "largest_component_fraction": 0.08222983550183488,
+        "largest_component_ratio": 1.0,
+        "fg_prob_mean": 0.975118100643158,
+        "fg_prob_max": 0.999998927116394,
+        "fg_prob_p95": 0.9999967813491821,
+        "prob_max": 0.999998927116394,
+        "high_conf_fraction_0p9": 0.07672517771447636
+      },
+      "artifacts": {
+        "binary_mask_path": "binary_masks/2023/徐诗婷/徐诗婷_01_0009_0009.png",
+        "prob_png_path": "prob_png/2023/徐诗婷/徐诗婷_01_0009_0009.png",
+        "prob_npy_path": "prob_npy/2023/徐诗婷/徐诗婷_01_0009_0009.npy",
+        "overlay_path": "overlays/2023/徐诗婷/徐诗婷_01_0009_0009.png"
+      },
+      "bbox": {
+        "xmin": 115,
+        "ymin": 59,
+        "xmax": 273,
+        "ymax": 162
+      },
+      "rank_within_patient": 1
+    },
+    {
+      "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2023/陈积健/陈积健_01_0002_0002.jpg",
+      "relative_path": "2023/陈积健/陈积健_01_0002_0002.jpg",
+      "selection_label": "likely_primary_lesion",
+      "trustworthy_mask": true,
+      "trust_reasons_passed": [
+        "pred_has_positive",
+        "fg_prob_mean>=0.9604",
+        "prob_max>=0.9999",
+        "largest_component_area>=4236",
+        "pred_positive_fraction>=0.0129",
+        "largest_component_ratio>=1.0",
+        "num_components<=1",
+        "high_conf_fraction_0p9>=0.0116"
+      ],
+      "scores": {
+        "screen_score": 0.07802104403603653,
+        "score_max_prob": 0.9999417662620544,
+        "score_area": 0.08086737311114042,
+        "score_fg_mean": 0.9648025035858154
+      },
+      "mask_stats": {
+        "pred_positive_fraction": 0.08086737311114042,
+        "pred_positive_pixels": 11035,
+        "num_components": 1,
+        "largest_component_area": 11035,
+        "largest_component_fraction": 0.08086737311114042,
+        "largest_component_ratio": 1.0,
+        "fg_prob_mean": 0.9648025035858154,
+        "fg_prob_max": 0.9999417662620544,
+        "fg_prob_p95": 0.9999050498008728,
+        "prob_max": 0.9999417662620544,
+        "high_conf_fraction_0p9": 0.07334124785648331
+      },
+      "artifacts": {
+        "binary_mask_path": "binary_masks/2023/陈积健/陈积健_01_0002_0002.png",
+        "prob_png_path": "prob_png/2023/陈积健/陈积健_01_0002_0002.png",
+        "prob_npy_path": "prob_npy/2023/陈积健/陈积健_01_0002_0002.npy",
+        "overlay_path": "overlays/2023/陈积健/陈积健_01_0002_0002.png"
+      },
+      "bbox": {
+        "xmin": 70,
+        "ymin": 40,
+        "xmax": 222,
+        "ymax": 126
+      },
+      "rank_within_patient": 1
+    },
+    {
+      "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2023/庄叶如/庄叶如_01_0003_0003.jpg",
+      "relative_path": "2023/庄叶如/庄叶如_01_0003_0003.jpg",
+      "selection_label": "likely_primary_lesion",
+      "trustworthy_mask": true,
+      "trust_reasons_passed": [
+        "pred_has_positive",
+        "fg_prob_mean>=0.9604",
+        "prob_max>=0.9999",
+        "largest_component_area>=4236",
+        "pred_positive_fraction>=0.0129",
+        "largest_component_ratio>=1.0",
+        "num_components<=1",
+        "high_conf_fraction_0p9>=0.0116"
+      ],
+      "scores": {
+        "screen_score": 0.07444995662468831,
+        "score_max_prob": 1.0,
+        "score_area": 0.07580967375401959,
+        "score_fg_mean": 0.9820640683174133
+      },
+      "mask_stats": {
+        "pred_positive_fraction": 0.07580967375401959,
+        "pred_positive_pixels": 10208,
+        "num_components": 1,
+        "largest_component_area": 10208,
+        "largest_component_fraction": 0.07580967375401959,
+        "largest_component_ratio": 1.0,
+        "fg_prob_mean": 0.9820640683174133,
+        "fg_prob_max": 1.0,
+        "fg_prob_p95": 0.9999998807907104,
+        "prob_max": 1.0,
+        "high_conf_fraction_0p9": 0.07234892649996658
+      },
+      "artifacts": {
+        "binary_mask_path": "binary_masks/2023/庄叶如/庄叶如_01_0003_0003.png",
+        "prob_png_path": "prob_png/2023/庄叶如/庄叶如_01_0003_0003.png",
+        "prob_npy_path": "prob_npy/2023/庄叶如/庄叶如_01_0003_0003.npy",
+        "overlay_path": "overlays/2023/庄叶如/庄叶如_01_0003_0003.png"
+      },
+      "bbox": {
+        "xmin": 82,
+        "ymin": 49,
+        "xmax": 219,
+        "ymax": 135
+      },
+      "rank_within_patient": 1
+    },
+    {
+      "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2023/李妹英/李妹英_01_0004_0004.jpg",
+      "relative_path": "2023/李妹英/李妹英_01_0004_0004.jpg",
+      "selection_label": "likely_primary_lesion",
+      "trustworthy_mask": true,
+      "trust_reasons_passed": [
+        "pred_has_positive",
+        "fg_prob_mean>=0.9604",
+        "prob_max>=0.9999",
+        "largest_component_area>=4236",
+        "pred_positive_fraction>=0.0129",
+        "largest_component_ratio>=1.0",
+        "num_components<=1",
+        "high_conf_fraction_0p9>=0.0116"
+      ],
+      "scores": {
+        "screen_score": 0.06722611135636838,
+        "score_max_prob": 0.9999274611473083,
+        "score_area": 0.06882102221679161,
+        "score_fg_mean": 0.9768252372741699
+      },
+      "mask_stats": {
+        "pred_positive_fraction": 0.06882102221679161,
+        "pred_positive_pixels": 9575,
+        "num_components": 1,
+        "largest_component_area": 9575,
+        "largest_component_fraction": 0.06882102221679161,
+        "largest_component_ratio": 1.0,
+        "fg_prob_mean": 0.9768252372741699,
+        "fg_prob_max": 0.9999274611473083,
+        "fg_prob_p95": 0.9998947381973267,
+        "prob_max": 0.9999274611473083,
+        "high_conf_fraction_0p9": 0.06448691502131115
+      },
+      "artifacts": {
+        "binary_mask_path": "binary_masks/2023/李妹英/李妹英_01_0004_0004.png",
+        "prob_png_path": "prob_png/2023/李妹英/李妹英_01_0004_0004.png",
+        "prob_npy_path": "prob_npy/2023/李妹英/李妹英_01_0004_0004.npy",
+        "overlay_path": "overlays/2023/李妹英/李妹英_01_0004_0004.png"
+      },
+      "bbox": {
+        "xmin": 139,
+        "ymin": 80,
+        "xmax": 251,
+        "ymax": 179
+      },
+      "rank_within_patient": 1
+    },
+    {
+      "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2023/郭春花/郭春花_01_0017_0017.jpg",
+      "relative_path": "2023/郭春花/郭春花_01_0017_0017.jpg",
+      "selection_label": "likely_primary_lesion",
+      "trustworthy_mask": true,
+      "trust_reasons_passed": [
+        "pred_has_positive",
+        "fg_prob_mean>=0.9604",
+        "prob_max>=0.9999",
+        "largest_component_area>=4236",
+        "pred_positive_fraction>=0.0129",
+        "largest_component_ratio>=1.0",
+        "num_components<=1",
+        "high_conf_fraction_0p9>=0.0116"
+      ],
+      "scores": {
+        "screen_score": 0.05599682796813254,
+        "score_max_prob": 0.9999990463256836,
+        "score_area": 0.057099306529530935,
+        "score_fg_mean": 0.9806919097900391
+      },
+      "mask_stats": {
+        "pred_positive_fraction": 0.057099306529530935,
+        "pred_positive_pixels": 11725,
+        "num_components": 1,
+        "largest_component_area": 11725,
+        "largest_component_fraction": 0.057099306529530935,
+        "largest_component_ratio": 1.0,
+        "fg_prob_mean": 0.9806919097900391,
+        "fg_prob_max": 0.9999990463256836,
+        "fg_prob_p95": 0.9999987483024597,
+        "prob_max": 0.9999990463256836,
+        "high_conf_fraction_0p9": 0.05405563347358579
+      },
+      "artifacts": {
+        "binary_mask_path": "binary_masks/2023/郭春花/郭春花_01_0017_0017.png",
+        "prob_png_path": "prob_png/2023/郭春花/郭春花_01_0017_0017.png",
+        "prob_npy_path": "prob_npy/2023/郭春花/郭春花_01_0017_0017.npy",
+        "overlay_path": "overlays/2023/郭春花/郭春花_01_0017_0017.png"
+      },
+      "bbox": {
+        "xmin": 147,
+        "ymin": 89,
+        "xmax": 290,
+        "ymax": 190
+      },
+      "rank_within_patient": 1
+    },
+    {
+      "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2023/范秋香/范秋香_01_0011_0011.jpg",
+      "relative_path": "2023/范秋香/范秋香_01_0011_0011.jpg",
+      "selection_label": "likely_primary_lesion",
+      "trustworthy_mask": true,
+      "trust_reasons_passed": [
+        "pred_has_positive",
+        "fg_prob_mean>=0.9604",
+        "largest_component_area>=4236",
+        "pred_positive_fraction>=0.0129",
+        "largest_component_ratio>=1.0",
+        "num_components<=1",
+        "high_conf_fraction_0p9>=0.0116"
+      ],
+      "scores": {
+        "screen_score": 0.05340427101076207,
+        "score_max_prob": 0.9998001456260681,
+        "score_area": 0.05464953271028038,
+        "score_fg_mean": 0.9772136807441711
+      },
+      "mask_stats": {
+        "pred_positive_fraction": 0.05464953271028038,
+        "pred_positive_pixels": 16373,
+        "num_components": 1,
+        "largest_component_area": 16373,
+        "largest_component_fraction": 0.05464953271028038,
+        "largest_component_ratio": 1.0,
+        "fg_prob_mean": 0.9772136807441711,
+        "fg_prob_max": 0.9998001456260681,
+        "fg_prob_p95": 0.9997689962387085,
+        "prob_max": 0.9998001456260681,
+        "high_conf_fraction_0p9": 0.05116822429906542
+      },
+      "artifacts": {
+        "binary_mask_path": "binary_masks/2023/范秋香/范秋香_01_0011_0011.png",
+        "prob_png_path": "prob_png/2023/范秋香/范秋香_01_0011_0011.png",
+        "prob_npy_path": "prob_npy/2023/范秋香/范秋香_01_0011_0011.npy",
+        "overlay_path": "overlays/2023/范秋香/范秋香_01_0011_0011.png"
+      },
+      "bbox": {
+        "xmin": 221,
+        "ymin": 108,
+        "xmax": 397,
+        "ymax": 228
+      },
+      "rank_within_patient": 1
+    },
+    {
+      "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2023/肖家英/肖家英_01_0010_0010.jpg",
+      "relative_path": "2023/肖家英/肖家英_01_0010_0010.jpg",
+      "selection_label": "likely_primary_lesion",
+      "trustworthy_mask": true,
+      "trust_reasons_passed": [
+        "pred_has_positive",
+        "fg_prob_mean>=0.9604",
+        "prob_max>=0.9999",
+        "largest_component_area>=4236",
+        "pred_positive_fraction>=0.0129",
+        "largest_component_ratio>=1.0",
+        "num_components<=1",
+        "high_conf_fraction_0p9>=0.0116"
+      ],
+      "scores": {
+        "screen_score": 0.032137325961036044,
+        "score_max_prob": 0.9999920129776001,
+        "score_area": 0.03299233702012004,
+        "score_fg_mean": 0.9740845561027527
+      },
+      "mask_stats": {
+        "pred_positive_fraction": 0.03299233702012004,
+        "pred_positive_pixels": 6118,
+        "num_components": 1,
+        "largest_component_area": 6118,
+        "largest_component_fraction": 0.03299233702012004,
+        "largest_component_ratio": 1.0,
+        "fg_prob_mean": 0.9740845561027527,
+        "fg_prob_max": 0.9999920129776001,
+        "fg_prob_p95": 0.9999865382909775,
+        "prob_max": 0.9999920129776001,
+        "high_conf_fraction_0p9": 0.030743594859709768
+      },
+      "artifacts": {
+        "binary_mask_path": "binary_masks/2023/肖家英/肖家英_01_0010_0010.png",
+        "prob_png_path": "prob_png/2023/肖家英/肖家英_01_0010_0010.png",
+        "prob_npy_path": "prob_npy/2023/肖家英/肖家英_01_0010_0010.npy",
+        "overlay_path": "overlays/2023/肖家英/肖家英_01_0010_0010.png"
+      },
+      "bbox": {
+        "xmin": 201,
+        "ymin": 82,
+        "xmax": 282,
+        "ymax": 173
+      },
+      "rank_within_patient": 1
+    },
+    {
+      "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2023/梁舜洁/梁舜洁_01_0009_0009.jpg",
+      "relative_path": "2023/梁舜洁/梁舜洁_01_0009_0009.jpg",
+      "selection_label": "likely_primary_lesion",
+      "trustworthy_mask": true,
+      "trust_reasons_passed": [
+        "pred_has_positive",
+        "fg_prob_mean>=0.9604",
+        "prob_max>=0.9999",
+        "pred_positive_fraction>=0.0129",
+        "largest_component_ratio>=1.0",
+        "num_components<=1",
+        "high_conf_fraction_0p9>=0.0116"
+      ],
+      "scores": {
+        "screen_score": 0.02152963418712158,
+        "score_max_prob": 0.9999988079071045,
+        "score_area": 0.02218152218152218,
+        "score_fg_mean": 0.9706112146377563
+      },
+      "mask_stats": {
+        "pred_positive_fraction": 0.02218152218152218,
+        "pred_positive_pixels": 2398,
+        "num_components": 1,
+        "largest_component_area": 2398,
+        "largest_component_fraction": 0.02218152218152218,
+        "largest_component_ratio": 1.0,
+        "fg_prob_mean": 0.9706112146377563,
+        "fg_prob_max": 0.9999988079071045,
+        "fg_prob_p95": 0.9999983310699463,
+        "prob_max": 0.9999988079071045,
+        "high_conf_fraction_0p9": 0.02063677063677064
+      },
+      "artifacts": {
+        "binary_mask_path": "binary_masks/2023/梁舜洁/梁舜洁_01_0009_0009.png",
+        "prob_png_path": "prob_png/2023/梁舜洁/梁舜洁_01_0009_0009.png",
+        "prob_npy_path": "prob_npy/2023/梁舜洁/梁舜洁_01_0009_0009.npy",
+        "overlay_path": "overlays/2023/梁舜洁/梁舜洁_01_0009_0009.png"
+      },
+      "bbox": {
+        "xmin": 157,
+        "ymin": 121,
+        "xmax": 209,
+        "ymax": 178
+      },
+      "rank_within_patient": 1
+    },
+    {
+      "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2023/陈运瑞/陈运瑞_01_0003_0003.jpg",
+      "relative_path": "2023/陈运瑞/陈运瑞_01_0003_0003.jpg",
+      "selection_label": "likely_primary_lesion",
+      "trustworthy_mask": true,
+      "trust_reasons_passed": [
+        "pred_has_positive",
+        "fg_prob_mean>=0.9604",
+        "prob_max>=0.9999",
+        "largest_component_area>=4236",
+        "pred_positive_fraction>=0.0129",
+        "largest_component_ratio>=1.0",
+        "num_components<=1",
+        "high_conf_fraction_0p9>=0.0116"
+      ],
+      "scores": {
+        "screen_score": 0.016032657558996723,
+        "score_max_prob": 0.9999863505363464,
+        "score_area": 0.016509614647973646,
+        "score_fg_mean": 0.9711103439331055
+      },
+      "mask_stats": {
+        "pred_positive_fraction": 0.016509614647973646,
+        "pred_positive_pixels": 4741,
+        "num_components": 1,
+        "largest_component_area": 4741,
+        "largest_component_fraction": 0.016509614647973646,
+        "largest_component_ratio": 1.0,
+        "fg_prob_mean": 0.9711103439331055,
+        "fg_prob_max": 0.9999863505363464,
+        "fg_prob_p95": 0.9999823570251465,
+        "prob_max": 0.9999863505363464,
+        "high_conf_fraction_0p9": 0.015148032845113976
+      },
+      "artifacts": {
+        "binary_mask_path": "binary_masks/2023/陈运瑞/陈运瑞_01_0003_0003.png",
+        "prob_png_path": "prob_png/2023/陈运瑞/陈运瑞_01_0003_0003.png",
+        "prob_npy_path": "prob_npy/2023/陈运瑞/陈运瑞_01_0003_0003.npy",
+        "overlay_path": "overlays/2023/陈运瑞/陈运瑞_01_0003_0003.png"
+      },
+      "bbox": {
+        "xmin": 277,
+        "ymin": 79,
+        "xmax": 371,
+        "ymax": 141
+      },
+      "rank_within_patient": 1
+    },
+    {
+      "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2023/李泽文/李泽文_01_0010_0010.jpg",
+      "relative_path": "2023/李泽文/李泽文_01_0010_0010.jpg",
+      "selection_label": "likely_primary_lesion",
+      "trustworthy_mask": true,
+      "trust_reasons_passed": [
+        "pred_has_positive",
+        "prob_max>=0.9999",
+        "largest_component_ratio>=1.0",
+        "num_components<=1"
+      ],
+      "scores": {
+        "screen_score": 0.009427635360729008,
+        "score_max_prob": 0.9999986886978149,
+        "score_area": 0.009890256668312973,
+        "score_fg_mean": 0.9532245397567749
+      },
+      "mask_stats": {
+        "pred_positive_fraction": 0.009890256668312973,
+        "pred_positive_pixels": 3184,
+        "num_components": 1,
+        "largest_component_area": 3184,
+        "largest_component_fraction": 0.009890256668312973,
+        "largest_component_ratio": 1.0,
+        "fg_prob_mean": 0.9532245397567749,
+        "fg_prob_max": 0.9999986886978149,
+        "fg_prob_p95": 0.999998152256012,
+        "prob_max": 0.9999986886978149,
+        "high_conf_fraction_0p9": 0.008675718239509463
+      },
+      "artifacts": {
+        "binary_mask_path": "binary_masks/2023/李泽文/李泽文_01_0010_0010.png",
+        "prob_png_path": "prob_png/2023/李泽文/李泽文_01_0010_0010.png",
+        "prob_npy_path": "prob_npy/2023/李泽文/李泽文_01_0010_0010.npy",
+        "overlay_path": "overlays/2023/李泽文/李泽文_01_0010_0010.png"
+      },
+      "bbox": {
+        "xmin": 263,
+        "ymin": 127,
+        "xmax": 320,
+        "ymax": 196
+      },
+      "rank_within_patient": 1
+    },
+    {
+      "source_path": "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/2023/曾斌斌/曾斌斌_01_0003_0003.jpg",
+      "relative_path": "2023/曾斌斌/曾斌斌_01_0003_0003.jpg",
+      "selection_label": "likely_primary_lesion",
+      "trustworthy_mask": true,
+      "trust_reasons_passed": [
+        "pred_has_positive",
+        "prob_max>=0.9999",
+        "largest_component_ratio>=1.0",
+        "num_components<=1"
+      ],
+      "scores": {
+        "screen_score": 0.0037166866662394827,
+        "score_max_prob": 0.9999997615814209,
+        "score_area": 0.003972498090145149,
+        "score_fg_mean": 0.9356043934822083
+      },
+      "mask_stats": {
+        "pred_positive_fraction": 0.003972498090145149,
+        "pred_positive_pixels": 936,
+        "num_components": 1,
+        "largest_component_area": 936,
+        "largest_component_fraction": 0.003972498090145149,
+        "largest_component_ratio": 1.0,
+        "fg_prob_mean": 0.9356043934822083,
+        "fg_prob_max": 0.9999997615814209,
+        "fg_prob_p95": 0.9999995827674866,
+        "prob_max": 0.9999997615814209,
+        "high_conf_fraction_0p9": 0.003318903318903319
+      },
+      "artifacts": {
+        "binary_mask_path": "binary_masks/2023/曾斌斌/曾斌斌_01_0003_0003.png",
+        "prob_png_path": "prob_png/2023/曾斌斌/曾斌斌_01_0003_0003.png",
+        "prob_npy_path": "prob_npy/2023/曾斌斌/曾斌斌_01_0003_0003.npy",
+        "overlay_path": "overlays/2023/曾斌斌/曾斌斌_01_0003_0003.png"
+      },
+      "bbox": {
+        "xmin": 299,
+        "ymin": 64,
+        "xmax": 331,
+        "ymax": 98
+      },
+      "rank_within_patient": 1
+    }
+  ]
+}
