@@ -12,7 +12,7 @@ CHECKPOINT_PATH="/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/b
 TEST_IMAGE_PATH="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped"
 
 # Output root directory
-OUTPUT_ROOT="/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/screening_inference_outputs/test_dataset_FTCPTC_1"
+OUTPUT_ROOT="/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/screening_inference_outputs/test_dataset_FTCPTC_0"
 
 # Inference parameters
 IMG_SIZE=224
@@ -35,7 +35,7 @@ PRIMARY_JSON_NAME="likely_primary_lesion_images.json"
 PRIMARY_TOPK=1
 PRIMARY_SORT_SCORE="screen_score"
 EXPORT_REJECTED_JSON="False"
-PATIENT_FILTER_JSON="my_json/test_labels_ftcptc_1_filenames.json"
+PATIENT_FILTER_JSON="my_json/test_labels_ftcptc_0_filenames.json"
 TRUST_THRESHOLDS_FILE="threshold_analysis_outputs/Malignant_ultrasound/thresholds_for_infer_recursive_screening.txt"
 TRUST_FG_PROB_MEAN_MIN="0.60"
 TRUST_PROB_MAX_MIN="0.80"
