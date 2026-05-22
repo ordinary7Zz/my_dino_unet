@@ -1,0 +1,34 @@
+mask_threshold: 0.5
+min_region_area: 32
+
+probability:
+  high_conf_threshold: 0.9
+  uncertainty_lower: 0.4
+  uncertainty_upper: 0.6
+
+thresholds:
+  trust_fg_prob_mean_min: 0.70
+  trust_prob_max_min: 0.90
+  trust_largest_component_area_min: 256
+  trust_positive_fraction_min: 0.002
+  trust_positive_fraction_max: 0.40
+  trust_largest_component_ratio_min: 0.60
+  trust_num_components_max: 3
+  trust_high_conf_fraction_0p9_min: 0.0005
+
+negative_rules:
+  max_prob_max_for_no: 0.35
+  max_fg_prob_mean_for_no: 0.40
+  max_positive_fraction_for_empty: 0.0005
+
+label_thresholds:
+  yes_score_min: 0.72
+  suspicious_score_min: 0.35
+
+manifests:
+  directory:
+
+artifacts:
+  binary_subdir: binary
+  prob_subdir: prob
+  prob_png_subdir: prob_png
