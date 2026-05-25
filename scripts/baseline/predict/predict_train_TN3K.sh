@@ -33,7 +33,7 @@ if [ ${#TEST_DATASET_NAMES[@]} -ne ${#TEST_IMAGE_PATHS[@]} ] || [ ${#TEST_DATASE
 fi
 
 # Prediction results save path
-SAVE_PATH="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/pred_masks/${Train_DATASET}/train"
+SAVE_PATH="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/pred_masks/train"
 
 # Whether to save prediction results (true/false)
 SAVE_RESULTS="true"
@@ -78,5 +78,5 @@ python -u "test_parallel.py" \
     --img_size 224 \
     --dino_pretrained "True" \
     --use_dilation "False" \
-    --save_orig_size "False" \
+    --save_orig_size "True" \
     --device "$DEVICE"
