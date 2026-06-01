@@ -5,5 +5,5 @@ python shap_single_image_seg.py \
   --img_size 224 \
   --dino_pretrained True \
   --background_mode zeros \
-  --focus_percentile 70 \
+  --focus_percentile 80 \
   --overlay_alpha_scale 0.9
