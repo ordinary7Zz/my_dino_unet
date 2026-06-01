@@ -52,6 +52,12 @@ def sanitize_filename(name):
     safe_name = re.sub(r'[^A-Za-z0-9._-]+', '_', str(name)).strip('_')
     return safe_name or 'dataset'
 
+
+def json_default(obj):
+    if isinstance(obj, np.generic):
+        return obj.item()
+    raise TypeError(f"Object of type {obj.__class__.__name__} is not JSON serializable")
+
 def process_dataset(checkpoint, image_path, gt_path, save_base_path, dataset_name, device, save_results, target_size=224, dino_pretrained=True, save_orig_size=False, use_dilation=False):
     # Create save directory for this dataset
     save_path = os.path.join(save_base_path, dataset_name)
@@ -320,7 +326,7 @@ def main():
             },
         }
         with open(dataset_metrics_json_file, "w", encoding="utf-8") as f:
-            json.dump(dataset_metrics_payload, f, ensure_ascii=False, indent=2)
+            json.dump(dataset_metrics_payload, f, ensure_ascii=False, indent=2, default=json_default)
         print(f"Metrics JSON file location: {dataset_metrics_json_file}")
     
     total_time = time.time() - start_time
