@@ -1,5 +1,7 @@
 import argparse
+import json
 import os
+import re
 import sys
 import torch
 import numpy as np
@@ -44,6 +46,11 @@ def clean_path(path):
         # Strip whitespace
         path = path.strip()
     return path
+
+
+def sanitize_filename(name):
+    safe_name = re.sub(r'[^A-Za-z0-9._-]+', '_', str(name)).strip('_')
+    return safe_name or 'dataset'
 
 def process_dataset(checkpoint, image_path, gt_path, save_base_path, dataset_name, device, save_results, target_size=224, dino_pretrained=True, save_orig_size=False, use_dilation=False):
     # Create save directory for this dataset
@@ -199,7 +206,8 @@ def main():
     os.makedirs(args.log_dir, exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     log_file = os.path.join(args.log_dir, f"test_{timestamp}.log")
-    
+    metrics_json_file = os.path.join(args.log_dir, f"test_{timestamp}_metrics.json")
+
     # Set up logger
     sys.stdout = Logger(log_file)
     
@@ -289,6 +297,31 @@ def main():
             args.use_dilation,
         )
         all_metrics.append((dataset_name, result))
+
+        dataset_safe_name = sanitize_filename(dataset_name)
+        dataset_metrics_json_file = os.path.join(args.log_dir, f"test_{timestamp}_{dataset_safe_name}_metrics.json")
+        dice = result.get('Dice', {})
+        hd95 = result.get('HD95', {})
+        dataset_metrics_payload = {
+            "timestamp": timestamp,
+            "log_file": log_file,
+            "checkpoint": args.checkpoint,
+            "save_path": args.save_path,
+            "dataset_name": dataset_name,
+            "dice": {
+                "mean": dice.get('mean', 0.0),
+                "ci95": list(dice.get('CI95', (0.0, 0.0))),
+                "values": dice.get('values', []),
+            },
+            "hd95": {
+                "mean": hd95.get('mean', 0.0),
+                "ci95": list(hd95.get('CI95', (0.0, 0.0))),
+                "values": hd95.get('values', []),
+            },
+        }
+        with open(dataset_metrics_json_file, "w", encoding="utf-8") as f:
+            json.dump(dataset_metrics_payload, f, ensure_ascii=False, indent=2)
+        print(f"Metrics JSON file location: {dataset_metrics_json_file}")
     
     total_time = time.time() - start_time
     print(f"All datasets processed in {total_time:.2f} seconds")
@@ -306,7 +339,7 @@ def main():
         print(f"  Dice Mean: {dice_mean:.4f}  CI95: ({dice_ci95[0]:.4f}, {dice_ci95[1]:.4f})")
         print(f"  HD95 Mean: {hd95_mean:.4f}  CI95: ({hd95_ci95[0]:.4f}, {hd95_ci95[1]:.4f})")
         print(f"  ECE  Mean: {ece_mean:.4f}  CI95: ({ece_ci95[0]:.4f}, {ece_ci95[1]:.4f})")
-    
+
     print("\nAll datasets processing completed successfully!")
     print(f"Log file location: {log_file}")
     
