@@ -216,6 +216,7 @@ def run_shap_for_single_image(
 
     focus_threshold = np.percentile(shap_norm, 85)
     focus_map = np.clip((shap_norm - focus_threshold) / (1 - focus_threshold + 1e-8), 0, 1)
+    focus_map = np.squeeze(focus_map)
     focus_rgba = plt.cm.inferno(focus_map)
     focus_rgba[..., 3] = focus_map * 0.45
     plt.imshow(focus_rgba)
