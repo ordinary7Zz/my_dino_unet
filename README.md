@@ -19,6 +19,152 @@
 pip install -r requirements.txt
 ```
 
+## 淋巴结区域图像筛选
+
+当前仓库已经支持基于分割模型的淋巴结区域图像筛选，核心调用链路如下：
+
+1. `infer_recursive.py`
+   - 对候选超声图像做递归推理；
+   - 一次推理同时输出：
+     - 二值掩码 `binary/*.png`
+     - 概率图 `prob/*.npy`
+2. `screen_lymph_node_region.py`
+   - 读取原图、二值掩码和概率图；
+   - 提取掩码形态特征和概率置信特征；
+   - 输出 `yes / suspicious / no` 三分类结果与筛选报告。
+3. `scripts/baseline/predict_Lymph_Node_Region_Screening.sh`
+   - 将上述两步串联成一键执行脚本。
+
+### 相关文件
+- `infer_recursive.py`：递归推理并保存筛选所需的 mask / prob 结果
+- `screen_lymph_node_region.py`：图像级筛选主脚本
+- `configs/lymph_node_region_screening.yaml`：筛选阈值和策略配置
+- `scripts/baseline/predict_Lymph_Node_Region_Screening.sh`：一键执行入口
+
+### 方法一：直接使用一键脚本
+
+先修改脚本顶部配置：
+- `CHECKPOINT_PATH`：分割模型权重路径
+- `INPUT_DIR`：待筛选图像目录
+- `OUTPUT_ROOT`：筛选输出目录
+- `CONFIG_PATH`：筛选配置文件路径
+- `DEVICE` / `CUDA_VISIBLE_DEVICES`：推理设备
+
+然后执行：
+
+```bash
+bash scripts/baseline/predict_Lymph_Node_Region_Screening.sh
+```
+
+该脚本会依次调用：
+
+```bash
+python -u infer_recursive.py ...
+python -u screen_lymph_node_region.py ...
+```
+
+### 方法二：分两步手动执行
+
+#### 第一步：生成二值掩码和概率图
+
+```bash
+python -u infer_recursive.py \
+  --checkpoint "/path/to/checkpoint.pth" \
+  --input_dir "/path/to/images" \
+  --output_dir "/path/to/screening_outputs/masks" \
+  --img_size 224 \
+  --batch_size 4 \
+  --num_workers 4 \
+  --device "cuda:0" \
+  --dino_pretrained "True" \
+  --use_dilation "False" \
+  --save_orig_size "True" \
+  --threshold 0.5 \
+  --save_binary "True" \
+  --save_prob_npy "True"
+```
+
+执行后，输出目录下会生成：
+
+```text
+screening_outputs/
+  masks/
+    binary/
+      xxx.png
+    prob/
+      xxx.npy
+```
+
+说明：
+- `binary/*.png` 是阈值化后的前景掩码；
+- `prob/*.npy` 是真实 sigmoid 概率图，供后续筛选脚本计算概率特征；
+- 如果还想额外保存可视化概率图，可增加：
+
+```bash
+  --save_prob_png "True"
+```
+
+#### 第二步：执行图像级筛选
+
+```bash
+python -u screen_lymph_node_region.py \
+  --image_dir "/path/to/images" \
+  --binary_mask_dir "/path/to/screening_outputs/masks/binary" \
+  --prob_mask_dir "/path/to/screening_outputs/masks/prob" \
+  --output_csv "/path/to/screening_outputs/reports/screening_results.csv" \
+  --config "configs/lymph_node_region_screening.yaml" \
+  --save_subset_manifest "True" \
+  --manifest_dir "/path/to/screening_outputs/reports"
+```
+
+### 配置文件说明
+
+筛选规则由 `configs/lymph_node_region_screening.yaml` 控制，主要包括：
+- `min_region_area`：最小主连通域面积
+- `probability.high_conf_threshold`：高置信像素阈值
+- `probability.uncertainty_lower / uncertainty_upper`：不确定区间
+- `thresholds.*`：可信掩码规则阈值
+- `negative_rules.*`：强负向规则阈值
+- `label_thresholds.*`：`yes / suspicious / no` 分类阈值
+
+如果需要调整筛选严格程度，优先修改该 YAML 文件，而不是直接改 Python 代码。
+
+### 输出结果说明
+
+筛选完成后，通常会得到如下目录结构：
+
+```text
+screening_outputs/
+  masks/
+    binary/
+    prob/
+    prob_png/         # 仅在 --save_prob_png=True 时生成
+  reports/
+    screening_results.csv
+    yes_manifest.txt
+    suspicious_manifest.txt
+    no_manifest.txt
+```
+
+其中：
+- `screening_results.csv`：每张图像的完整筛选结果；
+- `present_pred`：最终分类，取值为 `yes / suspicious / no`；
+- `confidence`：结果置信度；
+- `final_score`：连续筛选分数；
+- `hard_reject_flag`：是否触发强拒绝规则；
+- `reason`：分类原因；
+- `yes_manifest.txt / suspicious_manifest.txt / no_manifest.txt`：每类图像路径清单，便于人工复核或后续过滤。
+
+### 典型使用流程
+
+1. 准备待筛选超声图像目录；
+2. 选择训练好的分割模型 checkpoint；
+3. 运行 `infer_recursive.py` 生成 `binary` 和 `prob`；
+4. 运行 `screen_lymph_node_region.py` 生成 CSV 和 manifest；
+5. 优先保留 `yes`；
+6. 对 `suspicious` 做人工复核；
+7. 将 `no` 作为排除样本或进一步抽查。
+
 ## 使用 `filter_json_by_exported_paths.py` 过滤标注 JSON
 
 当 `patient_summary.csv` 中的 `exported_relative_paths` 记录了筛选后导出的图像路径时，可以用这个脚本从原始标注 JSON 中只保留这些已导出的图像。

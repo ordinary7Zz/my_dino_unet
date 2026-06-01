@@ -1,14 +1,21 @@
 #!/bin/bash
 
 # ---------------------- Configuration ----------------------
+# Set CUDA device
 CUDA_VISIBLE_DEVICES="0"
 DEVICE="cuda:${CUDA_VISIBLE_DEVICES}"
 
-CHECKPOINT_PATH="/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/baseline/train_dataset_4/20260113_170943/dino_unet_train_dataset_4_epoch_50.pth"
+# Model checkpoint path
+CHECKPOINT_PATH="/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/train_Lymph_Node_Metastasis/Lymph_Node_Metastasis/20260521_211141/dino_unet_Lymph_Node_Metastasis_epoch_40.pth"
+
+# Input image root directory (recursive)
 INPUT_DIR="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped/"
-OUTPUT_ROOT="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/lymph_node_region_screening_outputs"
+
+# Prediction results save path
+OUTPUT_DIR="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Malignant_ultrasound_images_cropped_predictions_Lymph_Node_Region_Screening"
 CONFIG_PATH="configs/lymph_node_region_screening.yaml"
 
+# Inference parameters
 IMG_SIZE=224
 BATCH_SIZE=4
 NUM_WORKERS=4
@@ -18,8 +25,8 @@ SAVE_ORIG_SIZE="True"
 THRESHOLD="0.5"
 SAVE_SUBSET_MANIFEST="True"
 
-INFERENCE_OUTPUT_DIR="${OUTPUT_ROOT}/masks"
-REPORT_DIR="${OUTPUT_ROOT}/reports"
+INFERENCE_OUTPUT_DIR="${OUTPUT_DIR}/masks"
+REPORT_DIR="${OUTPUT_DIR}/reports"
 OUTPUT_CSV="${REPORT_DIR}/screening_results.csv"
 BINARY_MASK_DIR="${INFERENCE_OUTPUT_DIR}/binary"
 PROB_MASK_DIR="${INFERENCE_OUTPUT_DIR}/prob"
@@ -40,6 +47,7 @@ if [ ! -f "$CONFIG_PATH" ]; then
     exit 1
 fi
 
+mkdir -p "$OUTPUT_DIR"
 mkdir -p "$INFERENCE_OUTPUT_DIR" "$REPORT_DIR"
 
 python -u infer_recursive.py \

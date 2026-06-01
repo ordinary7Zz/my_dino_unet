@@ -3,7 +3,6 @@ import os
 import time
 from pathlib import Path
 
-import imageio
 import numpy as np
 import torch
 from PIL import Image
@@ -11,6 +10,7 @@ from torch.utils.data import DataLoader, Dataset
 from torchvision import transforms
 
 from dino_unet import DINOv3_S_UNet
+from LNM_screening.io_utils import save_binary_mask, save_prob_npy as save_prob_npy_file, save_prob_png
 
 
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff", ".webp"}
@@ -90,13 +90,56 @@ def load_checkpoint(model, checkpoint_path, device):
     return missing_keys, unexpected_keys
 
 
-def predict_to_uint8(pred_logits, output_type="binary", threshold=0.5):
-    prob = torch.sigmoid(pred_logits).detach().cpu().numpy().squeeze()
-    if output_type == "binary":
-        return (prob >= threshold).astype(np.uint8) * 255
+def logits_to_prob_array(pred_logits):
+    return torch.sigmoid(pred_logits).detach().cpu().numpy().squeeze().astype(np.float32)
 
+
+def prob_to_binary_uint8(prob, threshold=0.5):
+    return ((np.asarray(prob, dtype=np.float32) >= threshold).astype(np.uint8) * 255).astype(np.uint8)
+
+
+def prob_to_legacy_prob_uint8(prob):
+    prob = np.asarray(prob, dtype=np.float32)
     prob_norm = (prob - prob.min()) / (prob.max() - prob.min() + 1e-8)
-    return (prob_norm * 255).astype(np.uint8)
+    return (prob_norm * 255.0).round().astype(np.uint8)
+
+
+def prob_to_visual_uint8(prob):
+    return (np.clip(np.asarray(prob, dtype=np.float32), 0.0, 1.0) * 255.0).round().astype(np.uint8)
+
+
+def resize_binary_mask(mask_uint8, size):
+    return np.array(Image.fromarray(mask_uint8).resize(size, resample=Image.NEAREST)).astype(np.uint8)
+
+
+def resize_prob_map(prob, size):
+    prob_img = Image.fromarray(np.clip(np.asarray(prob, dtype=np.float32), 0.0, 1.0), mode="F")
+    return np.asarray(prob_img.resize(size, resample=Image.BILINEAR), dtype=np.float32)
+
+
+def resolve_output_flags(args):
+    explicit_new_outputs = any(
+        [
+            str2bool(args.save_binary),
+            str2bool(args.save_prob_png),
+            str2bool(args.save_prob_npy),
+        ]
+    )
+
+    if not explicit_new_outputs:
+        return {
+            "legacy_mode": True,
+            "save_binary": args.output_type == "binary",
+            "save_prob_png": args.output_type == "prob",
+            "save_prob_npy": False,
+        }
+
+    return {
+        "legacy_mode": False,
+        "save_binary": str2bool(args.save_binary),
+        "save_prob_png": str2bool(args.save_prob_png),
+        "save_prob_npy": str2bool(args.save_prob_npy),
+    }
 
 
 def main():
@@ -131,9 +174,15 @@ def main():
         type=str,
         default="binary",
         choices=["binary", "prob"],
-        help="binary: thresholded mask; prob: normalized probability map",
+        help="Legacy single-output mode: binary saves thresholded masks, prob saves probability PNGs.",
     )
-    parser.add_argument("--threshold", type=float, default=0.5, help="Threshold used when output_type=binary")
+    parser.add_argument("--threshold", type=float, default=0.5, help="Threshold used for binary mask generation")
+    parser.add_argument("--save_binary", type=str, default="false", help="Whether to save thresholded binary masks")
+    parser.add_argument("--save_prob_png", type=str, default="false", help="Whether to save probability PNGs scaled from sigmoid outputs")
+    parser.add_argument("--save_prob_npy", type=str, default="false", help="Whether to save raw sigmoid probability maps as .npy")
+    parser.add_argument("--binary_subdir", type=str, default="binary", help="Subdirectory for binary mask outputs")
+    parser.add_argument("--prob_png_subdir", type=str, default="prob_png", help="Subdirectory for probability PNG outputs")
+    parser.add_argument("--prob_npy_subdir", type=str, default="prob", help="Subdirectory for probability NPY outputs")
     args = parser.parse_args()
 
     args.input_dir = clean_path(args.input_dir)
@@ -142,6 +191,11 @@ def main():
     args.dino_pretrained = str2bool(args.dino_pretrained)
     args.use_dilation = str2bool(args.use_dilation)
     args.save_orig_size = str2bool(args.save_orig_size)
+    output_flags = resolve_output_flags(args)
+    legacy_mode = output_flags["legacy_mode"]
+    save_binary = output_flags["save_binary"]
+    save_prob_png = output_flags["save_prob_png"]
+    save_prob_npy = output_flags["save_prob_npy"]
 
     if not os.path.isdir(args.input_dir):
         raise NotADirectoryError(f"--input_dir must be an existing directory: {args.input_dir}")
@@ -155,6 +209,10 @@ def main():
     print(f"Checkpoint: {args.checkpoint}")
     print(f"Input dir: {args.input_dir}")
     print(f"Output dir: {args.output_dir}")
+    print(f"Legacy mode: {legacy_mode}")
+    print(f"Save binary: {save_binary}")
+    print(f"Save prob png: {save_prob_png}")
+    print(f"Save prob npy: {save_prob_npy}")
 
     dataset = RecursiveInferenceDataset(args.input_dir, args.img_size)
     if len(dataset) == 0:
@@ -194,20 +252,46 @@ def main():
                 pred = pred[0]
 
             for i in range(pred.shape[0]):
-                mask_uint8 = predict_to_uint8(pred[i : i + 1], args.output_type, args.threshold)
+                prob = logits_to_prob_array(pred[i : i + 1])
+                legacy_uint8 = None
+                binary_uint8 = prob_to_binary_uint8(prob, args.threshold) if save_binary else None
+                prob_png_uint8 = prob_to_visual_uint8(prob) if save_prob_png else None
+
+                if legacy_mode:
+                    legacy_uint8 = (
+                        prob_to_binary_uint8(prob, args.threshold)
+                        if args.output_type == "binary"
+                        else prob_to_legacy_prob_uint8(prob)
+                    )
 
                 if args.save_orig_size:
                     ow = int(orig_ws[i].item())
                     oh = int(orig_hs[i].item())
-                    if (mask_uint8.shape[1], mask_uint8.shape[0]) != (ow, oh):
-                        mask_uint8 = np.array(
-                            Image.fromarray(mask_uint8).resize((ow, oh), resample=Image.NEAREST)
-                        ).astype(np.uint8)
+                    target_size = (ow, oh)
+                    if legacy_uint8 is not None and (legacy_uint8.shape[1], legacy_uint8.shape[0]) != target_size:
+                        legacy_uint8 = resize_binary_mask(legacy_uint8, target_size)
+                    if binary_uint8 is not None and (binary_uint8.shape[1], binary_uint8.shape[0]) != target_size:
+                        binary_uint8 = resize_binary_mask(binary_uint8, target_size)
+                    if prob_png_uint8 is not None and (prob_png_uint8.shape[1], prob_png_uint8.shape[0]) != target_size:
+                        prob_png_uint8 = prob_to_visual_uint8(resize_prob_map(prob, target_size))
+                    if save_prob_npy and (prob.shape[1], prob.shape[0]) != target_size:
+                        prob = resize_prob_map(prob, target_size)
 
-                rel_file = Path(rel_paths[i]).with_suffix(".png")
-                out_file = Path(args.output_dir) / rel_file
-                out_file.parent.mkdir(parents=True, exist_ok=True)
-                imageio.imsave(out_file.as_posix(), mask_uint8)
+                rel_png = Path(rel_paths[i]).with_suffix(".png")
+                rel_npy = Path(rel_paths[i]).with_suffix(".npy")
+                output_root = Path(args.output_dir)
+
+                if legacy_mode and legacy_uint8 is not None:
+                    out_file = output_root / rel_png
+                    out_file.parent.mkdir(parents=True, exist_ok=True)
+                    Image.fromarray(legacy_uint8).save(out_file.as_posix())
+                else:
+                    if binary_uint8 is not None:
+                        save_binary_mask(output_root / args.binary_subdir / rel_png, binary_uint8)
+                    if prob_png_uint8 is not None:
+                        save_prob_png(output_root / args.prob_png_subdir / rel_png, prob_png_uint8.astype(np.float32) / 255.0)
+                    if save_prob_npy:
+                        save_prob_npy_file(output_root / args.prob_npy_subdir / rel_npy, prob)
 
                 done += 1
                 if done % 50 == 0 or done == total:

@@ -213,7 +213,12 @@ def run_shap_for_single_image(
         plt.imshow(orig_np, cmap="gray")
     else:
         plt.imshow(orig_np)
-    plt.imshow(shap_norm, cmap="jet", alpha=0.5)
+
+    focus_threshold = np.percentile(shap_norm, 85)
+    focus_map = np.clip((shap_norm - focus_threshold) / (1 - focus_threshold + 1e-8), 0, 1)
+    focus_rgba = plt.cm.inferno(focus_map)
+    focus_rgba[..., 3] = focus_map * 0.45
+    plt.imshow(focus_rgba)
     plt.axis("off")
     plt.title("Overlay")
 
