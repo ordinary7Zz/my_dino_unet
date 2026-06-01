@@ -2,39 +2,27 @@
 
 # ---------------------- Configuration ----------------------
 # Set CUDA device
-CUDA_VISIBLE_DEVICES="1"
+CUDA_VISIBLE_DEVICES="2"
 # 根据 CUDA_VISIBLE_DEVICES 自动设置 device，也可以手动指定（如 "cuda:0", "cpu"）
 DEVICE="cuda:${CUDA_VISIBLE_DEVICES}"
 
 # Model checkpoint path
-CHECKPOINT_PATH=""
+CHECKPOINT_PATH="/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/train_Lymph_Node_Metastasis/dino_unet_Lymph_Node_Metastasis_epoch_40.pth"
 
 # Configure multiple test dataset paths
 # Test dataset names array
 TEST_DATASET_NAMES=(
-    "TN3K"
-    "DDTI"
-    "ThyroidXL"
-    "PKTN"
-    "TN5K"
+    "Lymph_images"
 )
 
 # 测试图像路径数组
 TEST_IMAGE_PATHS=(
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/TN3K/test-image/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/DDTI/2_preprocessed_data/stage1/p_image/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/ThyroidXL/test/images/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/PKTN_processed/images/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/TN5K_processed/test/images/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Lymph_Node_Metastasis_fake/images/"
 )
 
 # 测试掩码路径数组
 TEST_MASK_PATHS=(
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/TN3K/test-mask/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/DDTI/2_preprocessed_data/stage1/p_mask/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/ThyroidXL/test/masks/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/PKTN_processed/masks/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/TN5K_processed/test/masks/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Lymph_Node_Metastasis_fake/masks/"
 )
 
 # Ensure arrays have the same length
@@ -44,13 +32,13 @@ if [ ${#TEST_DATASET_NAMES[@]} -ne ${#TEST_IMAGE_PATHS[@]} ] || [ ${#TEST_DATASE
 fi
 
 # Prediction results save path
-SAVE_PATH="./predictions/test_dataset5"
+SAVE_PATH="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/pred_masks/Lymph_Node_Metastasis_fake"
 
 # Whether to save prediction results (true/false)
-SAVE_RESULTS="false"
+SAVE_RESULTS="true"
 
 # Log directory
-LOG_DIR="./logs/test_logs/baseline/test_dataset5"
+LOG_DIR=$SAVE_PATH
 
 # ---------------------- Execution ----------------------
 # Create save directory if it doesn't exist
@@ -89,5 +77,5 @@ python -u "test_parallel.py" \
     --img_size 224 \
     --dino_pretrained "True" \
     --use_dilation "False" \
-    --save_orig_size "False" \
+    --save_orig_size "True" \
     --device "$DEVICE"
