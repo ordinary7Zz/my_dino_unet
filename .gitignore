@@ -5,7 +5,7 @@ RL_train/
 predictions/
 logs/
 infer/
-pyradiomics_dice/
+
 Segmentation_infer/
 cc3d/
 back_up/
@@ -69,4 +69,6 @@ screening_inference_outputs/**/*.npy
 
 !my_json/*
 
-!pyradiomics_dice/shap_single_out/*
+pyradiomics_dice/*
+!pyradiomics_dice/shap_single_out/
+!pyradiomics_dice/shap_single_out/**
