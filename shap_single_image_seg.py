@@ -209,7 +209,9 @@ def run_shap_for_single_image(
     shap_norm = np.clip((shap_map_np - shap_min) / (shap_max - shap_min + 1e-8), 0, 1)
 
     # 5) 分开保存原图、SHAP 热力图和叠加图
-    original_path = os.path.join(output_dir, "original_image.png")
+    image_name = os.path.splitext(os.path.basename(image_path))[0]
+
+    original_path = os.path.join(output_dir, f"original_{image_name}.png")
     fig, ax = plt.subplots(figsize=(5, 5))
     if orig_np.ndim == 2:
         ax.imshow(orig_np, cmap="gray")
@@ -220,7 +222,7 @@ def run_shap_for_single_image(
     fig.savefig(original_path, dpi=200, bbox_inches="tight", pad_inches=0)
     plt.close(fig)
 
-    heatmap_path = os.path.join(output_dir, "shap_map.png")
+    heatmap_path = os.path.join(output_dir, f"shap_map_{image_name}.png")
     fig, ax = plt.subplots(figsize=(5, 5))
     im = ax.imshow(shap_norm, cmap="jet")
     fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
@@ -234,7 +236,7 @@ def run_shap_for_single_image(
     focus_rgba = plt.cm.inferno(np.squeeze(focus_map))
     focus_rgba[..., 3] = np.squeeze(focus_map) * overlay_alpha_scale
 
-    overlay_path = os.path.join(output_dir, "overlay.png")
+    overlay_path = os.path.join(output_dir, f"overlay_{image_name}.png")
     fig, ax = plt.subplots(figsize=(5, 5))
     height, width = shap_norm.shape
     extent = (0, width, height, 0)

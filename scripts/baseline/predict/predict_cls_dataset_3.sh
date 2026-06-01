@@ -2,7 +2,7 @@
 
 # ---------------------- Configuration ----------------------
 # Set CUDA device
-CUDA_VISIBLE_DEVICES="1"
+CUDA_VISIBLE_DEVICES="2"
 # 根据 CUDA_VISIBLE_DEVICES 自动设置 device，也可以手动指定（如 "cuda:0", "cpu"）
 DEVICE="cuda:${CUDA_VISIBLE_DEVICES}"
 
@@ -12,23 +12,23 @@ CHECKPOINT_PATH="/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/b
 # Configure multiple test dataset paths
 # Test dataset names array
 TEST_DATASET_NAMES=(
-    "dataset_4_train"
-    "dataset_4_valid"
-    "dataset_4_test"
+    "dataset_3_train"
+    "dataset_3_valid"
+    "dataset_3_test"
 )
 
 # 测试图像路径数组
 TEST_IMAGE_PATHS=(
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/Superimposed_experiment/dataset_4/train/images/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/Superimposed_experiment/dataset_4/valid/images/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/Superimposed_experiment/dataset_4/test/images/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/Superimposed_multitask/dataset_3/train/images/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/Superimposed_multitask/dataset_3/valid/images/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/Superimposed_multitask/dataset_3/test/images/"
 )
 
 # 测试掩码路径数组
 TEST_MASK_PATHS=(
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/Superimposed_experiment/dataset_4/train/masks/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/Superimposed_experiment/dataset_4/valid/masks/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/Superimposed_experiment/dataset_4/test/masks/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/Superimposed_multitask/dataset_3/train/masks/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/Superimposed_multitask/dataset_3/valid/masks/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/Superimposed_multitask/dataset_3/test/masks/"
 )
 
 # Ensure arrays have the same length
@@ -38,13 +38,13 @@ if [ ${#TEST_DATASET_NAMES[@]} -ne ${#TEST_IMAGE_PATHS[@]} ] || [ ${#TEST_DATASE
 fi
 
 # Prediction results save path
-SAVE_PATH="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/pred_masks/dataset_4"
+SAVE_PATH="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/pred_masks/cls_dataset_3"
 
 # Whether to save prediction results (true/false)
 SAVE_RESULTS="true"
 
 # Log directory
-LOG_DIR="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/pred_masks/dataset_4"
+LOG_DIR=$SAVE_PATH
 
 # ---------------------- Execution ----------------------
 # Create save directory if it doesn't exist
