@@ -129,6 +129,8 @@ def run_shap_for_single_image(
     img_size: int = 224,
     dino_pretrained: bool = True,
     background_mode: str = "zeros",
+    focus_percentile: int = 85,
+    overlay_alpha_scale: float = 0.6,
 ) -> None:
     """
     对单张图像进行 SHAP 分析，生成：
@@ -227,8 +229,6 @@ def run_shap_for_single_image(
     fig.savefig(heatmap_path, dpi=200, bbox_inches="tight", pad_inches=0)
     plt.close(fig)
 
-    focus_percentile = 85
-    overlay_alpha_scale = 0.6
     focus_threshold = np.percentile(shap_norm, focus_percentile)
     focus_map = np.clip((shap_norm - focus_threshold) / (1 - focus_threshold + 1e-8), 0, 1)
     focus_rgba = plt.cm.inferno(np.squeeze(focus_map))
@@ -300,6 +300,18 @@ def parse_args() -> argparse.Namespace:
         choices=["zeros", "blur"],
         help="SHAP baseline 的背景构造方式：zeros=全黑，blur=模糊图像。",
     )
+    parser.add_argument(
+        "--focus_percentile",
+        type=int,
+        default=85,
+        help="只显示 SHAP 值位于该分位数以上的重点区域。",
+    )
+    parser.add_argument(
+        "--overlay_alpha_scale",
+        type=float,
+        default=0.6,
+        help="叠加层透明度缩放系数，越大越明显。",
+    )
     args = parser.parse_args()
     args.dino_pretrained = str(args.dino_pretrained).lower() in ("true", "1", "yes", "y")
     return args
@@ -315,5 +327,7 @@ if __name__ == "__main__":
         img_size=args.img_size,
         dino_pretrained=args.dino_pretrained,
         background_mode=args.background_mode,
+        focus_percentile=args.focus_percentile,
+        overlay_alpha_scale=args.overlay_alpha_scale,
     )
 

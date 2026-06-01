@@ -4,4 +4,6 @@ python shap_single_image_seg.py \
   --output_dir ./pyradiomics_dice/shap_single_out \
   --img_size 224 \
   --dino_pretrained True \
-  --background_mode zeros
+  --background_mode zeros \
+  --focus_percentile 80 \
+  --overlay_alpha_scale 0.75
