@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # ---------------------- Configuration ----------------------
-Train_DATASET="TN5K"
 # Set CUDA device
 CUDA_VISIBLE_DEVICES="1"
 # 根据 CUDA_VISIBLE_DEVICES 自动设置 device，也可以手动指定（如 "cuda:0", "cpu"）
@@ -13,17 +12,23 @@ CHECKPOINT_PATH="/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/b
 # Configure multiple test dataset paths
 # Test dataset names array
 TEST_DATASET_NAMES=(
-    "TN5K"
+    "DDTI_train"
+    "DDTI_valid"
+    "DDTI_test"
 )
 
 # 测试图像路径数组
 TEST_IMAGE_PATHS=(
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/test/images/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/DDTI/train/images/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/DDTI/valid/images/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/DDTI/test/images/"
 )
 
 # 测试掩码路径数组
 TEST_MASK_PATHS=(
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/test/masks/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/DDTI/train/masks/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/DDTI/valid/masks/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/DDTI/test/masks/"
 )
 
 # Ensure arrays have the same length
@@ -33,13 +38,13 @@ if [ ${#TEST_DATASET_NAMES[@]} -ne ${#TEST_IMAGE_PATHS[@]} ] || [ ${#TEST_DATASE
 fi
 
 # Prediction results save path
-SAVE_PATH="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/pred_masks/test"
+SAVE_PATH="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/pred_masks/DDTI"
 
 # Whether to save prediction results (true/false)
 SAVE_RESULTS="true"
 
 # Log directory
-LOG_DIR="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/pred_masks/${Train_DATASET}"
+LOG_DIR=$SAVE_PATH
 
 # ---------------------- Execution ----------------------
 # Create save directory if it doesn't exist
