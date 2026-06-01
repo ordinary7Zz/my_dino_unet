@@ -25,7 +25,8 @@ def load_image(
 ) -> Tuple[torch.Tensor, np.ndarray]:
     """加载单张图像并做与训练类似的预处理（缩放到 img_size，转为张量，简单归一化）。"""
     img = Image.open(image_path).convert("RGB")
-    orig_np = np.array(img)
+    resized_img = img.resize((img_size, img_size), resample=Image.BILINEAR)
+    orig_np = np.array(resized_img)
 
     transform = transforms.Compose(
         [
@@ -191,55 +192,51 @@ def run_shap_for_single_image(
     shap_min, shap_max = np.percentile(shap_map_np, [2, 98])
     shap_norm = np.clip((shap_map_np - shap_min) / (shap_max - shap_min + 1e-8), 0, 1)
 
-    # 5) 保存 SHAP 热力图和叠加图
-    plt.figure(figsize=(10, 4))
-
-    plt.subplot(1, 3, 1)
+    # 5) 分开保存原图、SHAP 热力图和叠加图
+    original_path = os.path.join(output_dir, "original_image.png")
+    fig, ax = plt.subplots(figsize=(5, 5))
     if orig_np.ndim == 2:
-        plt.imshow(orig_np, cmap="gray")
+        ax.imshow(orig_np, cmap="gray")
     else:
-        plt.imshow(orig_np)
-    plt.axis("off")
-    plt.title("Original image")
+        ax.imshow(orig_np)
+    ax.axis("off")
+    fig.tight_layout(pad=0)
+    fig.savefig(original_path, dpi=200, bbox_inches="tight", pad_inches=0)
+    plt.close(fig)
 
-    plt.subplot(1, 3, 2)
-    plt.imshow(shap_norm, cmap="jet")
-    plt.colorbar(fraction=0.046, pad=0.04)
-    plt.axis("off")
-    plt.title("SHAP attribution")
-
-    plt.subplot(1, 3, 3)
-    if orig_np.ndim == 2:
-        plt.imshow(orig_np, cmap="gray")
-    else:
-        plt.imshow(orig_np)
-
-    focus_threshold = np.percentile(shap_norm, 85)
-    focus_map = np.clip((shap_norm - focus_threshold) / (1 - focus_threshold + 1e-8), 0, 1)
-    focus_map = np.squeeze(focus_map)
-    focus_rgba = plt.cm.inferno(focus_map)
-    focus_rgba[..., 3] = focus_map * 0.45
-    plt.imshow(focus_rgba)
-    plt.axis("off")
-    plt.title("Overlay")
-
-    plt.tight_layout()
-    save_path = os.path.join(output_dir, "shap_single_image.png")
-    plt.savefig(save_path, dpi=200)
-    plt.close()
-
-    # 同时单独保存归因热力图
-    plt.figure(figsize=(5, 4))
-    plt.imshow(shap_norm, cmap="jet")
-    plt.colorbar()
-    plt.axis("off")
-    plt.tight_layout()
     heatmap_path = os.path.join(output_dir, "shap_map.png")
-    plt.savefig(heatmap_path, dpi=200)
-    plt.close()
+    fig, ax = plt.subplots(figsize=(5, 5))
+    im = ax.imshow(shap_norm, cmap="jet")
+    fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
+    ax.axis("off")
+    fig.tight_layout(pad=0)
+    fig.savefig(heatmap_path, dpi=200, bbox_inches="tight", pad_inches=0)
+    plt.close(fig)
 
-    print(f"Saved SHAP visualization to: {save_path}")
+    focus_percentile = 85
+    overlay_alpha_scale = 0.6
+    focus_threshold = np.percentile(shap_norm, focus_percentile)
+    focus_map = np.clip((shap_norm - focus_threshold) / (1 - focus_threshold + 1e-8), 0, 1)
+    focus_rgba = plt.cm.inferno(np.squeeze(focus_map))
+    focus_rgba[..., 3] = np.squeeze(focus_map) * overlay_alpha_scale
+
+    overlay_path = os.path.join(output_dir, "overlay.png")
+    fig, ax = plt.subplots(figsize=(5, 5))
+    height, width = shap_norm.shape
+    extent = (0, width, height, 0)
+    if orig_np.ndim == 2:
+        ax.imshow(orig_np, cmap="gray", extent=extent)
+    else:
+        ax.imshow(orig_np, extent=extent)
+    ax.imshow(focus_rgba, extent=extent)
+    ax.axis("off")
+    fig.tight_layout(pad=0)
+    fig.savefig(overlay_path, dpi=200, bbox_inches="tight", pad_inches=0)
+    plt.close(fig)
+
+    print(f"Saved original image to: {original_path}")
     print(f"Saved SHAP heatmap to: {heatmap_path}")
+    print(f"Saved SHAP overlay to: {overlay_path}")
 
 
 def parse_args() -> argparse.Namespace:
