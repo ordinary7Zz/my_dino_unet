@@ -16,7 +16,7 @@ from torchvision import transforms
 import torch.nn as nn
 import torch.nn.functional as F
 
-from utils.metrics import evaluate_model
+from utils.metrics import Dice, HD95, ECE, bootstrap_ci
 from dataset import FullDataset
 from dino_unet import DINOv3_S_UNet
 
@@ -76,11 +76,11 @@ def process_dataset(checkpoint, image_path, gt_path, save_base_path, dataset_nam
     # Check path existence before loading dataset
     if not os.path.exists(image_path):
         print(f"Error: Image directory does not exist: {image_path}")
-        return 0.0, 0.0
-    
+        return {}
+
     if not os.path.exists(gt_path):
         print(f"Error: Mask directory does not exist: {gt_path}")
-        return 0.0, 0.0
+        return {}
     
     # List directory contents for debugging
     try:
@@ -101,54 +101,66 @@ def process_dataset(checkpoint, image_path, gt_path, save_base_path, dataset_nam
         print(f"Successfully loaded checkpoint from {checkpoint}")
     except Exception as e:
         print(f"Error loading checkpoint: {e}")
-        return 0.0, 0.0
-    
+        return {}
+
     # 加载测试数据集，使用与训练时相同的尺寸
     print(f"Loading dataset with FullDataset using size: {target_size}x{target_size}")
     test_dataset = FullDataset(image_path, gt_path, target_size, mode='val')
-    
+
     # 检查数据集是否为空
     if len(test_dataset) == 0:
         print(f"Error: Test dataset {dataset_name} is empty!")
-        return 0.0, 0.0
-    
+        return {}
+
     test_loader = DataLoader(test_dataset, shuffle=False, batch_size=1, num_workers=8)
     print(f"Dataset loaded: {len(test_dataset)} images found")
-    
-    # 计算评估指标（返回字典，包含 mean + CI95）
+
+    dice_calculator = Dice()
+    hd_calculator = HD95()
+    ece_calculator = ECE()
+    all_dice_values = []
+    all_hd_values = []
+    all_ece_values = []
+    case_records = []
+
     print(f"Calculating evaluation metrics for dataset: {dataset_name}")
-    results = evaluate_model(model, test_loader, device)
-    dice_mean = results.get('Dice', {}).get('mean', 0.0)
-    dice_ci95 = results.get('Dice', {}).get('CI95', (0.0, 0.0))
-    hd95_mean = results.get('HD95', {}).get('mean', 0.0)
-    hd95_ci95 = results.get('HD95', {}).get('CI95', (0.0, 0.0))
-    ece_mean = results.get('ECE', {}).get('mean', 0.0)
-    ece_ci95 = results.get('ECE', {}).get('CI95', (0.0, 0.0))
-    print(f"Dice Mean: {dice_mean:.4f}, Dice CI95: ({dice_ci95[0]:.4f}, {dice_ci95[1]:.4f})")
-    print(f"HD95 Mean: {hd95_mean:.4f}, HD95 CI95: ({hd95_ci95[0]:.4f}, {hd95_ci95[1]:.4f})")
-    print(f"ECE Mean: {ece_mean:.4f}, ECE CI95: ({ece_ci95[0]:.4f}, {ece_ci95[1]:.4f})")
-    
-    # 保存预测结果（如果需要）
-    if save_results.lower() == "true":
-        model.eval()
-        for i, batch in enumerate(tqdm(test_loader, desc='Saving predictions', unit='image')):
-            with torch.no_grad():
-                image = batch['image'].to(device=device)
-                name = batch.get('filename', [f'image_{i}'])[0]
-                # print('Processing image:', name)
-                
-                # Forward pass
-                res = model(image)
-                if type(res) == type([]):
-                    res = res[0]
-                
-                # 后处理和保存
-                res_sigmoid = res.sigmoid().data.cpu()
-                res_np = res_sigmoid.numpy().squeeze()
+    model.eval()
+    with torch.no_grad():
+        for i, batch in enumerate(tqdm(test_loader, desc=f"Evaluating {dataset_name}", unit='image')):
+            image = batch['image'].to(device=device)
+            mask_true = batch['label'].to(device=device)
+            filenames = batch.get('filename', [f'image_{i}'])
+            name = filenames[0] if isinstance(filenames, (list, tuple)) else filenames
+
+            res = model(image)
+            if isinstance(res, (list, tuple)):
+                res = res[0]
+
+            mask_pred = torch.sigmoid(res)
+            mask_pred_binary = (mask_pred > 0.5).float()
+
+            prob_i = mask_pred[0]
+            pred_i = mask_pred_binary[0]
+            true_i = (mask_true[0] > 0.5).float()
+
+            dice_i = float(dice_calculator(pred_i, true_i).item())
+            hd_i = float(hd_calculator(pred_i, true_i).item())
+            ece_i = float(ece_calculator(prob_i, true_i).item())
+
+            all_dice_values.append(dice_i)
+            all_hd_values.append(hd_i)
+            all_ece_values.append(ece_i)
+            case_records.append({
+                "filename": str(name),
+                "dice": round(dice_i, 4),
+                "hd95": round(hd_i, 4),
+            })
+
+            if save_results.lower() == "true":
+                res_np = mask_pred[0].detach().cpu().numpy().squeeze()
                 res_normalized = (res_np - res_np.min()) / (res_np.max() - res_np.min() + 1e-8)
                 res_uint8 = (res_normalized * 255).astype(np.uint8)
 
-                # Optional: resize prediction back to original image size
                 if save_orig_size:
                     try:
                         orig_size = batch.get('orig_size', None)
@@ -159,15 +171,40 @@ def process_dataset(checkpoint, image_path, gt_path, save_base_path, dataset_nam
                             ).astype(np.uint8)
                     except Exception as e:
                         print(f"Warning: Failed to resize {name} to orig_size: {e}")
-                
-                # 使用从数据集中获取的原始文件名（不包含扩展名）
+
                 try:
-                    imageio.imsave(os.path.join(save_path, name), res_uint8)
-                    # print(f"Saved prediction: {output_filename}")
+                    imageio.imsave(os.path.join(save_path, str(name)), res_uint8)
                 except Exception as e:
                     print(f"Error saving prediction for {name}: {e}")
+
+    dice_mean, dice_ci95 = bootstrap_ci(all_dice_values)
+    hd95_mean, hd95_ci95 = bootstrap_ci(all_hd_values)
+    ece_mean, ece_ci95 = bootstrap_ci(all_ece_values)
+
+    results = {
+        'Dice': {
+            'mean': round(dice_mean, 4),
+            'CI95': (round(dice_ci95[0], 4), round(dice_ci95[1], 4)),
+            'values': [round(float(v), 4) for v in all_dice_values],
+        },
+        'HD95': {
+            'mean': round(hd95_mean, 4),
+            'CI95': (round(hd95_ci95[0], 4), round(hd95_ci95[1], 4)),
+            'values': [round(float(v), 4) for v in all_hd_values],
+        },
+        'ECE': {
+            'mean': round(ece_mean, 4),
+            'CI95': (round(ece_ci95[0], 4), round(ece_ci95[1], 4)),
+            'values': [round(float(v), 4) for v in all_ece_values],
+        },
+        'files': case_records,
+    }
+
+    print(f"Dice Mean: {results['Dice']['mean']:.4f}, Dice CI95: ({results['Dice']['CI95'][0]:.4f}, {results['Dice']['CI95'][1]:.4f})")
+    print(f"HD95 Mean: {results['HD95']['mean']:.4f}, HD95 CI95: ({results['HD95']['CI95'][0]:.4f}, {results['HD95']['CI95'][1]:.4f})")
+    print(f"ECE Mean: {results['ECE']['mean']:.4f}, ECE CI95: ({results['ECE']['CI95'][0]:.4f}, {results['ECE']['CI95'][1]:.4f})")
     print(f"Dataset {dataset_name} processing completed.")
-    
+
     return results
 
 def main():
@@ -312,18 +349,19 @@ def main():
             "timestamp": timestamp,
             "log_file": log_file,
             "checkpoint": args.checkpoint,
-            "save_path": args.save_path,
+            "save_path": os.path.join(args.save_path, dataset_name),
             "dataset_name": dataset_name,
-            "dice": {
-                "mean": dice.get('mean', 0.0),
-                "ci95": list(dice.get('CI95', (0.0, 0.0))),
-                "values": dice.get('values', []),
+            "summary": {
+                "dice": {
+                    "mean": dice.get('mean', 0.0),
+                    "ci95": list(dice.get('CI95', (0.0, 0.0))),
+                },
+                "hd95": {
+                    "mean": hd95.get('mean', 0.0),
+                    "ci95": list(hd95.get('CI95', (0.0, 0.0))),
+                },
             },
-            "hd95": {
-                "mean": hd95.get('mean', 0.0),
-                "ci95": list(hd95.get('CI95', (0.0, 0.0))),
-                "values": hd95.get('values', []),
-            },
+            "files": result.get('files', []),
         }
         with open(dataset_metrics_json_file, "w", encoding="utf-8") as f:
             json.dump(dataset_metrics_payload, f, ensure_ascii=False, indent=2, default=json_default)
