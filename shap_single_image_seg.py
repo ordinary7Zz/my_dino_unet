@@ -185,8 +185,27 @@ def run_shap_for_single_image(
     else:
         shap_arr_np = np.asarray(shap_arr)
 
-    # 对通道维求和，得到 (H, W) 的像素级归因图
-    shap_map_np = shap_arr_np.sum(axis=1)[0]  # (H, W)
+    # 自适应处理 SHAP 的通道维，兼容 NCHW / NHWC / 单通道等输出格式
+    shap_map_np = np.asarray(shap_arr_np)
+    if shap_map_np.ndim == 4:
+        if shap_map_np.shape[1] in (1, 3, 4):
+            shap_map_np = shap_map_np[0].sum(axis=0)
+        elif shap_map_np.shape[-1] in (1, 3, 4):
+            shap_map_np = shap_map_np[0].sum(axis=-1)
+        else:
+            shap_map_np = np.squeeze(shap_map_np)
+    elif shap_map_np.ndim == 3:
+        if shap_map_np.shape[0] in (1, 3, 4):
+            shap_map_np = shap_map_np.sum(axis=0)
+        elif shap_map_np.shape[-1] in (1, 3, 4):
+            shap_map_np = shap_map_np.sum(axis=-1)
+        else:
+            shap_map_np = np.squeeze(shap_map_np)
+    else:
+        shap_map_np = np.squeeze(shap_map_np)
+
+    if shap_map_np.ndim != 2:
+        raise ValueError(f"Unexpected SHAP map shape after reduction: {shap_map_np.shape}")
 
     # 归一化到 [0,1] 便于可视化
     shap_min, shap_max = np.percentile(shap_map_np, [2, 98])
