@@ -136,6 +136,7 @@ def run_shap_for_single_image(
     对单张图像进行 SHAP 分析，生成：
     - shap_map.png：像素级 SHAP 归因热力图
     - overlay.png：原图 + SHAP 叠加图
+    - overlay_with_gt.png：原图 + SHAP + GT mask 轮廓图（仅在提供 mask_path 时生成）
     """
     os.makedirs(output_dir, exist_ok=True)
 
@@ -238,21 +239,36 @@ def run_shap_for_single_image(
 
     overlay_path = os.path.join(output_dir, f"overlay_{image_name}.png")
     fig, ax = plt.subplots(figsize=(5, 5))
-    height, width = shap_norm.shape
-    extent = (0, width, height, 0)
     if orig_np.ndim == 2:
-        ax.imshow(orig_np, cmap="gray", extent=extent)
+        ax.imshow(orig_np, cmap="gray")
     else:
-        ax.imshow(orig_np, extent=extent)
-    ax.imshow(focus_rgba, extent=extent)
+        ax.imshow(orig_np)
+    ax.imshow(focus_rgba)
     ax.axis("off")
     fig.tight_layout(pad=0)
     fig.savefig(overlay_path, dpi=200, bbox_inches="tight", pad_inches=0)
     plt.close(fig)
 
+    gt_overlay_path = None
+    if region_mask_np is not None:
+        gt_overlay_path = os.path.join(output_dir, f"overlay_with_gt_{image_name}.png")
+        fig, ax = plt.subplots(figsize=(5, 5))
+        if orig_np.ndim == 2:
+            ax.imshow(orig_np, cmap="gray")
+        else:
+            ax.imshow(orig_np)
+        ax.imshow(focus_rgba)
+        ax.contour(region_mask_np, levels=[0.5], colors="lime", linewidths=2.0)
+        ax.axis("off")
+        fig.tight_layout(pad=0)
+        fig.savefig(gt_overlay_path, dpi=200, bbox_inches="tight", pad_inches=0)
+        plt.close(fig)
+
     print(f"Saved original image to: {original_path}")
     print(f"Saved SHAP heatmap to: {heatmap_path}")
     print(f"Saved SHAP overlay to: {overlay_path}")
+    if gt_overlay_path is not None:
+        print(f"Saved SHAP overlay with GT contour to: {gt_overlay_path}")
 
 
 def parse_args() -> argparse.Namespace:
