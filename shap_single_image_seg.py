@@ -211,57 +211,63 @@ def run_shap_for_single_image(
 
     # 5) 分开保存原图、SHAP 热力图和叠加图
     image_name = os.path.splitext(os.path.basename(image_path))[0]
+    height, width = shap_norm.shape
+    export_dpi = 100
+    fig_size = (width / export_dpi, height / export_dpi)
+    shap_cmap = "magma"
+    contour_color = "#00c853"
+    contour_linewidth = 1.4
 
     original_path = os.path.join(output_dir, f"original_{image_name}.png")
-    fig, ax = plt.subplots(figsize=(5, 5))
+    fig, ax = plt.subplots(figsize=fig_size, dpi=export_dpi)
     if orig_np.ndim == 2:
-        ax.imshow(orig_np, cmap="gray")
+        ax.imshow(orig_np, cmap="gray", interpolation="nearest")
     else:
-        ax.imshow(orig_np)
-    ax.axis("off")
-    fig.tight_layout(pad=0)
-    fig.savefig(original_path, dpi=200, bbox_inches="tight", pad_inches=0)
+        ax.imshow(orig_np, interpolation="nearest")
+    ax.set_axis_off()
+    fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
+    fig.savefig(original_path, dpi=export_dpi, bbox_inches=None, pad_inches=0)
     plt.close(fig)
 
     heatmap_path = os.path.join(output_dir, f"shap_map_{image_name}.png")
-    fig, ax = plt.subplots(figsize=(5, 5))
-    im = ax.imshow(shap_norm, cmap="jet")
-    fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
-    ax.axis("off")
-    fig.tight_layout(pad=0)
-    fig.savefig(heatmap_path, dpi=200, bbox_inches="tight", pad_inches=0)
+    fig, ax = plt.subplots(figsize=fig_size, dpi=export_dpi)
+    im = ax.imshow(shap_norm, cmap=shap_cmap, interpolation="nearest")
+    fig.colorbar(im, ax=ax, fraction=0.046, pad=0.02)
+    ax.set_axis_off()
+    fig.subplots_adjust(left=0, right=0.88, bottom=0, top=1)
+    fig.savefig(heatmap_path, dpi=export_dpi, bbox_inches=None, pad_inches=0)
     plt.close(fig)
 
     focus_threshold = np.percentile(shap_norm, focus_percentile)
     focus_map = np.clip((shap_norm - focus_threshold) / (1 - focus_threshold + 1e-8), 0, 1)
-    focus_rgba = plt.cm.inferno(np.squeeze(focus_map))
+    focus_rgba = plt.cm.magma(np.squeeze(focus_map))
     focus_rgba[..., 3] = np.squeeze(focus_map) * overlay_alpha_scale
 
     overlay_path = os.path.join(output_dir, f"overlay_{image_name}.png")
-    fig, ax = plt.subplots(figsize=(5, 5))
+    fig, ax = plt.subplots(figsize=fig_size, dpi=export_dpi)
     if orig_np.ndim == 2:
-        ax.imshow(orig_np, cmap="gray")
+        ax.imshow(orig_np, cmap="gray", interpolation="nearest")
     else:
-        ax.imshow(orig_np)
-    ax.imshow(focus_rgba)
-    ax.axis("off")
-    fig.tight_layout(pad=0)
-    fig.savefig(overlay_path, dpi=200, bbox_inches="tight", pad_inches=0)
+        ax.imshow(orig_np, interpolation="nearest")
+    ax.imshow(focus_rgba, interpolation="nearest")
+    ax.set_axis_off()
+    fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
+    fig.savefig(overlay_path, dpi=export_dpi, bbox_inches=None, pad_inches=0)
     plt.close(fig)
 
     gt_overlay_path = None
     if region_mask_np is not None:
         gt_overlay_path = os.path.join(output_dir, f"overlay_with_gt_{image_name}.png")
-        fig, ax = plt.subplots(figsize=(5, 5))
+        fig, ax = plt.subplots(figsize=fig_size, dpi=export_dpi)
         if orig_np.ndim == 2:
-            ax.imshow(orig_np, cmap="gray")
+            ax.imshow(orig_np, cmap="gray", interpolation="nearest")
         else:
-            ax.imshow(orig_np)
-        ax.imshow(focus_rgba)
-        ax.contour(region_mask_np, levels=[0.5], colors="lime", linewidths=2.0)
-        ax.axis("off")
-        fig.tight_layout(pad=0)
-        fig.savefig(gt_overlay_path, dpi=200, bbox_inches="tight", pad_inches=0)
+            ax.imshow(orig_np, interpolation="nearest")
+        ax.imshow(focus_rgba, interpolation="nearest")
+        ax.contour(region_mask_np, levels=[0.5], colors=contour_color, linewidths=contour_linewidth, antialiased=True)
+        ax.set_axis_off()
+        fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
+        fig.savefig(gt_overlay_path, dpi=export_dpi, bbox_inches=None, pad_inches=0)
         plt.close(fig)
 
     print(f"Saved original image to: {original_path}")
