@@ -6,7 +6,7 @@ python gradcam_single_image_seg.py \
     --img_size 224 \
     --dino_pretrained True \
     --alpha 0.45 \
-    --target_layer reduce4 \
+    --target_layer up2 \
     --smooth_sigma_ratio 0.02 \
     --gamma 1.0 \
     --saturation_scale 1.5
