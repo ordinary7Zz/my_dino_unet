@@ -131,7 +131,7 @@ def run_shap_for_single_image(
     dino_pretrained: bool = True,
     background_mode: str = "zeros",
     focus_percentile: int = 85,
-    overlay_alpha_scale: float = 0.35,
+    overlay_alpha_scale: float = 0.7,
 ) -> None:
     """
     对单张图像进行 SHAP 分析，生成：
@@ -212,18 +212,18 @@ def run_shap_for_single_image(
 
     # --- 后处理：高斯平滑 + 对比度增强，使热力图更接近参考图风格 ---
     height, width = shap_norm.shape
-    # 1) 高斯平滑：消除像素级噪点，产生平滑连续的色彩渐变
-    smooth_sigma = max(height, width) * 0.06  # 自适应平滑核（约图像尺寸的6%，更平滑）
+    # 1) 高斯平滑：适度消除像素噪点，但保留热点的空间聚焦特征
+    smooth_sigma = max(height, width) * 0.03  # 适度平滑核（约图像尺寸的3%）
     shap_smooth = gaussian_filter(shap_norm, sigma=smooth_sigma)
 
     # 2) 重新归一化平滑后的结果到 [0, 1]
     s_min, s_max = shap_smooth.min(), shap_smooth.max()
     shap_smooth = (shap_smooth - s_min) / (s_max - s_min + 1e-8)
 
-    # 3) 温和的非线性对比度拉伸（仅用 gamma 校正）
-    #    gamma < 1 让高值区域更突出（更红），但保留中间色调的连续渐变
-    #    避免 sigmoid 等过激拉伸导致颜色过饱和遮盖原图
-    gamma = 0.5
+    # 3) 使用 gamma > 1 压低中低值，让低注意力区域保持暗色/蓝色
+    #    这样只有真正的高SHAP值区域才映射到红/橙色，形成明确的"焦点"
+    #    gamma > 1: 压低中低值，保留高值；与之前的 gamma=0.5（抬高全部值）相反
+    gamma = 1.5
     shap_enhanced = np.power(shap_smooth, gamma)
 
     # 5) 分开保存原图、SHAP 热力图和叠加图
@@ -257,30 +257,34 @@ def run_shap_for_single_image(
     plt.close(fig)
 
     # --- 生成全图覆盖的半透明叠加热力图（与参考图风格一致） ---
-    # 使用 numpy 直接混合原图和热力图
+    # 核心思路：用 SHAP 值本身作为空间变化的 alpha（透明度）
+    #   - 高 SHAP 值区域：热力图颜色浓烈（红/橙），alpha 大
+    #   - 低 SHAP 值区域：热力图几乎透明（蓝/暗），原图纹理清晰透出
+    # 这正是参考图的关键视觉特征
+
     # 将原图归一化到 [0, 1] float
     orig_float = orig_np.astype(np.float32) / 255.0
     if orig_float.ndim == 2:
         orig_float = np.stack([orig_float] * 3, axis=-1)  # 灰度→RGB
 
-    # 对原图做亮度/对比度增强，使其不被热力图颜色压过
-    # 将原图拉伸到 [0, 1] 的完整范围（局部对比度增强）
+    # 对原图做对比度增强（percentile 拉伸）
     o_min, o_max = np.percentile(orig_float, [1, 99])
     orig_enhanced = np.clip((orig_float - o_min) / (o_max - o_min + 1e-8), 0, 1)
 
-    # 将热力图转为 RGB（不需要 alpha 通道）
-    heatmap_rgb = plt.cm.jet(np.squeeze(shap_enhanced))[..., :3]  # (H, W, 3)
+    # 将热力图转为 RGB
+    heatmap_rgb = plt.cm.jet(shap_enhanced)[..., :3]  # (H, W, 3)
 
-    # 混合策略：使用「屏幕混合」（screen blending）模式
-    # screen(a, b) = 1 - (1-a)*(1-b)，能让暗色原图的纹理在亮色热力图中透出
-    # 再与线性混合加权组合，兼顾色彩强度和纹理可见性
-    alpha = overlay_alpha_scale
-    # 线性混合部分
-    linear_blend = alpha * heatmap_rgb + (1.0 - alpha) * orig_enhanced
-    # screen 混合部分（让原图纹理从热力图中"透"出来）
-    screen_blend = 1.0 - (1.0 - heatmap_rgb * alpha) * (1.0 - orig_enhanced)
-    # 最终混合：70% screen + 30% linear，平衡色彩饱和度与纹理清晰度
-    blended = 0.7 * screen_blend + 0.3 * linear_blend
+    # 构造空间变化的 alpha 通道（基于 SHAP 值）
+    # shap_enhanced 已经是 [0,1]，高值区域 alpha 大，低值区域 alpha 小
+    # overlay_alpha_scale 控制热力图的整体最大不透明度
+    # alpha_map 范围: [alpha_min, overlay_alpha_scale]
+    alpha_min = 0.15  # 低 SHAP 区域的最低 alpha（保留一点蓝色底色）
+    alpha_max = overlay_alpha_scale  # 高 SHAP 区域的最大 alpha
+    alpha_map = alpha_min + (alpha_max - alpha_min) * shap_enhanced  # (H, W)
+    alpha_map = alpha_map[..., np.newaxis]  # (H, W, 1) 用于广播
+
+    # 线性混合：blended = alpha_map * heatmap + (1 - alpha_map) * orig
+    blended = alpha_map * heatmap_rgb + (1.0 - alpha_map) * orig_enhanced
     blended = np.clip(blended, 0, 1)
 
     overlay_path = os.path.join(output_dir, f"overlay_{image_name}.png")
@@ -366,8 +370,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--overlay_alpha_scale",
         type=float,
-        default=0.35,
-        help="叠加层透明度缩放系数（0~1），越大热力图越明显，越小原图越清晰。推荐 0.3~0.5。",
+        default=0.7,
+        help="热力图高注意力区域的最大不透明度（0~1）。越大热点区域颜色越浓，推荐 0.5~0.8。",
     )
     args = parser.parse_args()
     args.dino_pretrained = str(args.dino_pretrained).lower() in ("true", "1", "yes", "y")
