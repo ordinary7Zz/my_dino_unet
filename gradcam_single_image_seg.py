@@ -90,11 +90,11 @@ class GradCAM:
     ) -> np.ndarray:
         """
         生成 Grad-CAM 热力图。
-        
+
         Args:
             input_tensor: (1, 3, H, W) 输入张量
             target_mask: 可选的目标区域掩膜 (H, W)，用于指定计算梯度的目标区域
-            
+
         Returns:
             cam: (H, W) 归一化到 [0, 1] 的热力图
         """
@@ -102,18 +102,16 @@ class GradCAM:
 
         # 前向传播
         output = self.model(input_tensor)  # (1, 1, H, W)
-        probs = torch.sigmoid(output)  # (1, 1, H, W)
 
-        # 定义目标：区域内前景概率之和
         if target_mask is not None:
             mask_tensor = torch.from_numpy(target_mask).float().to(input_tensor.device)
             mask_tensor = mask_tensor.unsqueeze(0).unsqueeze(0)  # (1, 1, H, W)
-            # resize mask to match output size
-            mask_tensor = F.interpolate(mask_tensor, size=probs.shape[2:], mode="nearest")
-            target_score = (probs * mask_tensor).sum()
+            mask_tensor = F.interpolate(mask_tensor, size=output.shape[2:], mode="nearest")
+            target_score = (output * mask_tensor).sum() / (mask_tensor.sum() + 1e-6)
         else:
-            # 使用整幅预测的前景概率之和作为目标
-            target_score = probs.sum()
+            flat_logits = output.flatten()
+            k = max(1, flat_logits.numel() // 20)
+            target_score = flat_logits.topk(k).values.mean()
 
         # 反向传播获取梯度
         target_score.backward()
@@ -148,8 +146,8 @@ class GradCAM:
 
 def postprocess_cam(
     cam: np.ndarray,
-    smooth_sigma_ratio: float = 0.12,
-    gamma: float = 0.5,
+    smooth_sigma_ratio: float = 0.02,
+    gamma: float = 1.0,
 ) -> np.ndarray:
     """
     对原始 CAM 进行后处理，使热力分布接近 heatmap.jpg 风格。
@@ -171,7 +169,7 @@ def postprocess_cam(
     H, W = cam.shape
 
     # 1) percentile 裁切归一化：截断极端值，保留主体分布
-    p_low, p_high = np.percentile(cam, [2, 98])
+    p_low, p_high = np.percentile(cam, [1, 99])
     cam = np.clip(cam, p_low, p_high)
     c_min, c_max = cam.min(), cam.max()
     if c_max - c_min > 1e-8:
@@ -179,9 +177,10 @@ def postprocess_cam(
     else:
         cam = np.zeros_like(cam)
 
-    # 2) 大核高斯平滑：让热力扩散，形成宽过渡带
+    # 2) 轻量高斯平滑：仅用于展示，不强行塑形
     sigma = max(H, W) * smooth_sigma_ratio
-    cam = gaussian_filter(cam, sigma=sigma)
+    if sigma > 1e-6:
+        cam = gaussian_filter(cam, sigma=sigma)
 
     # 3) 重新归一化
     c_min, c_max = cam.min(), cam.max()
@@ -190,7 +189,7 @@ def postprocess_cam(
     else:
         cam = np.zeros_like(cam)
 
-    # 4) gamma 变换：gamma < 1 抬升中低值，扩大绿/黄色覆盖面积
+    # 4) gamma 变换：默认不压缩/抬升中低值，尽量保留原始响应形状
     cam = np.power(cam, gamma)
 
     return cam
@@ -257,9 +256,9 @@ def run_gradcam(
     img_size: int = 224,
     dino_pretrained: bool = True,
     alpha: float = 0.45,
-    target_layer_name: str = "up1",
-    smooth_sigma_ratio: float = 0.18,
-    gamma: float = 0.5,
+    target_layer_name: str = "reduce4",
+    smooth_sigma_ratio: float = 0.02,
+    gamma: float = 1.0,
     saturation_scale: float = 1.3,
 ) -> None:
     """
@@ -294,13 +293,15 @@ def run_gradcam(
 
     # 4) 选择目标层
     # DINOv3_S_UNet 的解码器层: up1, up2, up3, up4
-    # up1 最靠近输出（默认），热点位置与分割结果精确对齐，配合大核平滑实现扩散效果
+    # reduce4 更偏语义关注，避免默认落在过于贴近输出的层
     target_layer = getattr(model, target_layer_name, None)
+    resolved_target_layer_name = target_layer_name
     if target_layer is None:
-        print(f"Warning: target_layer '{target_layer_name}' not found, using 'up1'")
-        target_layer = model.up1
+        resolved_target_layer_name = "reduce4"
+        print(f"Warning: target_layer '{target_layer_name}' not found, using 'reduce4'")
+        target_layer = model.reduce4
 
-    print(f"Using target layer: {target_layer_name}")
+    print(f"Using target layer: {resolved_target_layer_name}")
 
     # 5) 计算 Grad-CAM
     img_tensor.requires_grad_(True)
@@ -406,21 +407,21 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--target_layer",
         type=str,
-        default="up1",
+        default="reduce4",
         choices=["up1", "up2", "up3", "up4", "reduce1", "reduce2", "reduce3", "reduce4"],
-        help="Grad-CAM 目标层名称。up1（默认）最靠近输出，热点位置与分割结果精确对齐。",
+        help="Grad-CAM 目标层名称。reduce4（默认）更偏语义关注，避免过于贴近输出。",
     )
     parser.add_argument(
         "--smooth_sigma_ratio",
         type=float,
-        default=0.18,
-        help="高斯平滑核占图像尺寸的比例（0.08~0.15），越大热力越扩散。",
+        default=0.02,
+        help="高斯平滑核占图像尺寸的比例；值越小越接近原始 CAM。",
     )
     parser.add_argument(
         "--gamma",
         type=float,
-        default=0.5,
-        help="Gamma 变换指数（<1 抬升中低值扩大过渡区，>1 压缩中低值聚焦热点）。",
+        default=1.0,
+        help="Gamma 变换指数；1.0 表示尽量保持原始响应形状。",
     )
     parser.add_argument(
         "--saturation_scale",
