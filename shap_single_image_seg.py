@@ -210,14 +210,16 @@ def run_shap_for_single_image(
     shap_norm = np.clip((shap_map_np - shap_min) / (shap_max - shap_min + 1e-8), 0, 1)
 
     # 5) 分开保存原图、SHAP 热力图和叠加图
+    # 使用 jet colormap + 全图半透明叠加风格（类 Grad-CAM 样式）
     image_name = os.path.splitext(os.path.basename(image_path))[0]
     height, width = shap_norm.shape
     export_dpi = 100
     fig_size = (width / export_dpi, height / export_dpi)
-    shap_cmap = "magma"
+    shap_cmap = "jet"  # 彩虹色映射，与参考图风格一致
     contour_color = "#00c853"
     contour_linewidth = 1.4
 
+    # --- 保存原图 ---
     original_path = os.path.join(output_dir, f"original_{image_name}.png")
     fig, ax = plt.subplots(figsize=fig_size, dpi=export_dpi)
     if orig_np.ndim == 2:
@@ -229,19 +231,19 @@ def run_shap_for_single_image(
     fig.savefig(original_path, dpi=export_dpi, bbox_inches=None, pad_inches=0)
     plt.close(fig)
 
+    # --- 保存纯 SHAP 热力图（无 colorbar，纯净图像） ---
     heatmap_path = os.path.join(output_dir, f"shap_map_{image_name}.png")
     fig, ax = plt.subplots(figsize=fig_size, dpi=export_dpi)
-    im = ax.imshow(shap_norm, cmap=shap_cmap, interpolation="nearest")
-    fig.colorbar(im, ax=ax, fraction=0.046, pad=0.02)
+    ax.imshow(shap_norm, cmap=shap_cmap, interpolation="bilinear")
     ax.set_axis_off()
-    fig.subplots_adjust(left=0, right=0.88, bottom=0, top=1)
+    fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
     fig.savefig(heatmap_path, dpi=export_dpi, bbox_inches=None, pad_inches=0)
     plt.close(fig)
 
-    focus_threshold = np.percentile(shap_norm, focus_percentile)
-    focus_map = np.clip((shap_norm - focus_threshold) / (1 - focus_threshold + 1e-8), 0, 1)
-    focus_rgba = plt.cm.magma(np.squeeze(focus_map))
-    focus_rgba[..., 3] = np.squeeze(focus_map) * overlay_alpha_scale
+    # --- 生成全图覆盖的半透明叠加热力图（与参考图风格一致） ---
+    # 将 shap_norm 通过 jet colormap 转为 RGBA，整体使用固定半透明度
+    heatmap_rgba = plt.cm.jet(np.squeeze(shap_norm))  # (H, W, 4)
+    heatmap_rgba[..., 3] = overlay_alpha_scale  # 全图统一半透明度
 
     overlay_path = os.path.join(output_dir, f"overlay_{image_name}.png")
     fig, ax = plt.subplots(figsize=fig_size, dpi=export_dpi)
@@ -249,12 +251,13 @@ def run_shap_for_single_image(
         ax.imshow(orig_np, cmap="gray", interpolation="nearest")
     else:
         ax.imshow(orig_np, interpolation="nearest")
-    ax.imshow(focus_rgba, interpolation="nearest")
+    ax.imshow(heatmap_rgba, interpolation="bilinear")
     ax.set_axis_off()
     fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
     fig.savefig(overlay_path, dpi=export_dpi, bbox_inches=None, pad_inches=0)
     plt.close(fig)
 
+    # --- 叠加图 + GT mask 轮廓 ---
     gt_overlay_path = None
     if region_mask_np is not None:
         gt_overlay_path = os.path.join(output_dir, f"overlay_with_gt_{image_name}.png")
@@ -263,7 +266,7 @@ def run_shap_for_single_image(
             ax.imshow(orig_np, cmap="gray", interpolation="nearest")
         else:
             ax.imshow(orig_np, interpolation="nearest")
-        ax.imshow(focus_rgba, interpolation="nearest")
+        ax.imshow(heatmap_rgba, interpolation="bilinear")
         ax.contour(region_mask_np, levels=[0.5], colors=contour_color, linewidths=contour_linewidth, antialiased=True)
         ax.set_axis_off()
         fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
