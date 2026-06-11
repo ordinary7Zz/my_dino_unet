@@ -131,7 +131,7 @@ def run_shap_for_single_image(
     dino_pretrained: bool = True,
     background_mode: str = "zeros",
     focus_percentile: int = 85,
-    overlay_alpha_scale: float = 0.4,
+    overlay_alpha_scale: float = 0.35,
 ) -> None:
     """
     对单张图像进行 SHAP 分析，生成：
@@ -220,18 +220,11 @@ def run_shap_for_single_image(
     s_min, s_max = shap_smooth.min(), shap_smooth.max()
     shap_smooth = (shap_smooth - s_min) / (s_max - s_min + 1e-8)
 
-    # 3) 非线性对比度拉伸（S型拉伸 + gamma），增强高/低区域的色彩区分度
-    #    先用 sigmoid 式拉伸将中间段推向两端，再用 gamma 微调
-    #    这样能产生参考图中明确的深蓝和鲜红区域
-    steepness = 10.0  # 控制 S 型曲线的陡峭程度
-    midpoint = 0.5
-    shap_sigmoid = 1.0 / (1.0 + np.exp(-steepness * (shap_smooth - midpoint)))
-    # 归一化 sigmoid 输出到 [0, 1]
-    sig_min, sig_max = shap_sigmoid.min(), shap_sigmoid.max()
-    shap_sigmoid = (shap_sigmoid - sig_min) / (sig_max - sig_min + 1e-8)
-    # 再做轻微 gamma 校正
-    gamma = 0.8
-    shap_enhanced = np.power(shap_sigmoid, gamma)
+    # 3) 温和的非线性对比度拉伸（仅用 gamma 校正）
+    #    gamma < 1 让高值区域更突出（更红），但保留中间色调的连续渐变
+    #    避免 sigmoid 等过激拉伸导致颜色过饱和遮盖原图
+    gamma = 0.5
+    shap_enhanced = np.power(shap_smooth, gamma)
 
     # 5) 分开保存原图、SHAP 热力图和叠加图
     # 使用 jet colormap + 全图半透明叠加风格（类 Grad-CAM 样式）
@@ -361,7 +354,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--overlay_alpha_scale",
         type=float,
-        default=0.4,
+        default=0.35,
         help="叠加层透明度缩放系数（0~1），越大热力图越明显，越小原图越清晰。推荐 0.3~0.5。",
     )
     args = parser.parse_args()
