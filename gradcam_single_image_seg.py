@@ -256,9 +256,9 @@ def run_gradcam(
     mask_path: Optional[str] = None,
     img_size: int = 224,
     dino_pretrained: bool = True,
-    alpha: float = 0.65,
-    target_layer_name: str = "up3",
-    smooth_sigma_ratio: float = 0.12,
+    alpha: float = 0.45,
+    target_layer_name: str = "up1",
+    smooth_sigma_ratio: float = 0.18,
     gamma: float = 0.5,
     saturation_scale: float = 1.3,
 ) -> None:
@@ -294,11 +294,11 @@ def run_gradcam(
 
     # 4) 选择目标层
     # DINOv3_S_UNet 的解码器层: up1, up2, up3, up4
-    # up3 粒度适中（默认），热力扩散且有方向性，最接近 heatmap.jpg
+    # up1 最靠近输出（默认），热点位置与分割结果精确对齐，配合大核平滑实现扩散效果
     target_layer = getattr(model, target_layer_name, None)
     if target_layer is None:
-        print(f"Warning: target_layer '{target_layer_name}' not found, using 'up3'")
-        target_layer = model.up3
+        print(f"Warning: target_layer '{target_layer_name}' not found, using 'up1'")
+        target_layer = model.up1
 
     print(f"Using target layer: {target_layer_name}")
 
@@ -400,20 +400,20 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--alpha",
         type=float,
-        default=0.65,
-        help="热力图叠加不透明度（0~1）。0.65 接近 heatmap.jpg 风格，色彩浓烈且原图可见。",
+        default=0.45,
+        help="热力图叠加不透明度（0~1）。0.45 原图纹理清晰透出。",
     )
     parser.add_argument(
         "--target_layer",
         type=str,
-        default="up3",
+        default="up1",
         choices=["up1", "up2", "up3", "up4", "reduce1", "reduce2", "reduce3", "reduce4"],
-        help="Grad-CAM 目标层名称。up3（默认）粒度适中最接近 heatmap.jpg 风格。",
+        help="Grad-CAM 目标层名称。up1（默认）最靠近输出，热点位置与分割结果精确对齐。",
     )
     parser.add_argument(
         "--smooth_sigma_ratio",
         type=float,
-        default=0.12,
+        default=0.18,
         help="高斯平滑核占图像尺寸的比例（0.08~0.15），越大热力越扩散。",
     )
     parser.add_argument(
