@@ -72,6 +72,6 @@ screening_inference_outputs/**/*.npy
 pyradiomics_dice/*
 !pyradiomics_dice/shap_single_out/
 !pyradiomics_dice/shap_single_out/**
-
+!pyradiomics_dice/gradcam/*
 
 !error.txt
