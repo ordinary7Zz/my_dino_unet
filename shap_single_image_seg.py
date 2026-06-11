@@ -257,18 +257,30 @@ def run_shap_for_single_image(
     plt.close(fig)
 
     # --- 生成全图覆盖的半透明叠加热力图（与参考图风格一致） ---
-    # 使用 numpy 直接混合原图和热力图（避免 matplotlib alpha 叠加效果不足的问题）
+    # 使用 numpy 直接混合原图和热力图
     # 将原图归一化到 [0, 1] float
     orig_float = orig_np.astype(np.float32) / 255.0
     if orig_float.ndim == 2:
         orig_float = np.stack([orig_float] * 3, axis=-1)  # 灰度→RGB
 
+    # 对原图做亮度/对比度增强，使其不被热力图颜色压过
+    # 将原图拉伸到 [0, 1] 的完整范围（局部对比度增强）
+    o_min, o_max = np.percentile(orig_float, [1, 99])
+    orig_enhanced = np.clip((orig_float - o_min) / (o_max - o_min + 1e-8), 0, 1)
+
     # 将热力图转为 RGB（不需要 alpha 通道）
     heatmap_rgb = plt.cm.jet(np.squeeze(shap_enhanced))[..., :3]  # (H, W, 3)
 
-    # 直接像素级混合：overlay = alpha * heatmap + (1 - alpha) * original
+    # 混合策略：使用「屏幕混合」（screen blending）模式
+    # screen(a, b) = 1 - (1-a)*(1-b)，能让暗色原图的纹理在亮色热力图中透出
+    # 再与线性混合加权组合，兼顾色彩强度和纹理可见性
     alpha = overlay_alpha_scale
-    blended = alpha * heatmap_rgb + (1.0 - alpha) * orig_float
+    # 线性混合部分
+    linear_blend = alpha * heatmap_rgb + (1.0 - alpha) * orig_enhanced
+    # screen 混合部分（让原图纹理从热力图中"透"出来）
+    screen_blend = 1.0 - (1.0 - heatmap_rgb * alpha) * (1.0 - orig_enhanced)
+    # 最终混合：70% screen + 30% linear，平衡色彩饱和度与纹理清晰度
+    blended = 0.7 * screen_blend + 0.3 * linear_blend
     blended = np.clip(blended, 0, 1)
 
     overlay_path = os.path.join(output_dir, f"overlay_{image_name}.png")
