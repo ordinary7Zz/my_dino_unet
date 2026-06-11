@@ -131,7 +131,7 @@ def run_shap_for_single_image(
     dino_pretrained: bool = True,
     background_mode: str = "zeros",
     focus_percentile: int = 85,
-    overlay_alpha_scale: float = 0.5,
+    overlay_alpha_scale: float = 0.4,
 ) -> None:
     """
     对单张图像进行 SHAP 分析，生成：
@@ -213,17 +213,25 @@ def run_shap_for_single_image(
     # --- 后处理：高斯平滑 + 对比度增强，使热力图更接近参考图风格 ---
     height, width = shap_norm.shape
     # 1) 高斯平滑：消除像素级噪点，产生平滑连续的色彩渐变
-    smooth_sigma = max(height, width) * 0.04  # 自适应平滑核大小（约为图像尺寸的4%）
+    smooth_sigma = max(height, width) * 0.06  # 自适应平滑核（约图像尺寸的6%，更平滑）
     shap_smooth = gaussian_filter(shap_norm, sigma=smooth_sigma)
 
     # 2) 重新归一化平滑后的结果到 [0, 1]
     s_min, s_max = shap_smooth.min(), shap_smooth.max()
     shap_smooth = (shap_smooth - s_min) / (s_max - s_min + 1e-8)
 
-    # 3) 非线性对比度拉伸（幂次变换），增强高/低区域的色彩区分度
-    #    gamma < 1 会让高值区域更突出（更多红色），gamma > 1 则相反
-    gamma = 0.6
-    shap_enhanced = np.power(shap_smooth, gamma)
+    # 3) 非线性对比度拉伸（S型拉伸 + gamma），增强高/低区域的色彩区分度
+    #    先用 sigmoid 式拉伸将中间段推向两端，再用 gamma 微调
+    #    这样能产生参考图中明确的深蓝和鲜红区域
+    steepness = 10.0  # 控制 S 型曲线的陡峭程度
+    midpoint = 0.5
+    shap_sigmoid = 1.0 / (1.0 + np.exp(-steepness * (shap_smooth - midpoint)))
+    # 归一化 sigmoid 输出到 [0, 1]
+    sig_min, sig_max = shap_sigmoid.min(), shap_sigmoid.max()
+    shap_sigmoid = (shap_sigmoid - sig_min) / (sig_max - sig_min + 1e-8)
+    # 再做轻微 gamma 校正
+    gamma = 0.8
+    shap_enhanced = np.power(shap_sigmoid, gamma)
 
     # 5) 分开保存原图、SHAP 热力图和叠加图
     # 使用 jet colormap + 全图半透明叠加风格（类 Grad-CAM 样式）
@@ -256,17 +264,23 @@ def run_shap_for_single_image(
     plt.close(fig)
 
     # --- 生成全图覆盖的半透明叠加热力图（与参考图风格一致） ---
-    # 将增强后的 SHAP 值通过 jet colormap 转为 RGBA
-    heatmap_rgba = plt.cm.jet(np.squeeze(shap_enhanced))  # (H, W, 4)
-    heatmap_rgba[..., 3] = overlay_alpha_scale  # 全图统一半透明度
+    # 使用 numpy 直接混合原图和热力图（避免 matplotlib alpha 叠加效果不足的问题）
+    # 将原图归一化到 [0, 1] float
+    orig_float = orig_np.astype(np.float32) / 255.0
+    if orig_float.ndim == 2:
+        orig_float = np.stack([orig_float] * 3, axis=-1)  # 灰度→RGB
+
+    # 将热力图转为 RGB（不需要 alpha 通道）
+    heatmap_rgb = plt.cm.jet(np.squeeze(shap_enhanced))[..., :3]  # (H, W, 3)
+
+    # 直接像素级混合：overlay = alpha * heatmap + (1 - alpha) * original
+    alpha = overlay_alpha_scale
+    blended = alpha * heatmap_rgb + (1.0 - alpha) * orig_float
+    blended = np.clip(blended, 0, 1)
 
     overlay_path = os.path.join(output_dir, f"overlay_{image_name}.png")
     fig, ax = plt.subplots(figsize=fig_size, dpi=export_dpi)
-    if orig_np.ndim == 2:
-        ax.imshow(orig_np, cmap="gray", interpolation="nearest")
-    else:
-        ax.imshow(orig_np, interpolation="nearest")
-    ax.imshow(heatmap_rgba, interpolation="bilinear")
+    ax.imshow(blended, interpolation="bilinear")
     ax.set_axis_off()
     fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
     fig.savefig(overlay_path, dpi=export_dpi, bbox_inches=None, pad_inches=0)
@@ -277,11 +291,7 @@ def run_shap_for_single_image(
     if region_mask_np is not None:
         gt_overlay_path = os.path.join(output_dir, f"overlay_with_gt_{image_name}.png")
         fig, ax = plt.subplots(figsize=fig_size, dpi=export_dpi)
-        if orig_np.ndim == 2:
-            ax.imshow(orig_np, cmap="gray", interpolation="nearest")
-        else:
-            ax.imshow(orig_np, interpolation="nearest")
-        ax.imshow(heatmap_rgba, interpolation="bilinear")
+        ax.imshow(blended, interpolation="bilinear")
         ax.contour(region_mask_np, levels=[0.5], colors=contour_color, linewidths=contour_linewidth, antialiased=True)
         ax.set_axis_off()
         fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
@@ -351,8 +361,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--overlay_alpha_scale",
         type=float,
-        default=0.5,
-        help="叠加层透明度缩放系数（0~1），越大热力图越明显，越小原图越清晰。",
+        default=0.4,
+        help="叠加层透明度缩放系数（0~1），越大热力图越明显，越小原图越清晰。推荐 0.3~0.5。",
     )
     args = parser.parse_args()
     args.dino_pretrained = str(args.dino_pretrained).lower() in ("true", "1", "yes", "y")
