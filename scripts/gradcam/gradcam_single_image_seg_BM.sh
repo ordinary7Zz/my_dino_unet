@@ -8,5 +8,5 @@ python gradcam_single_image_seg.py \
     --alpha 0.45 \
     --target_layer up1 \
     --smooth_sigma_ratio 0.18 \
-    --gamma 0.5 \
-    --saturation_scale 1.3
+    --gamma 0.6 \
+    --saturation_scale 1.5
