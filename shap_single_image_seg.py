@@ -211,6 +211,7 @@ def run_shap_for_single_image(
     shap_norm = np.clip((shap_map_np - shap_min) / (shap_max - shap_min + 1e-8), 0, 1)
 
     # --- 后处理：高斯平滑 + 对比度增强，使热力图更接近参考图风格 ---
+    height, width = shap_norm.shape
     # 1) 高斯平滑：消除像素级噪点，产生平滑连续的色彩渐变
     smooth_sigma = max(height, width) * 0.04  # 自适应平滑核大小（约为图像尺寸的4%）
     shap_smooth = gaussian_filter(shap_norm, sigma=smooth_sigma)
@@ -227,7 +228,6 @@ def run_shap_for_single_image(
     # 5) 分开保存原图、SHAP 热力图和叠加图
     # 使用 jet colormap + 全图半透明叠加风格（类 Grad-CAM 样式）
     image_name = os.path.splitext(os.path.basename(image_path))[0]
-    height, width = shap_enhanced.shape
     export_dpi = 100
     fig_size = (width / export_dpi, height / export_dpi)
     shap_cmap = "jet"  # 彩虹色映射，与参考图风格一致
