@@ -1,8 +1,8 @@
 python gradcam_single_image_seg.py \
     --checkpoint /mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/baseline/dino_unet_train_dataset_4_epoch_50.pth \
-    --image_path /mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN3K/test/images/TN3K_test_0040.jpg \
-    --mask_path /mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN3K/test/masks/TN3K_test_0040.jpg \
-    --output_dir ./pyradiomics_dice/gradcam/BM \
+    --image_path /mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Lymph_Node_Metastasis_fake/images/22_Benign_center1.png \
+    --mask_path /mnt/wangbd8/workspace/DataSets/ThyroidAgent/Classifaction_Data/Lymph_Node_Metastasis_fake/masks/22_Benign_center1.png \
+    --output_dir ./pyradiomics_dice/gradcam/LNM_CN01 \
     --img_size 224 \
     --dino_pretrained True \
     --alpha 0.45 \
