@@ -76,3 +76,6 @@ pyradiomics_dice/*
 !pyradiomics_dice/gradcam/**
 
 !error.txt
+
+
+.ipynb_checkpoints/

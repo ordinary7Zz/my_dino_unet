@@ -8,6 +8,7 @@ from typing import Optional, Tuple
 import cv2
 import numpy as np
 from PIL import Image
+from scipy.ndimage import gaussian_filter
 
 import torch
 import torch.nn.functional as F
@@ -135,13 +136,8 @@ class GradCAM:
             cam, size=input_tensor.shape[2:], mode="bilinear", align_corners=False
         )
 
-        # 归一化到 [0, 1]
+        # 转为 numpy
         cam = cam.squeeze().cpu().numpy()  # (H, W)
-        cam_min, cam_max = cam.min(), cam.max()
-        if cam_max - cam_min > 1e-8:
-            cam = (cam - cam_min) / (cam_max - cam_min)
-        else:
-            cam = np.zeros_like(cam)
 
         return cam
 
@@ -150,10 +146,61 @@ class GradCAM:
         self._backward_hook.remove()
 
 
+def postprocess_cam(
+    cam: np.ndarray,
+    smooth_sigma_ratio: float = 0.12,
+    gamma: float = 0.5,
+) -> np.ndarray:
+    """
+    对原始 CAM 进行后处理，使热力分布接近 heatmap.jpg 风格。
+    
+    处理步骤：
+    1. percentile 裁切归一化（避免极端值拉伸）
+    2. 大核高斯平滑（让热力扩散、过渡宽）
+    3. 重新归一化
+    4. gamma < 1 变换（抬升中低值，扩大绿/黄过渡区域面积）
+    
+    Args:
+        cam: (H, W) 原始 Grad-CAM 热力图
+        smooth_sigma_ratio: 高斯平滑核大小占图像尺寸的比例，越大越扩散
+        gamma: gamma 变换指数，< 1 抬升中低值，让热力分布更"满"
+        
+    Returns:
+        cam_final: (H, W) [0, 1] 后处理后的热力图
+    """
+    H, W = cam.shape
+
+    # 1) percentile 裁切归一化：截断极端值，保留主体分布
+    p_low, p_high = np.percentile(cam, [2, 98])
+    cam = np.clip(cam, p_low, p_high)
+    c_min, c_max = cam.min(), cam.max()
+    if c_max - c_min > 1e-8:
+        cam = (cam - c_min) / (c_max - c_min)
+    else:
+        cam = np.zeros_like(cam)
+
+    # 2) 大核高斯平滑：让热力扩散，形成宽过渡带
+    sigma = max(H, W) * smooth_sigma_ratio
+    cam = gaussian_filter(cam, sigma=sigma)
+
+    # 3) 重新归一化
+    c_min, c_max = cam.min(), cam.max()
+    if c_max - c_min > 1e-8:
+        cam = (cam - c_min) / (c_max - c_min)
+    else:
+        cam = np.zeros_like(cam)
+
+    # 4) gamma 变换：gamma < 1 抬升中低值，扩大绿/黄色覆盖面积
+    cam = np.power(cam, gamma)
+
+    return cam
+
+
 def generate_heatmap_overlay(
     cam: np.ndarray,
     orig_np: np.ndarray,
-    alpha: float = 0.5,
+    alpha: float = 0.65,
+    saturation_scale: float = 1.3,
 ) -> np.ndarray:
     """
     生成与 heatmap.jpg 风格一致的叠加图像。
@@ -162,12 +209,13 @@ def generate_heatmap_overlay(
     - jet colormap
     - 固定 alpha 叠加（整幅图均匀覆盖）
     - 原图纹理清晰透出
-    - 色彩饱和鲜艳
+    - 色彩饱和鲜艳（HSV 饱和度增强）
     
     Args:
         cam: (H, W) 归一化的热力图 [0, 1]
         orig_np: (H, W, 3) uint8 原图
-        alpha: 热力图叠加的不透明度
+        alpha: 热力图叠加的不透明度（0.65 更接近 heatmap.jpg）
+        saturation_scale: 饱和度增强倍数（>1 更鲜艳）
         
     Returns:
         blended: (H, W, 3) uint8 叠加图像
@@ -186,12 +234,17 @@ def generate_heatmap_overlay(
     heatmap_rgb = cv2.cvtColor(heatmap_bgr, cv2.COLOR_BGR2RGB)
 
     # 固定 alpha 叠加：blended = alpha * heatmap + (1 - alpha) * orig
-    # 这正是 heatmap.jpg 的风格（均匀叠加，原图纹理统一透出）
     orig_float = orig_np.astype(np.float32)
     heatmap_float = heatmap_rgb.astype(np.float32)
 
     blended = alpha * heatmap_float + (1.0 - alpha) * orig_float
     blended = np.clip(blended, 0, 255).astype(np.uint8)
+
+    # 色彩饱和度增强：在 HSV 空间提升 S 通道，让颜色更鲜艳
+    if saturation_scale != 1.0:
+        blended_hsv = cv2.cvtColor(blended, cv2.COLOR_RGB2HSV).astype(np.float32)
+        blended_hsv[:, :, 1] = np.clip(blended_hsv[:, :, 1] * saturation_scale, 0, 255)
+        blended = cv2.cvtColor(blended_hsv.astype(np.uint8), cv2.COLOR_HSV2RGB)
 
     return blended
 
@@ -203,15 +256,18 @@ def run_gradcam(
     mask_path: Optional[str] = None,
     img_size: int = 224,
     dino_pretrained: bool = True,
-    alpha: float = 0.5,
-    target_layer_name: str = "up1",
+    alpha: float = 0.65,
+    target_layer_name: str = "up3",
+    smooth_sigma_ratio: float = 0.12,
+    gamma: float = 0.5,
+    saturation_scale: float = 1.3,
 ) -> None:
     """
     对单张图像生成 Grad-CAM 热力图，输出风格与 heatmap.jpg 一致。
     
     输出文件:
     - original_{name}.png: 原图
-    - gradcam_map_{name}.png: 纯 Grad-CAM 热力图
+    - gradcam_map_{name}.png: 纯 Grad-CAM 热力图（经后处理）
     - gradcam_overlay_{name}.png: 原图 + Grad-CAM 叠加图（heatmap.jpg 风格）
     """
     os.makedirs(output_dir, exist_ok=True)
@@ -238,32 +294,41 @@ def run_gradcam(
 
     # 4) 选择目标层
     # DINOv3_S_UNet 的解码器层: up1, up2, up3, up4
-    # up1 是最后一个上采样层（分辨率最高，Grad-CAM 最精细）
+    # up3 粒度适中（默认），热力扩散且有方向性，最接近 heatmap.jpg
     target_layer = getattr(model, target_layer_name, None)
     if target_layer is None:
-        print(f"Warning: target_layer '{target_layer_name}' not found, using 'up1'")
-        target_layer = model.up1
+        print(f"Warning: target_layer '{target_layer_name}' not found, using 'up3'")
+        target_layer = model.up3
 
     print(f"Using target layer: {target_layer_name}")
 
     # 5) 计算 Grad-CAM
-    # 需要开启梯度
     img_tensor.requires_grad_(True)
 
     gradcam = GradCAM(model, target_layer)
-    cam = gradcam.generate(img_tensor, target_mask=region_mask)
+    cam_raw = gradcam.generate(img_tensor, target_mask=region_mask)
     gradcam.release()
 
-    print(f"Grad-CAM computed, shape: {cam.shape}, range: [{cam.min():.4f}, {cam.max():.4f}]")
+    print(f"Grad-CAM raw computed, shape: {cam_raw.shape}, "
+          f"range: [{cam_raw.min():.4f}, {cam_raw.max():.4f}]")
 
-    # 6) 生成输出图像
+    # 6) 后处理：高斯平滑 + gamma 变换，使热力风格匹配 heatmap.jpg
+    cam = postprocess_cam(
+        cam_raw,
+        smooth_sigma_ratio=smooth_sigma_ratio,
+        gamma=gamma,
+    )
+    print(f"Postprocessed CAM, range: [{cam.min():.4f}, {cam.max():.4f}], "
+          f"sigma_ratio={smooth_sigma_ratio}, gamma={gamma}")
+
+    # 7) 生成输出图像
     image_name = os.path.splitext(os.path.basename(image_path))[0]
 
     # --- 保存原图 ---
     original_path = os.path.join(output_dir, f"original_{image_name}.png")
     Image.fromarray(orig_np).save(original_path)
 
-    # --- 保存纯 Grad-CAM 热力图 ---
+    # --- 保存纯 Grad-CAM 热力图（经后处理） ---
     cam_uint8 = np.uint8(255 * cam)
     heatmap_bgr = cv2.applyColorMap(cam_uint8, cv2.COLORMAP_JET)
     heatmap_rgb = cv2.cvtColor(heatmap_bgr, cv2.COLOR_BGR2RGB)
@@ -271,13 +336,14 @@ def run_gradcam(
     Image.fromarray(heatmap_rgb).save(gradcam_map_path)
 
     # --- 生成叠加图（heatmap.jpg 风格）---
-    blended = generate_heatmap_overlay(cam, orig_np, alpha=alpha)
+    blended = generate_heatmap_overlay(
+        cam, orig_np, alpha=alpha, saturation_scale=saturation_scale,
+    )
     overlay_path = os.path.join(output_dir, f"gradcam_overlay_{image_name}.png")
     Image.fromarray(blended).save(overlay_path)
 
     # --- 如果有 mask，额外保存带 GT 轮廓的叠加图 ---
     if region_mask is not None:
-        # 在 blended 上绘制 GT 轮廓
         contours_img = blended.copy()
         mask_uint8 = (region_mask * 255).astype(np.uint8)
         contours, _ = cv2.findContours(mask_uint8, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
@@ -334,15 +400,33 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--alpha",
         type=float,
-        default=0.5,
-        help="热力图叠加不透明度（0~1）。0.5 与 heatmap.jpg 风格一致，原图纹理清晰透出。",
+        default=0.65,
+        help="热力图叠加不透明度（0~1）。0.65 接近 heatmap.jpg 风格，色彩浓烈且原图可见。",
     )
     parser.add_argument(
         "--target_layer",
         type=str,
-        default="up1",
+        default="up3",
         choices=["up1", "up2", "up3", "up4", "reduce1", "reduce2", "reduce3", "reduce4"],
-        help="Grad-CAM 目标层名称。up1 为最高分辨率解码层，up4 为最低分辨率。",
+        help="Grad-CAM 目标层名称。up3（默认）粒度适中最接近 heatmap.jpg 风格。",
+    )
+    parser.add_argument(
+        "--smooth_sigma_ratio",
+        type=float,
+        default=0.12,
+        help="高斯平滑核占图像尺寸的比例（0.08~0.15），越大热力越扩散。",
+    )
+    parser.add_argument(
+        "--gamma",
+        type=float,
+        default=0.5,
+        help="Gamma 变换指数（<1 抬升中低值扩大过渡区，>1 压缩中低值聚焦热点）。",
+    )
+    parser.add_argument(
+        "--saturation_scale",
+        type=float,
+        default=1.3,
+        help="色彩饱和度增强倍数（>1 更鲜艳）。",
     )
     args = parser.parse_args()
     args.dino_pretrained = str(args.dino_pretrained).lower() in ("true", "1", "yes", "y")
@@ -360,4 +444,7 @@ if __name__ == "__main__":
         dino_pretrained=args.dino_pretrained,
         alpha=args.alpha,
         target_layer_name=args.target_layer,
+        smooth_sigma_ratio=args.smooth_sigma_ratio,
+        gamma=args.gamma,
+        saturation_scale=args.saturation_scale,
     )
