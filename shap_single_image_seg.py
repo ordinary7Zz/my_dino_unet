@@ -7,6 +7,7 @@ from typing import Optional, Tuple
 
 import numpy as np
 from PIL import Image
+from scipy.ndimage import gaussian_filter
 
 import torch
 import torch.nn.functional as F
@@ -130,7 +131,7 @@ def run_shap_for_single_image(
     dino_pretrained: bool = True,
     background_mode: str = "zeros",
     focus_percentile: int = 85,
-    overlay_alpha_scale: float = 0.6,
+    overlay_alpha_scale: float = 0.5,
 ) -> None:
     """
     对单张图像进行 SHAP 分析，生成：
@@ -209,10 +210,24 @@ def run_shap_for_single_image(
     shap_min, shap_max = np.percentile(shap_map_np, [2, 98])
     shap_norm = np.clip((shap_map_np - shap_min) / (shap_max - shap_min + 1e-8), 0, 1)
 
+    # --- 后处理：高斯平滑 + 对比度增强，使热力图更接近参考图风格 ---
+    # 1) 高斯平滑：消除像素级噪点，产生平滑连续的色彩渐变
+    smooth_sigma = max(height, width) * 0.04  # 自适应平滑核大小（约为图像尺寸的4%）
+    shap_smooth = gaussian_filter(shap_norm, sigma=smooth_sigma)
+
+    # 2) 重新归一化平滑后的结果到 [0, 1]
+    s_min, s_max = shap_smooth.min(), shap_smooth.max()
+    shap_smooth = (shap_smooth - s_min) / (s_max - s_min + 1e-8)
+
+    # 3) 非线性对比度拉伸（幂次变换），增强高/低区域的色彩区分度
+    #    gamma < 1 会让高值区域更突出（更多红色），gamma > 1 则相反
+    gamma = 0.6
+    shap_enhanced = np.power(shap_smooth, gamma)
+
     # 5) 分开保存原图、SHAP 热力图和叠加图
     # 使用 jet colormap + 全图半透明叠加风格（类 Grad-CAM 样式）
     image_name = os.path.splitext(os.path.basename(image_path))[0]
-    height, width = shap_norm.shape
+    height, width = shap_enhanced.shape
     export_dpi = 100
     fig_size = (width / export_dpi, height / export_dpi)
     shap_cmap = "jet"  # 彩虹色映射，与参考图风格一致
@@ -234,15 +249,15 @@ def run_shap_for_single_image(
     # --- 保存纯 SHAP 热力图（无 colorbar，纯净图像） ---
     heatmap_path = os.path.join(output_dir, f"shap_map_{image_name}.png")
     fig, ax = plt.subplots(figsize=fig_size, dpi=export_dpi)
-    ax.imshow(shap_norm, cmap=shap_cmap, interpolation="bilinear")
+    ax.imshow(shap_enhanced, cmap=shap_cmap, interpolation="bilinear")
     ax.set_axis_off()
     fig.subplots_adjust(left=0, right=1, bottom=0, top=1)
     fig.savefig(heatmap_path, dpi=export_dpi, bbox_inches=None, pad_inches=0)
     plt.close(fig)
 
     # --- 生成全图覆盖的半透明叠加热力图（与参考图风格一致） ---
-    # 将 shap_norm 通过 jet colormap 转为 RGBA，整体使用固定半透明度
-    heatmap_rgba = plt.cm.jet(np.squeeze(shap_norm))  # (H, W, 4)
+    # 将增强后的 SHAP 值通过 jet colormap 转为 RGBA
+    heatmap_rgba = plt.cm.jet(np.squeeze(shap_enhanced))  # (H, W, 4)
     heatmap_rgba[..., 3] = overlay_alpha_scale  # 全图统一半透明度
 
     overlay_path = os.path.join(output_dir, f"overlay_{image_name}.png")
@@ -336,8 +351,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--overlay_alpha_scale",
         type=float,
-        default=0.6,
-        help="叠加层透明度缩放系数，越大越明显。",
+        default=0.5,
+        help="叠加层透明度缩放系数（0~1），越大热力图越明显，越小原图越清晰。",
     )
     args = parser.parse_args()
     args.dino_pretrained = str(args.dino_pretrained).lower() in ("true", "1", "yes", "y")
