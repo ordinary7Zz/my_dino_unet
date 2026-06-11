@@ -131,7 +131,7 @@ def run_shap_for_single_image(
     dino_pretrained: bool = True,
     background_mode: str = "zeros",
     focus_percentile: int = 85,
-    overlay_alpha_scale: float = 0.7,
+    overlay_alpha_scale: float = 0.8,
 ) -> None:
     """
     对单张图像进行 SHAP 分析，生成：
@@ -223,7 +223,7 @@ def run_shap_for_single_image(
     # 3) 使用 gamma > 1 压低中低值，让低注意力区域保持暗色/蓝色
     #    这样只有真正的高SHAP值区域才映射到红/橙色，形成明确的"焦点"
     #    gamma > 1: 压低中低值，保留高值；与之前的 gamma=0.5（抬高全部值）相反
-    gamma = 1.5
+    gamma = 0.9
     shap_enhanced = np.power(shap_smooth, gamma)
 
     # 5) 分开保存原图、SHAP 热力图和叠加图
@@ -278,7 +278,7 @@ def run_shap_for_single_image(
     # shap_enhanced 已经是 [0,1]，高值区域 alpha 大，低值区域 alpha 小
     # overlay_alpha_scale 控制热力图的整体最大不透明度
     # alpha_map 范围: [alpha_min, overlay_alpha_scale]
-    alpha_min = 0.15  # 低 SHAP 区域的最低 alpha（保留一点蓝色底色）
+    alpha_min = 0.45  # 低 SHAP 区域的最低 alpha（确保全图都有蓝/青色底色）
     alpha_max = overlay_alpha_scale  # 高 SHAP 区域的最大 alpha
     alpha_map = alpha_min + (alpha_max - alpha_min) * shap_enhanced  # (H, W)
     alpha_map = alpha_map[..., np.newaxis]  # (H, W, 1) 用于广播
@@ -370,8 +370,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--overlay_alpha_scale",
         type=float,
-        default=0.7,
-        help="热力图高注意力区域的最大不透明度（0~1）。越大热点区域颜色越浓，推荐 0.5~0.8。",
+        default=0.8,
+        help="热力图高注意力区域的最大不透明度（0~1）。越大热点区域颜色越浓，推荐 0.6~0.85。",
     )
     args = parser.parse_args()
     args.dino_pretrained = str(args.dino_pretrained).lower() in ("true", "1", "yes", "y")
