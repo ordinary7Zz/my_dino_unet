@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ---------------------- Configuration ----------------------
-Train_DATASET="dataset_2"
+Train_DATASET="dataset_4"
 # Set CUDA device
 CUDA_VISIBLE_DEVICES="1"
 # 根据 CUDA_VISIBLE_DEVICES 自动设置 device，也可以手动指定（如 "cuda:0", "cpu"）
@@ -13,29 +13,23 @@ CHECKPOINT_PATH="/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/b
 # Configure multiple test dataset paths
 # Test dataset names array
 TEST_DATASET_NAMES=(
-    "TN3K"
-    "DDTI"
-    "ThyroidXL"
-    "PKTN"
-    "TN5K"
+    "augtrain"
+    "final_data"
+    "Cine-Clip"
 )
 
 # 测试图像路径数组
 TEST_IMAGE_PATHS=(
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN3K/test/images/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/DDTI/2_preprocessed_data/stage1/p_image/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/ThyroidXL/test/images/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/PKTN/test/images/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/test/images/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/augtrain_PNG/image/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/final_data/image/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/Cine-Clip/test/images/"
 )
 
 # 测试掩码路径数组
 TEST_MASK_PATHS=(
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN3K/test/masks/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/DDTI/2_preprocessed_data/stage1/p_mask/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/ThyroidXL/test/masks/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/PKTN/test/masks/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/test/masks/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/augtrain_PNG/mask/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/final_data/mask"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/Cine-Clip/test/masks/"
 )
 
 # Ensure arrays have the same length
@@ -51,7 +45,7 @@ SAVE_PATH="./predictions/new_test_${Train_DATASET}"
 SAVE_RESULTS="false"
 
 # Log directory
-LOG_DIR="./logs/test_logs/baseline/new_test_${Train_DATASET}"
+LOG_DIR="./logs/test_logs/baseline/test_${Train_DATASET}"
 
 # ---------------------- Execution ----------------------
 # Create save directory if it doesn't exist
