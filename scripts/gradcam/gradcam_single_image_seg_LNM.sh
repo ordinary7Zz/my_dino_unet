@@ -5,7 +5,7 @@ python gradcam_single_image_seg.py \
     --output_dir ./pyradiomics_dice/gradcam/LNM_CN01 \
     --img_size 224 \
     --dino_pretrained True \
-    --alpha 0.45 \
+    --alpha 0.3 \
     --target_layer up1 \
     --smooth_sigma_ratio 0.02 \
     --gamma 1.0 \

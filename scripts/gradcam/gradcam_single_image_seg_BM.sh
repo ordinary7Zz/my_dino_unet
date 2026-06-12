@@ -5,8 +5,8 @@ python gradcam_single_image_seg.py \
     --output_dir ./pyradiomics_dice/gradcam/BM \
     --img_size 224 \
     --dino_pretrained True \
-    --alpha 0.4 \
+    --alpha 0.3 \
     --target_layer up1 \
-    --smooth_sigma_ratio 0.05 \
-    --gamma 0.7 \
+    --smooth_sigma_ratio 0.1 \
+    --gamma 0.4 \
     --saturation_scale 1.5
