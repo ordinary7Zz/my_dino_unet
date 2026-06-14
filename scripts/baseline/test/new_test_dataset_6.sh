@@ -40,7 +40,6 @@ TEST_MASK_PATHS=(
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/ThyroidXL/test/masks/"
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/PKTN/test/masks/"
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/test/masks/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroiAgent/train_val_test/Cine-Clip/test/masks/"
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/augtrain_PNG/mask/"
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/VIDEO_ImageAndMask_merged/selected_masks/"
 )
