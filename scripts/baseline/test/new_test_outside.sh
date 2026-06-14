@@ -28,7 +28,7 @@ TEST_IMAGE_PATHS=(
 # 测试掩码路径数组
 TEST_MASK_PATHS=(
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/augtrain_PNG/mask/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/final_data/mask"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/final_data/mask/"
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/Cine-Clip/test/masks/"
 )
 
