@@ -143,17 +143,23 @@ def process_dataset(checkpoint, image_path, gt_path, save_base_path, dataset_nam
             pred_i = mask_pred_binary[0]
             true_i = (mask_true[0] > 0.5).float()
 
-            dice_i = float(dice_calculator(pred_i, true_i).item())
-            hd_i = float(hd_calculator(pred_i, true_i).item())
-            ece_i = float(ece_calculator(prob_i, true_i).item())
+            dice_i = dice_calculator(pred_i, true_i)
+            hd_i = hd_calculator(pred_i, true_i)
+            ece_i = ece_calculator(prob_i, true_i).item()
 
-            all_dice_values.append(dice_i)
-            all_hd_values.append(hd_i)
+            dice_value = None if dice_i is None else float(dice_i.item())
+            hd_value = None if hd_i is None else float(hd_i.item())
+
+            if dice_value is not None:
+                all_dice_values.append(dice_value)
+            if hd_value is not None:
+                all_hd_values.append(hd_value)
             all_ece_values.append(ece_i)
             case_records.append({
                 "filename": str(name),
-                "dice": round(dice_i, 4),
-                "hd95": round(hd_i, 4),
+                "dice": round(dice_value, 4) if dice_value is not None else None,
+                "hd95": round(hd_value, 4) if hd_value is not None else None,
+                "skipped_for_overlap_metrics": dice_value is None and hd_value is None,
             })
 
             if save_results.lower() == "true":

@@ -6,6 +6,17 @@ from scipy.ndimage import distance_transform_edt as edt
 from tqdm import tqdm
 
 
+def _to_bool_2d(mask: torch.Tensor) -> np.ndarray:
+    if mask.dim() == 3:
+        if mask.shape[0] == 1 or mask.shape[2] == 1:
+            mask = mask.squeeze()
+        else:
+            mask = mask[0]
+    if mask.dim() != 2:
+        raise ValueError(f"Expected 2D tensors, got mask: {mask.shape}")
+    return mask.detach().cpu().numpy().astype(bool)
+
+
 # =========================
 # Dice（逐病例）
 # =========================
@@ -17,12 +28,18 @@ class Dice(nn.Module):
         super(Dice, self).__init__()
 
     def forward(self, predict, target):
+        pred_np = _to_bool_2d(predict)
+        target_np = _to_bool_2d(target)
+
+        if not np.any(target_np):
+            return None
+
         smooth = 1.0
-        intersection = (predict * target).sum()
+        intersection = np.logical_and(pred_np, target_np).sum()
         dice = (2.0 * intersection + smooth) / (
-            predict.sum() + target.sum() + smooth
+            pred_np.sum() + target_np.sum() + smooth
         )
-        return dice
+        return torch.tensor(dice, dtype=torch.float32)
 
 
 # =========================
@@ -40,45 +57,19 @@ class HD95(nn.Module):
         return self.calculate_hd(predict, target)
 
     def calculate_hd(self, predict, target):
-        # 确保输入是2D或3D tensor，统一处理
-        if predict.dim() == 3:
-            # 如果是3D [C, H, W] 或 [H, W, C]，取第一个通道
-            if predict.shape[0] == 1 or predict.shape[2] == 1:
-                predict = predict.squeeze()
-            else:
-                predict = predict[0]  # 取第一个通道
-        if target.dim() == 3:
-            if target.shape[0] == 1 or target.shape[2] == 1:
-                target = target.squeeze()
-            else:
-                target = target[0]
-        
-        # 确保是2D tensor
-        if predict.dim() != 2 or target.dim() != 2:
-            raise ValueError(f"Expected 2D tensors, got predict: {predict.shape}, target: {target.shape}")
-        
-        pred_np = predict.cpu().numpy().astype(bool)
-        target_np = target.cpu().numpy().astype(bool)
-        
-        # 检查空 mask 情况
+        pred_np = _to_bool_2d(predict)
+        target_np = _to_bool_2d(target)
+
+        if not np.any(target_np):
+            return None
+
         pred_empty = not np.any(pred_np)
-        target_empty = not np.any(target_np)
-        
-        # 处理空 mask 的特殊情况
-        if pred_empty and target_empty:
-            # 两者都为空：定义为0（完全匹配）
-            return torch.tensor(0.0, dtype=torch.float32)
-        elif pred_empty or target_empty:
-            # 一个为空，另一个不为空：返回图像对角线长度（表示最大可能距离）
-            if pred_empty:
-                print(f"pred_empty: {pred_np.shape}")
-            if target_empty:
-                print(f"target_empty: {target_np.shape}")
+
+        if pred_empty:
             h, w = pred_np.shape
             max_distance = float(np.sqrt(h * h + w * w))
             return torch.tensor(max_distance, dtype=torch.float32)
-                    
-        # 两者都不为空：正常计算 Hausdorff Distance
+
         hd1 = self.hd_distance(pred_np, target_np)
         hd2 = self.hd_distance(target_np, pred_np)
 
@@ -165,7 +156,7 @@ def bootstrap_ci(values, n_boot=5000, ci=0.95, seed=0):
     n = len(values)
 
     if n == 0:
-        return 0.0, (0.0, 0.0)
+        return float("nan"), (float("nan"), float("nan"))
 
     rng = np.random.default_rng(seed)
     boot_means = []
@@ -235,14 +226,15 @@ def evaluate_model(net, dataloader, device):
             pred_i = mask_pred_binary[i]
             true_i = (mask_true[i] > 0.5).float()
 
-            # Dice
-            dice_i = dice_calculator(pred_i, true_i).item()
-            all_dice_values.append(dice_i)
+            dice_i = dice_calculator(pred_i, true_i)
+            if dice_i is not None:
+                all_dice_values.append(dice_i.item())
 
             # HD95
             try:
-                hd_i = hd_calculator(pred_i, true_i).item()
-                all_hd_values.append(hd_i)
+                hd_i = hd_calculator(pred_i, true_i)
+                if hd_i is not None:
+                    all_hd_values.append(hd_i.item())
             except Exception as e:
                 print(f"[Warning] HD95 failed on sample {i}: {e}")
 
