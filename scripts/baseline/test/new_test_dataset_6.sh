@@ -19,7 +19,7 @@ TEST_DATASET_NAMES=(
     "PKTN"
     "TN5K"
     "Augtrain"
-    "TNVideo"
+    "FinalData"
 )
 
 # 测试图像路径数组
@@ -30,7 +30,7 @@ TEST_IMAGE_PATHS=(
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/PKTN/test/images/"
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/test/images/"
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/augtrain_PNG/image/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/VIDEO_ImageAndMask_merged/selected_images/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/finall_data/image/"
 )
 
 # 测试掩码路径数组
@@ -41,7 +41,7 @@ TEST_MASK_PATHS=(
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/PKTN/test/masks/"
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/test/masks/"
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/augtrain_PNG/mask/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/VIDEO_ImageAndMask_merged/selected_masks/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/finall_data/mask/"
 )
 
 # Ensure arrays have the same length
