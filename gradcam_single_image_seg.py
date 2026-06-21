@@ -19,11 +19,19 @@ if TYPE_CHECKING:
 
 
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff", ".webp"}
-OUTPUT_TYPE_CHOICES = ("all", "original", "overlay", "overlay_gt", "gradcam_map")
+OUTPUT_TYPE_CHOICES = (
+    "all",
+    "original",
+    "overlay",
+    "overlay_gt",
+    "original_gt",
+    "gradcam_map",
+)
 OUTPUT_SUBDIRS = {
     "original": "original",
     "overlay": "overlay",
     "overlay_gt": "overlay_gt",
+    "original_gt": "original_gt",
     "gradcam_map": "gradcam_map",
 }
 
@@ -52,7 +60,7 @@ def resolve_output_types(output_type: str) -> Tuple[str, ...]:
             f"不支持的 output_type: {output_type}，可选值为: {', '.join(OUTPUT_TYPE_CHOICES)}"
         )
     if normalized == "all":
-        return ("original", "overlay", "overlay_gt", "gradcam_map")
+        return ("original", "overlay", "overlay_gt", "original_gt", "gradcam_map")
     return (normalized,)
 
 
@@ -70,7 +78,7 @@ def resolve_input_pairs(
     if use_single_image == use_image_dir:
         raise ValueError("必须且只能提供一个输入来源：image_path 或 image_dir。")
 
-    requires_mask = "overlay_gt" in output_types
+    requires_mask = any(output_type in {"overlay_gt", "original_gt"} for output_type in output_types)
 
     if use_single_image:
         if mask_dir is not None:
@@ -401,6 +409,25 @@ def resolve_target_layer(
     return target_layer, resolved_target_layer_name
 
 
+def draw_mask_contours_on_image(
+    base_image: np.ndarray,
+    region_mask: Optional[np.ndarray],
+) -> np.ndarray:
+    """在底图上绘制 GT mask 轮廓。"""
+    if region_mask is None:
+        raise ValueError("GT 叠加输出需要提供对应的 mask。")
+
+    contours_img = base_image.copy()
+    mask_uint8 = (region_mask * 255).astype(np.uint8)
+    contours, _ = cv2.findContours(
+        mask_uint8,
+        cv2.RETR_EXTERNAL,
+        cv2.CHAIN_APPROX_SIMPLE,
+    )
+    cv2.drawContours(contours_img, contours, -1, (0, 255, 0), 2)
+    return contours_img
+
+
 def save_sample_outputs(
     image_path: str,
     output_dir: str,
@@ -416,39 +443,43 @@ def save_sample_outputs(
     output_paths = build_output_paths(output_dir, image_filename, output_types)
     saved_paths: Dict[str, str] = {}
 
-    heatmap_rgb = create_heatmap_rgb(cam)
-    blended = generate_heatmap_overlay(
-        cam,
-        orig_np,
-        alpha=alpha,
-        saturation_scale=saturation_scale,
-    )
+    heatmap_rgb: Optional[np.ndarray] = None
+    blended: Optional[np.ndarray] = None
+
+    if "gradcam_map" in output_paths:
+        heatmap_rgb = create_heatmap_rgb(cam)
+        Image.fromarray(heatmap_rgb).save(output_paths["gradcam_map"])
+        saved_paths["gradcam_map"] = output_paths["gradcam_map"]
+
+    if any(output_type in output_paths for output_type in ("overlay", "overlay_gt")):
+        blended = generate_heatmap_overlay(
+            cam,
+            orig_np,
+            alpha=alpha,
+            saturation_scale=saturation_scale,
+        )
 
     if "original" in output_paths:
         Image.fromarray(orig_np).save(output_paths["original"])
         saved_paths["original"] = output_paths["original"]
 
-    if "gradcam_map" in output_paths:
-        Image.fromarray(heatmap_rgb).save(output_paths["gradcam_map"])
-        saved_paths["gradcam_map"] = output_paths["gradcam_map"]
-
     if "overlay" in output_paths:
+        if blended is None:
+            raise RuntimeError("overlay 输出生成失败。")
         Image.fromarray(blended).save(output_paths["overlay"])
         saved_paths["overlay"] = output_paths["overlay"]
 
     if "overlay_gt" in output_paths:
-        if region_mask is None:
-            raise ValueError("输出 overlay_gt 需要提供对应的 mask。")
-        contours_img = blended.copy()
-        mask_uint8 = (region_mask * 255).astype(np.uint8)
-        contours, _ = cv2.findContours(
-            mask_uint8,
-            cv2.RETR_EXTERNAL,
-            cv2.CHAIN_APPROX_SIMPLE,
-        )
-        cv2.drawContours(contours_img, contours, -1, (0, 255, 0), 2)
+        if blended is None:
+            raise RuntimeError("overlay_gt 输出生成失败。")
+        contours_img = draw_mask_contours_on_image(blended, region_mask)
         Image.fromarray(contours_img).save(output_paths["overlay_gt"])
         saved_paths["overlay_gt"] = output_paths["overlay_gt"]
+
+    if "original_gt" in output_paths:
+        original_gt_img = draw_mask_contours_on_image(orig_np, region_mask)
+        Image.fromarray(original_gt_img).save(output_paths["original_gt"])
+        saved_paths["original_gt"] = output_paths["original_gt"]
 
     return saved_paths
 
@@ -475,7 +506,7 @@ def run_gradcam(
     输出规则：
     - 同一类输出保存到对应子目录下
     - 文件名与原图保持一致
-    - 可选输出目录: original / overlay / overlay_gt / gradcam_map
+    - 可选输出目录: original / overlay / overlay_gt / original_gt / gradcam_map
     """
     output_types = resolve_output_types(output_type)
     input_pairs = resolve_input_pairs(
@@ -589,7 +620,7 @@ def parse_args() -> argparse.Namespace:
         type=str,
         default="all",
         choices=OUTPUT_TYPE_CHOICES,
-        help="输出类型：all/original/overlay/overlay_gt/gradcam_map。",
+        help="输出类型：all/original/overlay/overlay_gt/original_gt/gradcam_map。",
     )
     parser.add_argument(
         "--img_size",

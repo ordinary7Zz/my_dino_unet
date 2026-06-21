@@ -3,7 +3,7 @@ python gradcam_single_image_seg.py \
     --image_dir /mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN3K/test/images \
     --mask_dir /mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN3K/test/masks \
     --output_dir ./pyradiomics_dice/gradcam/BM_batch \
-    --output_type all \
+    --output_type original_gt \
     --img_size 224 \
     --dino_pretrained True \
     --alpha 0.3 \
