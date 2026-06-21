@@ -79,3 +79,5 @@ pyradiomics_dice/*
 
 
 .ipynb_checkpoints/
+
+.DS_Store

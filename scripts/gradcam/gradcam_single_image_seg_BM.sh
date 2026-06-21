@@ -61,6 +61,15 @@ Benign bad masks|/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN3
 
 # Malignant good masks
 Malignant good masks|/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/test/images/TN5K_test_003323.jpg|/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/test/masks/TN5K_test_003323.png|all
+Malignant good masks|/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/test/images/TN5K_test_002683.jpg|/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/test/masks/TN5K_test_002683.png|all
+Malignant good masks|/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/test/images/TN5K_test_003874.jpg|/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/test/masks/TN5K_test_003874.png|all
+Malignant good masks|/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/test/images/TN3K_test_0593.jpg|/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/test/masks/TN3K_test_0593.png|all
+Malignant good masks|/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/test/images/TN5K_test_002306.jpg|/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/test/masks/TN5K_test_002306.png|all
+Malignant good masks|/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/test/images/TN5K_test_000802.jpg|/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/test/masks/TN5K_test_000802.png|all
+Malignant good masks|/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN3K/test/images/TN3K_test_0382.jpg|/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN3K/test/masks/TN3K_test_0382.jpg|all
+Malignant good masks|/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/ThyroidXL/test/images/ThyroidXL_test_00000387_57028F49_0.png|/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/ThyroidXL/test/masks/ThyroidXL_test_00000387_57028F49_0.png|all
+Malignant good masks|/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/test/images/TN5K_test_003026.jpg|/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/test/masks/TN5K_test_003026.png|all
+Malignant good masks|/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/ThyroidXL/test/images/ThyroidXL_test_00000364_B1B830C3_3.png|/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/ThyroidXL/test/masks/ThyroidXL_test_00000364_B1B830C3_3.png|all
 
 # Malignant bad masks
 Malignant bad masks|/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/ThyroidXL/test/images/ThyroidXL_test_00001873_6923593C_2.png|/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/ThyroidXL/test/masks/ThyroidXL_test_00001873_6923593C_2.png|all
