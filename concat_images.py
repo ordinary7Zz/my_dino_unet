@@ -34,7 +34,7 @@ def find_corresponding_files(orig_dir, gt_dir, shap_dir):
     return matched
 
 
-def add_label_to_image(img: np.ndarray, label: str, font_scale: float = 1.2, thickness: int = 2):
+def add_label_to_image(img: np.ndarray, label: str, font_scale: float = 0.5, thickness: int = 2):
     """在图像顶部添加居中文字标注，返回带标签的新图像。"""
     h, w = img.shape[:2]
     # 计算文字所需的顶部边距
@@ -68,10 +68,10 @@ def resize_to_same_height(images: list, target_height: int, interpolation=cv2.IN
 
 def concat_three(img_orig, img_gt, img_shap, labels):
     """水平拼接三张带标注的图像，返回拼接结果。"""
-    # 统一到同一高度（取三张图中的最小高度）
+    # 统一到同一高度（取三张图中的最大高度）
     images_with_labels = [(img_orig, labels[0]), (img_gt, labels[1]), (img_shap, labels[2])]
-    min_h = min(img.shape[0] for img, _ in images_with_labels)
-    images_with_labels = resize_to_same_height(images_with_labels, min_h)
+    max_h = max(img.shape[0] for img, _ in images_with_labels)
+    images_with_labels = resize_to_same_height(images_with_labels, max_h)
 
     # 给每张图添加顶部标注
     labeled_images = [add_label_to_image(img, lbl) for img, lbl in images_with_labels]
