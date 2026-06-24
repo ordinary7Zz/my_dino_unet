@@ -34,7 +34,7 @@ def find_corresponding_files(orig_dir, gt_dir, shap_dir):
     return matched
 
 
-def add_label_to_image(img: np.ndarray, label: str, font_scale: float = 1.0, thickness: int = 2):
+def add_label_to_image(img: np.ndarray, label: str, font_scale: float = 8.0, thickness: int = 2):
     """在图像顶部添加居中文字标注，返回带标签的新图像。"""
     h, w = img.shape[:2]
     # 计算文字所需的顶部边距
