@@ -124,7 +124,7 @@ def main():
         result = concat_three(img_orig, img_gt, img_shap, labels)
 
         # 保存
-        out_path = output_dir / f"{stem}_concat.png"
+        out_path = output_dir / f"{stem}.png"
         cv2.imwrite(str(out_path), result)
         print(f"已保存: {out_path}")
 
