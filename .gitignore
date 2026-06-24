@@ -81,3 +81,5 @@ pyradiomics_dice/*
 .ipynb_checkpoints/
 
 .DS_Store
+
+BM_171_doctor_wrong/*
