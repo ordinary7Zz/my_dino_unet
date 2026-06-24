@@ -3,7 +3,7 @@ python gradcam_single_image_seg.py \
     --image_dir /mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/500_TestData_Malignancy_Cls/171_doctor_wrong/images \
     --mask_dir /mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/500_TestData_Malignancy_Cls/171_doctor_wrong/masks \
     --output_dir ./pyradiomics_dice/gradcam/BM_171_doctor_wrong \
-    --output_type original_gt \
+    --output_type all \
     --img_size 224 \
     --dino_pretrained True \
     --alpha 0.3 \
