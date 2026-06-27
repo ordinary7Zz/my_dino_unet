@@ -1,0 +1,13 @@
+python gradcam_single_image_seg.py \
+    --checkpoint /mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/baseline/dino_unet_train_dataset_4_epoch_50.pth \
+    --image_dir /mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/500_TestData_Malignancy_Cls/171_doctor_wrong/images \
+    --mask_dir /mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/500_TestData_Malignancy_Cls/171_doctor_wrong/masks \
+    --output_dir ./pyradiomics_dice/gradcam/BM_171_doctor_wrong \
+    --output_type all \
+    --img_size 224 \
+    --dino_pretrained True \
+    --alpha 0.3 \
+    --target_layer up1 \
+    --smooth_sigma_ratio 0.1 \
+    --gamma 0.4 \
+    --saturation_scale 1.5

@@ -28,3 +28,36 @@ python3 move_low_foreground_pairs.py \
 4. `output_dir`：移动后的输出目录
 
 运行后，匹配到的图像会被移动到 `output_dir/images/`，对应的 mask 会被移动到 `output_dir/masks/`
+
+## `concat_images.py` 使用示例
+
+使用 matplotlib 将原图、Ground Truth 图和 SHAP 分析图水平拼接为一张图，并在每张子图上方添加标注。
+
+```bash
+python concat_images.py \
+  --orig_dir "/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/pyradiomics_dice/gradcam/BM_171_doctor_wrong/original" \
+  --gt_dir "/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/pyradiomics_dice/gradcam/BM_171_doctor_wrong/original_gt" \
+  --shap_dir "/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_multitask/pyradiomics_train/binary_class/single_image/BM_171_doctor_wrong/compact_shap_bar" \
+  --output_dir "/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/pyradiomics_dice/concat_results" \
+  --label1 "Original" \
+  --label2 "Ground Truth" \
+  --label3 "SHAP Analysis" \
+  --dpi 150 \
+  --fontsize 48
+```
+
+参数说明：
+
+| 参数 | 默认值 | 说明 |
+|------|--------|------|
+| `--orig_dir` | (必填) | 原图目录 |
+| `--gt_dir` | (必填) | Ground Truth (origin_gt) 目录 |
+| `--shap_dir` | (必填) | SHAP 分析图目录 |
+| `--output_dir` | (必填) | 拼接结果输出目录 |
+| `--label1` | `Original` | 第1张图标注文字 |
+| `--label2` | `Ground Truth` | 第2张图标注文字 |
+| `--label3` | `SHAP` | 第3张图标注文字 |
+| `--dpi` | `150` | 输出图像 DPI |
+| `--fontsize` | `24` | 标注文字字号 |
+
+三个目录中的图像按文件名 stem（不含后缀）自动匹配，统一缩放到最大高度后水平拼接，输出文件名为 `{stem}.png`。
