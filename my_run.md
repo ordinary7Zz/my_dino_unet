@@ -61,3 +61,33 @@ python concat_images.py \
 | `--fontsize` | `24` | 标注文字字号 |
 
 三个目录中的图像按文件名 stem（不含后缀）自动匹配，统一缩放到最大高度后水平拼接，输出文件名为 `{stem}.png`。
+
+## `infer_seg.py` 使用示例
+
+二分类分割推理脚本，输入图像目录和模型权重，输出二值掩码 PNG（大小与原图一致）。
+
+```bash
+python infer_seg.py \
+  --checkpoint ./checkpoints/baseline/dino_unet_train_dataset_4_epoch_50.pth \
+  --input_dir /mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/sample/images \
+  --output_dir ./my_infer/nodule \
+  --img_size 224 \
+  --batch_size 4 \
+  --device cuda
+```
+
+参数说明：
+
+| 参数 | 默认值 | 说明 |
+|------|--------|------|
+| `--checkpoint` | (必填) | 模型权重路径 (.pth) |
+| `--input_dir` | (必填) | 输入图像目录 |
+| `--output_dir` | (必填) | 输出掩码目录 |
+| `--img_size` | `224` | 模型输入图像尺寸 |
+| `--batch_size` | `4` | 推理批大小 |
+| `--num_workers` | `4` | DataLoader 进程数 |
+| `--device` | `auto` | 推理设备 (cuda/cuda:0/cpu) |
+| `--dino_pretrained` | `false` | 是否加载 DINO 预训练 backbone |
+| `--use_dilation` | `false` | 模型是否使用 dilation 模块 |
+
+输出：二值掩码 PNG（0/255），文件名与原图相同，尺寸还原至原始图像大小。
