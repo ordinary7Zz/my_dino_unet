@@ -83,3 +83,4 @@ pyradiomics_dice/*
 .DS_Store
 
 BM_171_doctor_wrong/*
+pyradiomics_dice/concat_results/*
