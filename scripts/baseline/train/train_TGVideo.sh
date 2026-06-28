@@ -5,12 +5,12 @@ CUDA_VISIBLE_DEVICES="2"
 # 根据 CUDA_VISIBLE_DEVICES 自动设置 device，也可以手动指定（如 "cuda:0", "cpu"）
 DEVICE="cuda:${CUDA_VISIBLE_DEVICES}"
 METHOD="dino_unet"
-TRAIN_IMAGE_PATH="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/TGVideo_PNG/train_images/"
-TRAIN_MASK_PATH="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/TGVideo_PNG/train_masks/"
+TRAIN_IMAGE_PATH="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TGVideo_PNG/train/image/"
+TRAIN_MASK_PATH="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TGVideo_PNG/train/mask/"
 EPOCH=50
 LR=1e-4
 BATCH_SIZE=12
-CHECKPOINT_DIR="/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/baseline/"
+CHECKPOINT_DIR="/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/baseline/gland"
 CHECKPOINT_INTERVAL=5
 EVAL_INTERVAL=5
 DATASET_NAME="train_TGVideo"
@@ -23,12 +23,12 @@ TEST_DATASET_NAMES=(
 
 # 测试图像路径数组
 TEST_IMAGE_PATHS=(
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/TGVideo_PNG/test_images/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TGVideo_PNG/test/image/"
 )
 
 # 测试掩码路径数组
 TEST_MASK_PATHS=(
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/TGVideo_PNG/test_masks/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TGVideo_PNG/test/mask/"
 )
 
 # 确保数组长度一致
