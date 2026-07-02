@@ -11,8 +11,8 @@ EPOCH=50
 LR=1e-4
 BATCH_SIZE=12
 CHECKPOINT_DIR="/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/baseline/gland"
-CHECKPOINT_INTERVAL=5
-EVAL_INTERVAL=5
+CHECKPOINT_INTERVAL=10
+EVAL_INTERVAL=10
 DATASET_NAME="train_TGVideo"
 
 # 使用数组配置多个测试数据集

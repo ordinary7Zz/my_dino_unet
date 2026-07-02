@@ -12,8 +12,8 @@ EPOCH=50
 LR=0.0001
 BATCH_SIZE=12
 CHECKPOINT_DIR="/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/train_Nodule"
-CHECKPOINT_INTERVAL=5
-EVAL_INTERVAL=5
+CHECKPOINT_INTERVAL=10
+EVAL_INTERVAL=10
 DATASET_NAME="train_${Train_DATASET}"
 
 # 使用数组配置多个测试数据集
