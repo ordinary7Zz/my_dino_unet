@@ -2,7 +2,7 @@
 
 # 设置训练参数
 Train_DATASET="dataset_3"
-CUDA_VISIBLE_DEVICES="2"
+CUDA_VISIBLE_DEVICES="0"
 # 根据 CUDA_VISIBLE_DEVICES 自动设置 device，也可以手动指定（如 "cuda:0", "cpu"）
 DEVICE="cuda:${CUDA_VISIBLE_DEVICES}"
 METHOD="dino_unet"
