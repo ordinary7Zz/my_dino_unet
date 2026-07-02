@@ -11,40 +11,40 @@ TRAIN_MASK_PATH="/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/Sup
 EPOCH=50
 LR=0.0001
 BATCH_SIZE=12
-CHECKPOINT_DIR="/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/baseline"
-CHECKPOINT_INTERVAL=10
-EVAL_INTERVAL=10
+CHECKPOINT_DIR="/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/train_Nodule"
+CHECKPOINT_INTERVAL=5
+EVAL_INTERVAL=5
 DATASET_NAME="train_${Train_DATASET}"
 
 # 使用数组配置多个测试数据集
 # 测试数据集名称数组
 TEST_DATASET_NAMES=(
     "TN3K"
-    "DDTI"
     "ThyroidXL"
     "PKTN"
     "TN5K"
-    "Cine-Clip"
+    "Shanghai7K"
+    "Zhujiang2K"
 )
 
 # 测试图像路径数组
 TEST_IMAGE_PATHS=(
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN3K/valid/images/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/DDTI/valid/images/"
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/ThyroidXL/valid/images/"
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/PKTN/valid/images/"
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/valid/images/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/Cine-Clip/valid/images/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/augtrain_PNG/image/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/finall_data/image/"
 )
 
 # 测试掩码路径数组
 TEST_MASK_PATHS=(
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN3K/valid/masks/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/DDTI/valid/masks/"
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/ThyroidXL/valid/masks/"
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/PKTN/valid/masks/"
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/valid/masks/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/Cine-Clip/valid/masks/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/augtrain_PNG/mask/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/finall_data/mask/"
 )
 
 # 确保数组长度一致
