@@ -8,37 +8,37 @@ CUDA_VISIBLE_DEVICES="1"
 DEVICE="cuda:${CUDA_VISIBLE_DEVICES}"
 
 # Model checkpoint path
-CHECKPOINT_PATH="/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/baseline/dino_unet_train_${Train_DATASET}_epoch_50.pth"
+CHECKPOINT_PATH="/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/train_Nodule/train_${Train_DATASET}/dino_unet_train_${Train_DATASET}_epoch_50.pth"
 
-# Configure multiple test dataset paths
-# Test dataset names array
+# 使用数组配置多个测试数据集
+# 测试数据集名称数组
 TEST_DATASET_NAMES=(
     "TN3K"
-    "DDTI"
     "ThyroidXL"
     "PKTN"
     "TN5K"
-    "Cine-Clip"
+    "Shanghai7K"
+    "Zhujiang2K"
 )
 
 # 测试图像路径数组
 TEST_IMAGE_PATHS=(
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN3K/valid/images/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/DDTI/valid/images/"
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/ThyroidXL/valid/images/"
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/PKTN/valid/images/"
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/valid/images/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/Cine-Clip/valid/images/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/augtrain_PNG/image/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/finall_data/image/"
 )
 
 # 测试掩码路径数组
 TEST_MASK_PATHS=(
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN3K/valid/masks/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/DDTI/valid/masks/"
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/ThyroidXL/valid/masks/"
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/PKTN/valid/masks/"
     "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN5K/valid/masks/"
-    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/Cine-Clip/valid/masks/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/augtrain_PNG/mask/"
+    "/mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/finall_data/mask/"
 )
 
 # Ensure arrays have the same length
@@ -48,13 +48,13 @@ if [ ${#TEST_DATASET_NAMES[@]} -ne ${#TEST_IMAGE_PATHS[@]} ] || [ ${#TEST_DATASE
 fi
 
 # Prediction results save path
-SAVE_PATH="./predictions/new_valid_${Train_DATASET}"
+SAVE_PATH="./predictions/test_${Train_DATASET}"
 
 # Whether to save prediction results (true/false)
-SAVE_RESULTS="true"
+SAVE_RESULTS="false"
 
 # Log directory
-LOG_DIR="./logs/valid_logs/baseline/new_valid_${Train_DATASET}"
+LOG_DIR="./logs/test_logs/train_Nodule/test_${Train_DATASET}"
 
 # ---------------------- Execution ----------------------
 # Create save directory if it doesn't exist
@@ -93,5 +93,5 @@ python -u "test_parallel.py" \
     --img_size 224 \
     --dino_pretrained "True" \
     --use_dilation "False" \
-    --save_orig_size "True" \
+    --save_orig_size "False" \
     --device "$DEVICE"
