@@ -52,6 +52,15 @@ python infer.py \
 ### 4. 推理 + 仅计算指标（不输出掩码）
 
 ```bash
+# 腺体分割
+python infer.py \
+    --checkpoint /mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/baseline/gland/train_TGVideo/dino_unet_train_TGVideo_epoch_30.pth \
+    --input_dir /mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TGVideo_PNG/test/image \
+    --gt_dir /mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TGVideo_PNG/test/mask \
+    --log_dir ./logs
+
+
+# 结节分割
 python infer.py \
     --checkpoint /mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/train_Nodule/train_dataset_4/dino_unet_train_dataset_4_epoch_50.pth \
     --input_dir /mnt/wangbd8/workspace/DataSets/ThyroidAgent/train_val_test/TN3K/test/images/ \
