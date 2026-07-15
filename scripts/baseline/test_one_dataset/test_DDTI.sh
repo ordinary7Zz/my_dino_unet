@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ---------------------- Configuration ----------------------
-Train_DATASET="dataset_1"
+Train_DATASET="dataset_2"
 # Set CUDA device
 CUDA_VISIBLE_DEVICES="1"
 # 根据 CUDA_VISIBLE_DEVICES 自动设置 device，也可以手动指定（如 "cuda:0", "cpu"）

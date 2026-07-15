@@ -1,9 +1,45 @@
 
+import os
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import timm
-    
+
+
+def _create_dino_backbone(model_name: str, pretrained: bool):
+    """Create the DINO backbone.
+
+    When `pretrained=False`, we explicitly disable any network access so the
+    model is built with random weights purely from the local code definition.
+    This avoids timm/huggingface_hub issuing HEAD requests that hang or fail
+    on machines without internet access (e.g. during inference).
+    """
+    if pretrained:
+        return timm.create_model(
+            model_name=model_name,
+            features_only=True,
+            pretrained=True,
+        )
+
+    # Offline path: do not let timm query huggingface_hub for weights/config.
+    prev_offline = os.environ.get("HF_HUB_OFFLINE")
+    os.environ["HF_HUB_OFFLINE"] = "1"
+    try:
+        model = timm.create_model(
+            model_name=model_name,
+            features_only=True,
+            pretrained=False,
+            pretrained_cfg=None,
+        )
+    finally:
+        if prev_offline is None:
+            os.environ.pop("HF_HUB_OFFLINE", None)
+        else:
+            os.environ["HF_HUB_OFFLINE"] = prev_offline
+    return model
+
+
 class DilatedConvBlock(nn.Module):
     def __init__(self, in_channels, out_channels):
         super().__init__()
@@ -70,8 +106,8 @@ class DINOv3_S_UNet(nn.Module):
 
         self.use_dilation = use_dilation
 
-        self.dino = timm.create_model(model_name="vit_small_patch16_dinov3.lvd1689m",
-            features_only=True,
+        self.dino = _create_dino_backbone(
+            model_name="vit_small_patch16_dinov3.lvd1689m",
             pretrained=pretrained,
         )
 
