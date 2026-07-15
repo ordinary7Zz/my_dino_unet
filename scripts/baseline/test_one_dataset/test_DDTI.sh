@@ -6,7 +6,6 @@ Train_DATASET="dataset_1"
 CUDA_VISIBLE_DEVICES="1"
 # 根据 CUDA_VISIBLE_DEVICES 自动设置 device，也可以手动指定（如 "cuda:0", "cpu"）
 DEVICE="cuda:${CUDA_VISIBLE_DEVICES}"
-4[]
 # Model checkpoint path
 CHECKPOINT_PATH="/mnt/wangbd8/workspace/ThyroidAgent/dino_unet_ori/checkpoints/train_Nodule/train_${Train_DATASET}/dino_unet_train_${Train_DATASET}_epoch_50.pth"
 
